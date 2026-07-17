@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tài sản công | IOC – Tài chính – Kinh tế số</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#666CFF">
+  <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="IOC">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="tai-san-cong">
+<div class="layout-wrapper">
+  <aside class="layout-sidebar" id="sidebar"></aside>
+
+  <div class="layout-page">
+    <nav class="navbar" id="navbar"></nav>
+
+    <main class="content">
+      <div class="page-head">
+        <h1 class="page-title">Tài sản công</h1>
+        <div class="page-breadcrumb">
+          <a href="index.html">IOC</a><span class="sep">/</span>Nghiệp vụ<span class="sep">/</span><span class="current">Tài sản công</span>
+        </div>
+      </div>
+
+      <div class="row" id="statRow"></div>
+
+      <div class="row">
+        <div class="card col-4">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Phân loại tài sản</div>
+              <div class="card-subtitle">Theo nguyên giá · tỷ đồng</div>
+            </div>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+          </div>
+          <div class="card-body">
+            <div id="chartTaiSanPhanLoai" class="chart-box"></div>
+          </div>
+        </div>
+
+        <div class="card col-8">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Nguyên giá theo đơn vị quản lý</div>
+              <div class="card-subtitle">Top 6 sở, ngành có giá trị tài sản lớn nhất · tỷ đồng</div>
+            </div>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+          </div>
+          <div class="card-body">
+            <div id="chartTaiSanDonVi" class="chart-box"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card col-12">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Danh mục tài sản giá trị lớn</div>
+              <div class="card-subtitle">12 tài sản tiêu biểu · đơn vị: tỷ đồng</div>
+            </div>
+            <button class="btn btn-outline btn-sm"><i class="ri-download-2-line"></i>Xuất danh mục</button>
+          </div>
+          <div class="card-body no-pad table-wrap" style="padding-top:14px">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Mã TS</th>
+                  <th style="min-width:260px">Tên tài sản</th>
+                  <th>Đơn vị quản lý</th>
+                  <th class="num">Nguyên giá</th>
+                  <th class="num">Giá trị còn lại</th>
+                  <th>Trạng thái</th>
+                </tr>
+              </thead>
+              <tbody id="tblTaiSan"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer" id="footer"></footer>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/charts.js"></script>
+<script>
+(function () {
+  var D = window.IOC_DATA, IOC = window.IOC;
+
+  document.getElementById("statRow").innerHTML =
+    IOC.statCard({ icon: "ri-archive-2-line", tint: "tint-primary", badge: "+3,1%", value: "12.640", unit: "tài sản", label: "Tổng số tài sản theo dõi", note: "So với đầu năm" }) +
+    IOC.statCard({ icon: "ri-money-dollar-circle-line", tint: "tint-info", badge: "+5,4%", value: "28.450", unit: "tỷ đồng", label: "Tổng nguyên giá", note: "So với đầu năm" }) +
+    IOC.statCard({ icon: "ri-funds-line", tint: "tint-success", badge: "69,8%", badgeClass: "badge-success", value: "19.870", unit: "tỷ đồng", label: "Giá trị còn lại", note: "Tỷ lệ còn lại / nguyên giá" }) +
+    IOC.statCard({ icon: "ri-delete-bin-6-line", tint: "tint-warning", badge: "+4", dir: "down", value: "37", unit: "tài sản", label: "Chờ xử lý / thanh lý", note: "Tăng so với quý trước" });
+
+  document.getElementById("tblTaiSan").innerHTML = D.taiSanCong.taiSan.map(function (x) {
+    return "<tr>" +
+      '<td class="td-main" style="white-space:nowrap">' + x.ma + "</td>" +
+      '<td class="td-main">' + x.ten + "</td>" +
+      "<td>" + x.donVi + "</td>" +
+      '<td class="num" style="font-weight:600;color:var(--text-heading)">' + IOC.fmt(x.nguyenGia, x.nguyenGia < 10 ? 1 : 0) + "</td>" +
+      '<td class="num">' + IOC.fmt(x.conLai, x.conLai < 10 ? 1 : 0) + "</td>" +
+      "<td>" + IOC.badgeTrangThai(x.trangThai) + "</td>" +
+      "</tr>";
+  }).join("");
+})();
+</script>
+</body>
+</html>

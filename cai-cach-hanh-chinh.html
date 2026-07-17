@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cải cách hành chính | IOC – Tài chính – Kinh tế số</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#666CFF">
+  <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="IOC">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="cai-cach-hanh-chinh">
+<div class="layout-wrapper">
+  <aside class="layout-sidebar" id="sidebar"></aside>
+
+  <div class="layout-page">
+    <nav class="navbar" id="navbar"></nav>
+
+    <main class="content">
+      <div class="page-head">
+        <h1 class="page-title">Cải cách hành chính</h1>
+        <div class="page-breadcrumb">
+          <a href="index.html">IOC</a><span class="sep">/</span>Nghiệp vụ<span class="sep">/</span><span class="current">Cải cách hành chính</span>
+        </div>
+      </div>
+
+      <div class="row" id="statRow"></div>
+
+      <div class="row">
+        <div class="card col-12">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Hồ sơ TTHC tiếp nhận và giải quyết đúng hạn theo tháng</div>
+              <div class="card-subtitle">Năm 2026 · toàn tỉnh · đơn vị: hồ sơ</div>
+            </div>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+          </div>
+          <div class="card-body">
+            <div id="chartCchc" class="chart-box"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card col-12">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Kết quả giải quyết TTHC theo đơn vị cấp xã</div>
+              <div class="card-subtitle">Lũy kế năm 2026 · 10 xã, phường</div>
+            </div>
+            <span class="badge badge-primary">10 đơn vị</span>
+          </div>
+          <div class="card-body no-pad table-wrap" style="padding-top:14px">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Đơn vị</th>
+                  <th class="num">Hồ sơ tiếp nhận</th>
+                  <th style="width:240px">Tỷ lệ đúng hạn</th>
+                  <th class="num">Điểm hài lòng</th>
+                  <th>Xếp loại</th>
+                </tr>
+              </thead>
+              <tbody id="tblCchc"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer" id="footer"></footer>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/charts.js"></script>
+<script>
+(function () {
+  var D = window.IOC_DATA, IOC = window.IOC;
+
+  document.getElementById("statRow").innerHTML =
+    IOC.statCard({ icon: "ri-file-list-3-line", tint: "tint-primary", badge: "+6,4%", value: "48.620", unit: "hồ sơ", label: "Hồ sơ TTHC tiếp nhận", note: "Lũy kế năm 2026" }) +
+    IOC.statCard({ icon: "ri-time-line", tint: "tint-success", badge: "+0,8 điểm", value: "96,4", unit: "%", label: "Tỷ lệ giải quyết đúng hạn", note: "So với cùng kỳ 2025" }) +
+    IOC.statCard({ icon: "ri-emotion-happy-line", tint: "tint-warning", badge: "+0,12", value: "4,42", unit: "/ 5", label: "Điểm hài lòng người dân", note: "Khảo sát Quý II/2026" }) +
+    IOC.statCard({ icon: "ri-computer-line", tint: "tint-info", badge: "+5,2 điểm", value: "68,5", unit: "%", label: "Tỷ lệ hồ sơ trực tuyến", note: "So với cùng kỳ 2025" });
+
+  document.getElementById("tblCchc").innerHTML = D.cchc.theoXa.map(function (x) {
+    return "<tr>" +
+      '<td class="td-main">' + x.ten + "</td>" +
+      '<td class="num">' + IOC.fmt(x.tiepNhan) + "</td>" +
+      '<td><div class="progress-cell"><div class="progress"><div class="progress-bar ' + IOC.progressClass(x.dungHan) + '" style="width:' + x.dungHan + '%"></div></div><span class="pct">' + String(x.dungHan.toFixed(1)).replace(".", ",") + '%</span></div></td>' +
+      '<td class="num" style="font-weight:600;color:var(--text-heading)">' + String(x.haiLong.toFixed(1)).replace(".", ",") + "</td>" +
+      "<td>" + IOC.badgeTrangThai(x.xepLoai) + "</td>" +
+      "</tr>";
+  }).join("");
+})();
+</script>
+</body>
+</html>

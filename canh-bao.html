@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cảnh báo & Giám sát | IOC – Tài chính – Kinh tế số</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#666CFF">
+  <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="IOC">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="canh-bao">
+<div class="layout-wrapper">
+  <aside class="layout-sidebar" id="sidebar"></aside>
+
+  <div class="layout-page">
+    <nav class="navbar" id="navbar"></nav>
+
+    <main class="content">
+      <div class="page-head">
+        <h1 class="page-title">Cảnh báo &amp; Giám sát</h1>
+        <div class="page-breadcrumb">
+          <a href="index.html">IOC</a><span class="sep">/</span>Điều hành<span class="sep">/</span><span class="current">Cảnh báo &amp; Giám sát</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card col-12">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Danh sách cảnh báo</div>
+              <div class="card-subtitle">Cảnh báo tự động từ bộ KPI và các đơn vị nghiệp vụ</div>
+            </div>
+            <div class="pill-group" id="pillMucDo">
+              <button class="pill active" data-filter="all">Tất cả <span id="cntAll"></span></button>
+              <button class="pill" data-filter="cao">Cao</button>
+              <button class="pill" data-filter="trung binh">Trung bình</button>
+              <button class="pill" data-filter="thap">Thấp</button>
+            </div>
+          </div>
+          <div class="card-body no-pad table-wrap" style="padding-top:14px">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Mã</th>
+                  <th>Mức độ</th>
+                  <th>Lĩnh vực</th>
+                  <th style="min-width:320px">Nội dung cảnh báo</th>
+                  <th>Nguồn</th>
+                  <th>Thời gian</th>
+                  <th>Trạng thái</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="tblCanhBao"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer" id="footer"></footer>
+  </div>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+(function () {
+  var D = window.IOC_DATA, IOC = window.IOC;
+  var tbody = document.getElementById("tblCanhBao");
+
+  function render(filter) {
+    var rows = D.canhBaoAll.filter(function (x) {
+      return filter === "all" || x.mucDo === filter;
+    });
+    tbody.innerHTML = rows.map(function (x) {
+      return "<tr>" +
+        '<td class="td-main" style="white-space:nowrap">' + x.id + "</td>" +
+        "<td>" + IOC.badgeMucDo(x.mucDo) + "</td>" +
+        "<td>" + x.linhVuc + "</td>" +
+        '<td class="td-main">' + x.noiDung + "</td>" +
+        "<td>" + x.nguon + "</td>" +
+        '<td style="white-space:nowrap">' + x.thoiGian + "</td>" +
+        "<td>" + IOC.badgeTrangThai(x.trangThai) + "</td>" +
+        '<td style="white-space:nowrap"><button class="btn btn-outline btn-sm btn-giao-viec" style="white-space:nowrap"><i class="ri-send-plane-line"></i>Giao việc</button></td>' +
+        "</tr>";
+    }).join("");
+    if (!rows.length) {
+      tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:rgba(76,78,100,.5);padding:32px">Không có cảnh báo nào ở mức này</td></tr>';
+    }
+  }
+
+  document.getElementById("cntAll").textContent = "(" + D.canhBaoAll.length + ")";
+  render("all");
+
+  document.getElementById("pillMucDo").addEventListener("click", function (e) {
+    var btn = e.target.closest(".pill");
+    if (!btn) return;
+    document.querySelectorAll("#pillMucDo .pill").forEach(function (p) { p.classList.remove("active"); });
+    btn.classList.add("active");
+    render(btn.getAttribute("data-filter"));
+  });
+
+  document.addEventListener("click", function (e) {
+    var btn = e.target.closest(".btn-giao-viec");
+    if (btn) {
+      btn.innerHTML = '<i class="ri-check-line"></i>Đã chuyển';
+      btn.disabled = true;
+      btn.style.opacity = "0.55";
+    }
+  });
+})();
+</script>
+</body>
+</html>

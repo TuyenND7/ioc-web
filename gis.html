@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GIS – Bản đồ số | IOC – Tài chính – Kinh tế số</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#666CFF">
+  <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="IOC">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="gis">
+<div class="layout-wrapper">
+  <aside class="layout-sidebar" id="sidebar"></aside>
+
+  <div class="layout-page">
+    <nav class="navbar" id="navbar"></nav>
+
+    <main class="content">
+      <div class="page-head">
+        <h1 class="page-title">GIS – Bản đồ số</h1>
+        <div class="page-breadcrumb">
+          <a href="index.html">IOC</a><span class="sep">/</span>Điều hành<span class="sep">/</span><span class="current">GIS – Bản đồ số</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card col-8">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Bản đồ thu ngân sách theo địa bàn</div>
+              <div class="card-subtitle">Kích thước điểm theo số thu · màu theo mức hoàn thành kế hoạch năm</div>
+            </div>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+          </div>
+          <div class="card-body">
+            <div id="map"></div>
+          </div>
+        </div>
+
+        <div class="card col-4">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Chỉ số theo địa bàn</div>
+              <div class="card-subtitle">Thu NSNN lũy kế 2026 · tỷ đồng</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="map-legend" style="margin-bottom:16px">
+              <div class="lg-row"><span class="lg-dot" style="background:#72E128"></span>Đạt / vượt kế hoạch (≥ 100%)</div>
+              <div class="lg-row"><span class="lg-dot" style="background:#FDB528"></span>Cận kế hoạch (80 – 99%)</div>
+              <div class="lg-row"><span class="lg-dot" style="background:#FF4D49"></span>Chậm kế hoạch (&lt; 80%)</div>
+            </div>
+            <div class="table-wrap" style="margin:0 -22px">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Địa bàn</th>
+                    <th class="num">Số thu</th>
+                    <th class="num">% KH</th>
+                  </tr>
+                </thead>
+                <tbody id="tblGis"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer" id="footer"></footer>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+(function () {
+  var D = window.IOC_DATA, IOC = window.IOC;
+
+  function mauKH(kh) {
+    if (kh >= 100) return "#72E128";
+    if (kh >= 80) return "#FDB528";
+    return "#FF4D49";
+  }
+
+  /* bảng bên cạnh */
+  document.getElementById("tblGis").innerHTML = D.gisDiaBan.map(function (x) {
+    return "<tr>" +
+      '<td class="td-main"><span class="status-cell"><span class="status-dot" style="background:' + mauKH(x.kh) + '"></span>' + x.ten + "</span></td>" +
+      '<td class="num">' + IOC.fmt(x.thu) + "</td>" +
+      '<td class="num" style="font-weight:600;color:' + mauKH(x.kh) + '">' + x.kh + "%</td>" +
+      "</tr>";
+  }).join("");
+
+  /* bản đồ Leaflet */
+  if (typeof L !== "undefined") {
+    var map = L.map("map", { scrollWheelZoom: false }).setView([12.31, 109.1], 10);
+
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 18,
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    var maxThu = Math.max.apply(null, D.gisDiaBan.map(function (x) { return x.thu; }));
+
+    D.gisDiaBan.forEach(function (x) {
+      var r = 8 + Math.sqrt(x.thu / maxThu) * 22;
+      L.circleMarker([x.lat, x.lng], {
+        radius: r,
+        color: mauKH(x.kh),
+        weight: 2,
+        fillColor: mauKH(x.kh),
+        fillOpacity: 0.45
+      }).addTo(map).bindPopup(
+        "<strong>" + x.ten + "</strong><br>" +
+        "Thu NSNN: <strong>" + IOC.fmt(x.thu) + " tỷ đồng</strong><br>" +
+        "Hoàn thành kế hoạch: <strong>" + x.kh + "%</strong>"
+      );
+    });
+  }
+})();
+</script>
+</body>
+</html>

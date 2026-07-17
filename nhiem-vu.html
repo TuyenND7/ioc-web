@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giao việc & Nhiệm vụ | IOC – Tài chính – Kinh tế số</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#666CFF">
+  <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="IOC">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="nhiem-vu">
+<div class="layout-wrapper">
+  <aside class="layout-sidebar" id="sidebar"></aside>
+
+  <div class="layout-page">
+    <nav class="navbar" id="navbar"></nav>
+
+    <main class="content">
+      <div class="page-head">
+        <h1 class="page-title">Giao việc &amp; Nhiệm vụ</h1>
+        <div class="page-breadcrumb">
+          <a href="index.html">IOC</a><span class="sep">/</span>Điều hành<span class="sep">/</span><span class="current">Giao việc &amp; Nhiệm vụ</span>
+        </div>
+      </div>
+
+      <!-- Stat cards -->
+      <div class="row" id="statRow"></div>
+
+      <!-- Bảng nhiệm vụ -->
+      <div class="row">
+        <div class="card col-12">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Danh sách nhiệm vụ điều hành</div>
+              <div class="card-subtitle">Nhiệm vụ do lãnh đạo UBND tỉnh giao qua hệ thống IOC</div>
+            </div>
+            <button class="btn btn-primary btn-sm"><i class="ri-add-line"></i>Giao nhiệm vụ mới</button>
+          </div>
+          <div class="card-body no-pad table-wrap" style="padding-top:14px">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Mã</th>
+                  <th style="min-width:300px">Nhiệm vụ</th>
+                  <th>Đơn vị chủ trì</th>
+                  <th>Người giao</th>
+                  <th>Hạn xử lý</th>
+                  <th>Trạng thái</th>
+                  <th style="width:200px">Tiến độ</th>
+                </tr>
+              </thead>
+              <tbody id="tblNhiemVuAll"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer" id="footer"></footer>
+  </div>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+(function () {
+  var D = window.IOC_DATA, IOC = window.IOC;
+
+  var dem = { "dang xu ly": 0, "qua han": 0, "hoan thanh": 0 };
+  D.nhiemVuAll.forEach(function (x) { dem[x.trangThai] = (dem[x.trangThai] || 0) + 1; });
+
+  document.getElementById("statRow").innerHTML =
+    IOC.statCard({ col: "col-4", icon: "ri-loader-4-line", tint: "tint-primary", value: String(dem["dang xu ly"]), unit: "nhiệm vụ", label: "Đang xử lý", note: "Trong kỳ điều hành" }) +
+    IOC.statCard({ col: "col-4", icon: "ri-alarm-warning-line", tint: "tint-danger", badge: "+1", dir: "down", value: String(dem["qua han"]), unit: "nhiệm vụ", label: "Quá hạn", note: "So với tuần trước" }) +
+    IOC.statCard({ col: "col-4", icon: "ri-checkbox-circle-line", tint: "tint-success", badge: "+2", value: String(dem["hoan thanh"]), unit: "nhiệm vụ", label: "Hoàn thành", note: "Trong tuần này" });
+
+  document.getElementById("tblNhiemVuAll").innerHTML = D.nhiemVuAll.map(function (x) {
+    return "<tr>" +
+      '<td class="td-main">' + x.ma + "</td>" +
+      '<td class="td-main">' + x.ten + "</td>" +
+      "<td>" + x.donVi + "</td>" +
+      "<td>" + x.nguoiGiao + "</td>" +
+      '<td style="white-space:nowrap">' + x.han + "</td>" +
+      "<td>" + IOC.badgeTrangThai(x.trangThai) + "</td>" +
+      '<td><div class="progress-cell"><div class="progress"><div class="progress-bar ' + IOC.progressClass(x.tienDo) + '" style="width:' + x.tienDo + '%"></div></div><span class="pct">' + x.tienDo + '%</span></div></td>' +
+      "</tr>";
+  }).join("");
+})();
+</script>
+</body>
+</html>

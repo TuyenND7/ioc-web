@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ngân sách | IOC – Tài chính – Kinh tế số</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#666CFF">
+  <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="IOC">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="ngan-sach">
+<div class="layout-wrapper">
+  <aside class="layout-sidebar" id="sidebar"></aside>
+
+  <div class="layout-page">
+    <nav class="navbar" id="navbar"></nav>
+
+    <main class="content">
+      <div class="page-head">
+        <h1 class="page-title">Ngân sách nhà nước</h1>
+        <div class="page-breadcrumb">
+          <a href="index.html">IOC</a><span class="sep">/</span>Nghiệp vụ<span class="sep">/</span><span class="current">Ngân sách</span>
+        </div>
+      </div>
+
+      <!-- Filter bar -->
+      <div class="row">
+        <div class="card filter-bar col-12">
+          <div class="card-body">
+            <div class="form-group">
+              <label class="form-label">Năm ngân sách</label>
+              <select class="form-select">
+                <option selected>Năm 2026</option>
+                <option>Năm 2025</option>
+                <option>Năm 2024</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Kỳ báo cáo</label>
+              <select class="form-select">
+                <option>Tháng 7</option>
+                <option selected>Lũy kế đến tháng 7</option>
+                <option>Quý II</option>
+                <option>6 tháng đầu năm</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Đơn vị / địa bàn</label>
+              <select class="form-select">
+                <option selected>Toàn tỉnh</option>
+                <option>Phường Hòa Bình</option>
+                <option>Phường Bến Thành Đông</option>
+                <option>Xã Tân Lập</option>
+                <option>Xã Đại Đồng</option>
+              </select>
+            </div>
+            <button class="btn btn-primary"><i class="ri-filter-3-line"></i>Áp dụng</button>
+            <button class="btn btn-outline"><i class="ri-download-2-line"></i>Xuất Excel</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stat cards -->
+      <div class="row" id="statRow"></div>
+
+      <!-- Chart Dự toán vs Thực hiện -->
+      <div class="row">
+        <div class="card col-12">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Dự toán vs Thực hiện thu theo tháng</div>
+              <div class="card-subtitle">Năm 2026 · đơn vị: tỷ đồng · đường nét đứt là dự toán được giao</div>
+            </div>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+          </div>
+          <div class="card-body">
+            <div id="chartNganSach" class="chart-box"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bảng chi tiết thu theo sắc thuế -->
+      <div class="row">
+        <div class="card col-12">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Chi tiết thu theo sắc thuế / khoản mục</div>
+              <div class="card-subtitle">Lũy kế đến 17/07/2026 · đơn vị: tỷ đồng</div>
+            </div>
+            <span class="badge badge-primary">12 khoản mục</span>
+          </div>
+          <div class="card-body no-pad table-wrap" style="padding-top:14px">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th style="width:42px">#</th>
+                  <th>Sắc thuế / khoản mục</th>
+                  <th class="num">Dự toán năm</th>
+                  <th class="num">Thực hiện</th>
+                  <th style="width:240px">% kế hoạch</th>
+                  <th>Đánh giá</th>
+                </tr>
+              </thead>
+              <tbody id="tblSacThue"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer" id="footer"></footer>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/charts.js"></script>
+<script>
+(function () {
+  var D = window.IOC_DATA, IOC = window.IOC;
+
+  document.getElementById("statRow").innerHTML =
+    IOC.statCard({ icon: "ri-file-list-3-line", tint: "tint-secondary", badge: "+6,0%", value: "16.980", unit: "tỷ đồng", label: "Dự toán thu năm", note: "So với dự toán 2025" }) +
+    IOC.statCard({ icon: "ri-money-dollar-circle-line", tint: "tint-primary", badge: "56,7%", badgeClass: "badge-primary", value: "9.620", unit: "tỷ đồng", label: "Đã thu (lũy kế)", note: "Tỷ lệ so dự toán năm" }) +
+    IOC.statCard({ icon: "ri-bank-card-line", tint: "tint-info", badge: "52,4%", badgeClass: "badge-info", value: "8.410", unit: "tỷ đồng", label: "Đã chi (lũy kế)", note: "Tỷ lệ so dự toán năm" }) +
+    IOC.statCard({ icon: "ri-scales-3-line", tint: "tint-success", badge: "+14,2%", value: "1.210", unit: "tỷ đồng", label: "Kết dư / chênh lệch", note: "So với cùng kỳ 2025" });
+
+  document.getElementById("tblSacThue").innerHTML = D.nganSach.sacThue.map(function (x, i) {
+    var pct = Math.round(x.thucHien / x.duToan * 1000) / 10;
+    var danhGia;
+    if (pct >= 58) danhGia = '<span class="badge badge-success">Vượt tiến độ</span>';
+    else if (pct >= 50) danhGia = '<span class="badge badge-primary">Đạt tiến độ</span>';
+    else danhGia = '<span class="badge badge-danger">Chậm tiến độ</span>';
+    return "<tr>" +
+      '<td style="color:rgba(76,78,100,.5)">' + (i + 1) + "</td>" +
+      '<td class="td-main">' + x.ten + "</td>" +
+      '<td class="num">' + IOC.fmt(x.duToan) + "</td>" +
+      '<td class="num" style="font-weight:600;color:#4C4E64">' + IOC.fmt(x.thucHien) + "</td>" +
+      '<td><div class="progress-cell"><div class="progress"><div class="progress-bar ' + IOC.progressClass(pct) + '" style="width:' + Math.min(pct, 100) + '%"></div></div><span class="pct">' + String(pct).replace(".", ",") + '%</span></div></td>' +
+      "<td>" + danhGia + "</td>" +
+      "</tr>";
+  }).join("");
+})();
+</script>
+</body>
+</html>

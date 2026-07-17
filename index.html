@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard điều hành | IOC – Tài chính – Kinh tế số</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#666CFF">
+  <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="IOC">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="index">
+<div class="layout-wrapper">
+  <aside class="layout-sidebar" id="sidebar"></aside>
+
+  <div class="layout-page">
+    <nav class="navbar" id="navbar"></nav>
+
+    <main class="content">
+      <div class="page-head">
+        <h1 class="page-title">Dashboard điều hành</h1>
+        <div class="page-breadcrumb">
+          <a href="index.html">IOC</a><span class="sep">/</span><span class="current">Tổng quan điều hành Tài chính – Kinh tế</span>
+        </div>
+      </div>
+
+      <!-- Card chào mừng -->
+      <div class="row">
+        <div class="card welcome-card col-12">
+          <div class="card-body">
+            <div class="welcome-body">
+              <div class="welcome-title">Chào mừng đồng chí! 🎉</div>
+              <div class="welcome-text">Thu NSNN toàn tỉnh đã đạt <strong>68% dự toán năm</strong>, cao hơn 4,1 điểm % so với cùng kỳ. Xem chi tiết diễn biến thu – chi và các chỉ tiêu điều hành trong báo cáo tuần này.</div>
+              <a href="bao-cao.html" class="btn btn-primary">Xem báo cáo</a>
+            </div>
+            <div class="welcome-art">🏆</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hàng stat cards -->
+      <div class="row" id="statRow">
+        <!-- 3 card render bằng JS + 1 card radial tĩnh -->
+      </div>
+
+      <!-- Chart lớn + donut -->
+      <div class="row">
+        <div class="card col-8">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Thu – Chi NSNN theo tháng</div>
+              <div class="card-subtitle">Năm 2026 · đơn vị: tỷ đồng</div>
+            </div>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+          </div>
+          <div class="card-body">
+            <div id="chartThuChi" class="chart-box"></div>
+          </div>
+        </div>
+
+        <div class="card col-4">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Giải ngân theo lĩnh vực</div>
+              <div class="card-subtitle">Lũy kế đến 17/07/2026</div>
+            </div>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+          </div>
+          <div class="card-body">
+            <div id="chartLinhVuc" class="chart-box"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CPI + Doanh nghiệp mới -->
+      <div class="row">
+        <div class="card col-8">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Chỉ số giá tiêu dùng (CPI) 12 tháng</div>
+              <div class="card-subtitle">Gốc so sánh: tháng 12 năm trước = 100</div>
+            </div>
+            <span class="badge badge-warning"><i class="ri-arrow-up-s-line"></i>+3,1% lũy kế</span>
+          </div>
+          <div class="card-body">
+            <div id="chartCpi" class="chart-box"></div>
+          </div>
+        </div>
+
+        <div class="card col-4">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Doanh nghiệp thành lập mới</div>
+              <div class="card-subtitle">Lũy kế 12 tháng gần nhất</div>
+            </div>
+            <div class="stat-icon tint-success" style="width:38px;height:38px;font-size:1.2rem"><i class="ri-briefcase-4-line"></i></div>
+          </div>
+          <div class="card-body" style="display:flex;flex-direction:column">
+            <div class="stat-value" style="font-size:2rem">1.329 <small>doanh nghiệp</small></div>
+            <div class="stat-trend up" style="margin:4px 0 14px"><i class="ri-arrow-up-s-line"></i>+12,4% <span class="vs">so cùng kỳ</span></div>
+            <div id="chartDoanhNghiep" class="chart-box" style="margin-top:auto"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top địa bàn (horizontal bar) + Cảnh báo mới nhất -->
+      <div class="row">
+        <div class="card col-6">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Top địa bàn thu ngân sách</div>
+              <div class="card-subtitle">Lũy kế năm 2026 · tỷ đồng · % so kế hoạch</div>
+            </div>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+          </div>
+          <div class="card-body">
+            <div id="chartTopDiaBan" class="chart-box"></div>
+          </div>
+        </div>
+
+        <div class="card col-6">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Cảnh báo mới nhất</div>
+              <div class="card-subtitle">5 cảnh báo gần đây từ hệ thống giám sát</div>
+            </div>
+            <a href="canh-bao.html" class="btn btn-outline btn-sm">Xem tất cả</a>
+          </div>
+          <div class="card-body">
+            <ul class="item-list" id="listCanhBao"></ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nhiệm vụ đang theo dõi -->
+      <div class="row">
+        <div class="card col-12">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Nhiệm vụ đang theo dõi</div>
+              <div class="card-subtitle">Nhiệm vụ do lãnh đạo tỉnh giao, cập nhật thời gian thực</div>
+            </div>
+            <a href="nhiem-vu.html" class="btn btn-outline btn-sm">Quản lý nhiệm vụ</a>
+          </div>
+          <div class="card-body no-pad table-wrap" style="padding-top:14px">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Nhiệm vụ</th>
+                  <th>Đơn vị chủ trì</th>
+                  <th>Hạn xử lý</th>
+                  <th>Trạng thái</th>
+                  <th style="width:220px">Tiến độ</th>
+                </tr>
+              </thead>
+              <tbody id="tblNhiemVu"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer" id="footer"></footer>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+(function () {
+  var D = window.IOC_DATA, IOC = window.IOC;
+
+  /* Stat cards */
+  document.getElementById("statRow").innerHTML =
+    IOC.statCard({ icon: "ri-money-dollar-circle-line", tint: "tint-primary", badge: "+8,2%", value: "12.480", unit: "tỷ đồng", label: "Tổng thu NSNN", note: "So với cùng kỳ 2025" }) +
+    IOC.statCard({ icon: "ri-bank-card-line", tint: "tint-info", badge: "+5,6%", value: "11.120", unit: "tỷ đồng", label: "Tổng chi NSNN", note: "So với cùng kỳ 2025" }) +
+    '<div class="card stat-card col-3"><div class="card-body" style="padding-bottom:12px">' +
+    '  <div class="stat-top" style="margin-bottom:0">' +
+    '    <div class="stat-icon tint-success"><i class="ri-funds-box-line"></i></div>' +
+    '    <span class="badge badge-success"><i class="ri-arrow-up-s-line"></i>+4,1 điểm</span>' +
+    "  </div>" +
+    '  <div id="chartGiaiNganRadial" class="chart-box" style="margin:-4px 0 -10px"></div>' +
+    '  <div class="stat-label" style="text-align:center">Tỷ lệ giải ngân đầu tư công</div>' +
+    '  <span class="stat-note" style="align-self:center">Kế hoạch năm: 8.520 tỷ đồng</span>' +
+    "</div></div>" +
+    IOC.statCard({ icon: "ri-alarm-warning-line", tint: "tint-danger", badge: "+5", dir: "down", badgeClass: "badge-danger", value: "23", unit: "cảnh báo", label: "Cảnh báo đang mở", note: "Tăng trong tuần này" });
+
+  /* Cảnh báo mới nhất */
+  var tintMucDo = { "cao": "tint-danger", "trung binh": "tint-warning", "thap": "tint-info" };
+  document.getElementById("listCanhBao").innerHTML = D.canhBaoMoi.map(function (x) {
+    return '<li class="item-row">' +
+      '<div class="item-icon ' + tintMucDo[x.mucDo] + '"><i class="' + x.icon + '"></i></div>' +
+      '<div class="item-body">' +
+      '  <div class="item-title">' + x.noiDung + '</div>' +
+      '  <div class="item-sub">' + x.thoiGian + '</div>' +
+      '</div>' +
+      '<div class="item-end">' + IOC.badgeMucDo(x.mucDo) + '</div></li>';
+  }).join("");
+
+  /* Nhiệm vụ */
+  document.getElementById("tblNhiemVu").innerHTML = D.nhiemVuTheoDoi.map(function (x) {
+    return "<tr>" +
+      '<td class="td-main">' + x.ten + "</td>" +
+      "<td>" + x.donVi + "</td>" +
+      "<td>" + x.han + "</td>" +
+      "<td>" + IOC.badgeTrangThai(x.trangThai) + "</td>" +
+      '<td><div class="progress-cell"><div class="progress"><div class="progress-bar ' + IOC.progressClass(x.tienDo) + '" style="width:' + x.tienDo + '%"></div></div><span class="pct">' + x.tienDo + '%</span></div></td>' +
+      "</tr>";
+  }).join("");
+})();
+</script>
+<script src="assets/js/charts.js"></script>
+</body>
+</html>

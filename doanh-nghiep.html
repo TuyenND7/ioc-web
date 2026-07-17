@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doanh nghiệp – Kinh tế | IOC – Tài chính – Kinh tế số</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#666CFF">
+  <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="IOC">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="doanh-nghiep">
+<div class="layout-wrapper">
+  <aside class="layout-sidebar" id="sidebar"></aside>
+
+  <div class="layout-page">
+    <nav class="navbar" id="navbar"></nav>
+
+    <main class="content">
+      <div class="page-head">
+        <h1 class="page-title">Doanh nghiệp – Kinh tế</h1>
+        <div class="page-breadcrumb">
+          <a href="index.html">IOC</a><span class="sep">/</span>Nghiệp vụ<span class="sep">/</span><span class="current">Doanh nghiệp – Kinh tế</span>
+        </div>
+      </div>
+
+      <div class="row" id="statRow"></div>
+
+      <div class="row">
+        <div class="card col-8">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Doanh nghiệp thành lập mới theo tháng</div>
+              <div class="card-subtitle">12 tháng gần nhất · toàn tỉnh</div>
+            </div>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+          </div>
+          <div class="card-body">
+            <div id="chartDnThang" class="chart-box"></div>
+          </div>
+        </div>
+
+        <div class="card col-4">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Cơ cấu theo ngành nghề</div>
+              <div class="card-subtitle">Doanh nghiệp đang hoạt động</div>
+            </div>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+          </div>
+          <div class="card-body">
+            <div id="chartDnNganh" class="chart-box"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card col-12">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Doanh nghiệp đăng ký mới nhất</div>
+              <div class="card-subtitle">10 hồ sơ đăng ký gần đây · vốn điều lệ: tỷ đồng</div>
+            </div>
+            <button class="btn btn-outline btn-sm"><i class="ri-download-2-line"></i>Xuất danh sách</button>
+          </div>
+          <div class="card-body no-pad table-wrap" style="padding-top:14px">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th style="min-width:280px">Tên doanh nghiệp</th>
+                  <th>Mã số thuế</th>
+                  <th>Ngành nghề chính</th>
+                  <th class="num">Vốn điều lệ</th>
+                  <th>Ngày đăng ký</th>
+                </tr>
+              </thead>
+              <tbody id="tblDn"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer" id="footer"></footer>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/charts.js"></script>
+<script>
+(function () {
+  var D = window.IOC_DATA, IOC = window.IOC;
+
+  document.getElementById("statRow").innerHTML =
+    IOC.statCard({ icon: "ri-building-line", tint: "tint-primary", badge: "+5,2%", value: "8.642", unit: "DN", label: "Doanh nghiệp đang hoạt động", note: "So với cùng kỳ 2025" }) +
+    IOC.statCard({ icon: "ri-briefcase-4-line", tint: "tint-success", badge: "+12,4%", value: "756", unit: "DN", label: "Thành lập mới (từ đầu năm)", note: "So với cùng kỳ 2025" }) +
+    IOC.statCard({ icon: "ri-close-circle-line", tint: "tint-danger", badge: "+8", dir: "down", value: "118", unit: "DN", label: "Giải thể (từ đầu năm)", note: "So với cùng kỳ 2025" }) +
+    IOC.statCard({ icon: "ri-pause-circle-line", tint: "tint-warning", badge: "+15", dir: "down", value: "234", unit: "DN", label: "Tạm ngừng hoạt động", note: "So với cùng kỳ 2025" });
+
+  document.getElementById("tblDn").innerHTML = D.doanhNghiep.dnMoi.map(function (x) {
+    return "<tr>" +
+      '<td class="td-main">' + x.ten + "</td>" +
+      '<td style="font-variant-numeric:tabular-nums">' + x.mst + "</td>" +
+      "<td>" + x.nganh + "</td>" +
+      '<td class="num" style="font-weight:600;color:var(--text-heading)">' + IOC.fmt(x.von, Number.isInteger(x.von) ? 0 : 1) + "</td>" +
+      '<td style="white-space:nowrap">' + x.ngay + "</td>" +
+      "</tr>";
+  }).join("");
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Báo cáo &amp; Xuất dữ liệu | IOC – Tài chính – Kinh tế số</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#666CFF">
+  <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="IOC">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="bao-cao">
+<div class="layout-wrapper">
+  <aside class="layout-sidebar" id="sidebar"></aside>
+
+  <div class="layout-page">
+    <nav class="navbar" id="navbar"></nav>
+
+    <main class="content">
+      <div class="page-head">
+        <h1 class="page-title">Báo cáo &amp; Xuất dữ liệu</h1>
+        <div class="page-breadcrumb">
+          <a href="index.html">IOC</a><span class="sep">/</span>Điều hành<span class="sep">/</span><span class="current">Báo cáo &amp; Xuất dữ liệu</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card col-12">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Kho báo cáo điều hành</div>
+              <div class="card-subtitle">Báo cáo định kỳ, đột xuất và chuyên đề của các đơn vị</div>
+            </div>
+            <div class="pill-group" id="pillLoai">
+              <button class="pill active" data-filter="all">Tất cả <span id="cntAll"></span></button>
+              <button class="pill" data-filter="dinh ky">Định kỳ</button>
+              <button class="pill" data-filter="dot xuat">Đột xuất</button>
+              <button class="pill" data-filter="chuyen de">Chuyên đề</button>
+            </div>
+          </div>
+          <div class="card-body no-pad table-wrap" style="padding-top:14px">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th style="min-width:300px">Tên báo cáo</th>
+                  <th>Loại</th>
+                  <th>Kỳ báo cáo</th>
+                  <th>Đơn vị lập</th>
+                  <th>Ngày phát hành</th>
+                  <th>Trạng thái</th>
+                  <th>Tải về</th>
+                </tr>
+              </thead>
+              <tbody id="tblBaoCao"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer" id="footer"></footer>
+  </div>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+(function () {
+  var D = window.IOC_DATA, IOC = window.IOC;
+  var tbody = document.getElementById("tblBaoCao");
+
+  function render(filter) {
+    var rows = D.baoCaoAll.filter(function (x) { return filter === "all" || x.loai === filter; });
+    tbody.innerHTML = rows.map(function (x) {
+      var canTai = x.trangThai === "da phat hanh";
+      var taiVe = canTai
+        ? '<div style="display:flex;gap:6px">' +
+          '<button class="icon-action pdf btn-tai" title="Tải PDF"><i class="ri-file-pdf-2-line"></i></button>' +
+          '<button class="icon-action xls btn-tai" title="Tải Excel"><i class="ri-file-excel-2-line"></i></button></div>'
+        : '<span style="color:var(--text-faint)">—</span>';
+      return "<tr>" +
+        '<td class="td-main">' + x.ten + "</td>" +
+        "<td>" + IOC.badgeTrangThai(x.loai) + "</td>" +
+        "<td>" + x.ky + "</td>" +
+        "<td>" + x.donVi + "</td>" +
+        '<td style="white-space:nowrap">' + x.ngay + "</td>" +
+        "<td>" + IOC.badgeTrangThai(x.trangThai) + "</td>" +
+        "<td>" + taiVe + "</td>" +
+        "</tr>";
+    }).join("");
+    if (!rows.length) {
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--text-faint);padding:32px">Không có báo cáo thuộc loại này</td></tr>';
+    }
+  }
+
+  document.getElementById("cntAll").textContent = "(" + D.baoCaoAll.length + ")";
+  render("all");
+
+  document.getElementById("pillLoai").addEventListener("click", function (e) {
+    var btn = e.target.closest(".pill");
+    if (!btn) return;
+    document.querySelectorAll("#pillLoai .pill").forEach(function (p) { p.classList.remove("active"); });
+    btn.classList.add("active");
+    render(btn.getAttribute("data-filter"));
+  });
+
+  /* UI-only: click tải -> hiện check rồi trả lại icon cũ */
+  document.addEventListener("click", function (e) {
+    var btn = e.target.closest(".btn-tai");
+    if (!btn) return;
+    var old = btn.innerHTML;
+    btn.innerHTML = '<i class="ri-check-line"></i>';
+    btn.disabled = true;
+    setTimeout(function () { btn.innerHTML = old; btn.disabled = false; }, 1200);
+  });
+})();
+</script>
+</body>
+</html>

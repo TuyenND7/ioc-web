@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đầu tư công | IOC – Tài chính – Kinh tế số</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#666CFF">
+  <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="IOC">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="dau-tu-cong">
+<div class="layout-wrapper">
+  <aside class="layout-sidebar" id="sidebar"></aside>
+
+  <div class="layout-page">
+    <nav class="navbar" id="navbar"></nav>
+
+    <main class="content">
+      <div class="page-head">
+        <h1 class="page-title">Đầu tư công</h1>
+        <div class="page-breadcrumb">
+          <a href="index.html">IOC</a><span class="sep">/</span>Nghiệp vụ<span class="sep">/</span><span class="current">Đầu tư công</span>
+        </div>
+      </div>
+
+      <!-- Stat cards -->
+      <div class="row" id="statRow"></div>
+
+      <!-- Chart tiến độ giải ngân -->
+      <div class="row">
+        <div class="card col-12">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Tiến độ giải ngân lũy kế vs kế hoạch</div>
+              <div class="card-subtitle">Năm 2026 · đơn vị: tỷ đồng · số liệu cập nhật đến tháng 9</div>
+            </div>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+          </div>
+          <div class="card-body">
+            <div id="chartDauTuCong" class="chart-box"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bảng dự án -->
+      <div class="row">
+        <div class="card col-12">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Danh sách dự án trọng điểm</div>
+              <div class="card-subtitle">10 dự án có tổng mức đầu tư lớn nhất · vốn: tỷ đồng</div>
+            </div>
+            <button class="btn btn-outline btn-sm"><i class="ri-download-2-line"></i>Xuất báo cáo</button>
+          </div>
+          <div class="card-body no-pad table-wrap" style="padding-top:14px">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th style="width:42px">#</th>
+                  <th>Dự án</th>
+                  <th>Chủ đầu tư</th>
+                  <th class="num">Kế hoạch vốn</th>
+                  <th style="width:220px">% giải ngân</th>
+                  <th>Trạng thái</th>
+                </tr>
+              </thead>
+              <tbody id="tblDuAn"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer" id="footer"></footer>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/charts.js"></script>
+<script>
+(function () {
+  var D = window.IOC_DATA, IOC = window.IOC;
+
+  document.getElementById("statRow").innerHTML =
+    IOC.statCard({ icon: "ri-stack-line", tint: "tint-secondary", badge: "+9,5%", value: "8.520", unit: "tỷ đồng", label: "Tổng kế hoạch vốn năm", note: "So với kế hoạch 2025" }) +
+    IOC.statCard({ icon: "ri-funds-box-line", tint: "tint-primary", badge: "+11,3%", value: "4.976", unit: "tỷ đồng", label: "Đã giải ngân (lũy kế)", note: "So với cùng kỳ 2025" }) +
+    IOC.statCard({ icon: "ri-percent-line", tint: "tint-success", badge: "+4,1 điểm", value: "58,4", unit: "%", label: "Tỷ lệ giải ngân", note: "So với cùng kỳ 2025" }) +
+    IOC.statCard({ icon: "ri-time-line", tint: "tint-danger", badge: "+1", dir: "down", value: "3", unit: "/ 10 dự án lớn", label: "Dự án chậm tiến độ", note: "So với tháng trước" });
+
+  document.getElementById("tblDuAn").innerHTML = D.dauTuCong.duAn.map(function (x, i) {
+    return "<tr>" +
+      '<td style="color:rgba(76,78,100,.5)">' + (i + 1) + "</td>" +
+      '<td><div class="td-main">' + x.ten + "</div></td>" +
+      "<td>" + x.chuDauTu + "</td>" +
+      '<td class="num" style="font-weight:600;color:#4C4E64">' + IOC.fmt(x.von) + "</td>" +
+      '<td><div class="progress-cell"><div class="progress"><div class="progress-bar ' + IOC.progressClass(x.giaiNgan) + '" style="width:' + x.giaiNgan + '%"></div></div><span class="pct">' + x.giaiNgan + '%</span></div></td>' +
+      "<td>" + IOC.badgeTrangThai(x.trangThai) + "</td>" +
+      "</tr>";
+  }).join("");
+})();
+</script>
+</body>
+</html>
