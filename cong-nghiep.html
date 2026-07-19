@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Công nghiệp – Năng lượng | IOC Kinh tế số & Tài chính số tỉnh Điện Biên</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#666CFF">
+  <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="IOC">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="cong-nghiep">
+<div class="layout-wrapper">
+  <aside class="layout-sidebar" id="sidebar"></aside>
+
+  <div class="layout-page">
+    <nav class="navbar" id="navbar"></nav>
+
+    <main class="content">
+      <div class="page-head">
+        <h1 class="page-title">Công nghiệp – Năng lượng</h1>
+        <div class="page-breadcrumb">
+          <a href="index.html">IOC Điện Biên</a><span class="sep">/</span>Động lực GRDP<span class="sep">/</span><span class="current">Công nghiệp – Năng lượng</span>
+        </div>
+      </div>
+
+      <div class="card welcome-card col-12" style="margin-bottom:0">
+        <div class="card-body">
+          <div class="welcome-body">
+            <div class="welcome-title">Tăng nhanh nhưng phụ thuộc thời tiết</div>
+            <div class="welcome-text">Công nghiệp tăng <strong>8,80%</strong> năm 2025. Năm 2024 sản xuất điện tăng đột biến <strong>+49,49%</strong> nhờ 2 nhà máy thủy điện mới và mưa thuận lợi; năm 2025 trở lại bình thường (+6,98%). Vì phụ thuộc thủy văn, khi dự báo GRDP <strong>cần đưa dữ liệu khí tượng – lưu lượng nước vào mô hình</strong>, không ngoại suy tuyến tính sản lượng điện.</div>
+          </div>
+          <div class="welcome-art">⚡</div>
+        </div>
+      </div>
+
+      <!-- Stat cards -->
+      <div class="row" id="statRow"></div>
+
+      <div class="row">
+        <div class="card col-6">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Tăng trưởng IIP theo ngành 2025</div>
+              <div class="card-subtitle">Chỉ số sản xuất công nghiệp · % so 2024</div>
+            </div>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+          </div>
+          <div class="card-body">
+            <div id="chartIip2025" class="chart-box"></div>
+          </div>
+        </div>
+
+        <div class="card col-6">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Sản lượng điện theo tháng</div>
+              <div class="card-subtitle">Triệu kWh · cao điểm mùa mưa · số liệu minh họa</div>
+            </div>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+          </div>
+          <div class="card-body">
+            <div id="chartSanLuongDien" class="chart-box"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card col-12">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Biến số theo dõi để dự báo</div>
+              <div class="card-subtitle">Nhóm chỉ số công nghiệp – năng lượng nạp vào mô hình nowcasting GRDP</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <ul class="item-list" id="listBienSo"></ul>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer" id="footer"></footer>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/charts.js"></script>
+<script>
+(function () {
+  var D = window.IOC_DATA, IOC = window.IOC, cn = D.linhVuc.congNghiep;
+
+  document.getElementById("statRow").innerHTML =
+    IOC.statCard({ icon: "ri-flashlight-line", tint: "tint-primary", badge: "2025", value: "8,80", unit: "%", label: "Tăng trưởng công nghiệp", note: "2024 tăng mạnh 22,43%" }) +
+    IOC.statCard({ icon: "ri-lightbulb-flash-line", tint: "tint-info", badge: "2024: +49,49%", value: "6,98", unit: "%", label: "Sản xuất & phân phối điện", note: "Trở lại bình thường sau đột biến" }) +
+    IOC.statCard({ icon: "ri-hammer-line", tint: "tint-warning", badge: "2025", value: "15,73", unit: "%", label: "Khai khoáng", note: "Ngành tăng nhanh nhất" }) +
+    IOC.statCard({ icon: "ri-settings-5-line", tint: "tint-success", badge: "2025", value: "10,55", unit: "%", label: "Chế biến – chế tạo", note: "Tiềm năng bền vững hơn thủy điện" });
+
+  var bienSo = [
+    { icon: "ri-bar-chart-box-line", tint: "tint-primary", t: "IIP theo từng ngành", s: "Khai khoáng, chế biến – chế tạo, sản xuất điện, cung cấp nước" },
+    { icon: "ri-flashlight-line", tint: "tint-info", t: "Sản lượng điện từng nhà máy", s: "Thủy điện, thời điểm nhà máy mới hòa lưới" },
+    { icon: "ri-rainy-line", tint: "tint-warning", t: "Lượng mưa, lưu lượng & mực nước hồ", s: "Yếu tố khí tượng – thủy văn quyết định sản lượng thủy điện" },
+    { icon: "ri-building-2-line", tint: "tint-success", t: "Sản lượng xi măng, đá, vật liệu xây dựng", s: "Liên thông với đầu tư công – xây dựng" },
+    { icon: "ri-scales-3-line", tint: "tint-danger", t: "Công nghiệp chế biến nông sản", s: "Gạo, cà phê, chè, mắc ca – gắn với nông nghiệp" }
+  ];
+  document.getElementById("listBienSo").innerHTML = bienSo.map(function (x) {
+    return '<li class="item-row">' +
+      '<div class="item-icon ' + x.tint + '"><i class="' + x.icon + '"></i></div>' +
+      '<div class="item-body"><div class="item-title">' + x.t + '</div><div class="item-sub">' + x.s + '</div></div>' +
+      '</li>';
+  }).join("");
+})();
+</script>
+</body>
+</html>
