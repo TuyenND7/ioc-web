@@ -5,6 +5,35 @@
 window.IOC_DATA = {
   months: ["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12"],
 
+  // ---- GRDP tỉnh Điện Biên (số liệu THẬT, chuỗi hiệu chỉnh cuối năm) ----
+  // Nguồn: Cục Thống kê / báo cáo tổng kết KT-XH tỉnh Điện Biên 2023–2025.
+  grdp: {
+    // Tăng trưởng theo quý — % so với cùng kỳ năm trước
+    quy: {
+      labels: ["23-Q1", "23-Q2", "23-Q3", "23-Q4", "24-Q1", "24-Q2", "24-Q3", "24-Q4", "25-Q1", "25-Q2", "25-Q3", "25-Q4"],
+      tang:   [6.71, 5.90, 8.78, 7.02, 6.86, 15.00, 11.10, 2.37, 8.08, 4.68, 8.02, 8.78]
+    },
+    // Tăng trưởng cả năm + quy mô (giá so sánh 2010, tỷ đồng)
+    nam: {
+      labels: ["2023", "2024", "2025"],
+      tang: [7.10, 8.51, 7.34],
+      quyMo: [14912.39, 16263.22, 17547.78]
+    },
+    // Đóng góp của các khu vực vào mức tăng 7,34% năm 2025
+    dongGop2025: [
+      { ten: "Dịch vụ", tang: 8.16, diem: 4.80, tyTrong: 65.4 },
+      { ten: "Công nghiệp – xây dựng", tang: 8.52, diem: 1.82, tyTrong: 24.8 },
+      { ten: "Nông, lâm nghiệp & thủy sản", tang: 2.94, diem: 0.46, tyTrong: 6.3 },
+      { ten: "Thuế sản phẩm trừ trợ cấp", tang: 6.20, diem: 0.26, tyTrong: 3.5 }
+    ],
+    // Hệ số độ nhạy (mô hình kế toán tĩnh, cơ cấu 2025):
+    // ngành tăng thêm 1 điểm % → GRDP toàn tỉnh tăng thêm heSo điểm %
+    doNhay: {
+      labels: ["Dịch vụ", "Công nghiệp – xây dựng", "Nông, lâm nghiệp & TS", "Thuế sản phẩm"],
+      heSo: [0.588, 0.214, 0.157, 0.042]
+    }
+  },
+
   // ---- Dashboard tổng quan ----
   thuChi: {
     thu: [980, 890, 1050, 1120, 1010, 1080, 1150, 1090, 1160, 1210, 1180, 560],
@@ -19,12 +48,12 @@ window.IOC_DATA = {
   cpi: [100.2, 100.5, 100.4, 100.8, 101.1, 101.3, 101.2, 101.6, 102.0, 102.3, 102.6, 103.1],
 
   topDiaBan: [
-    { ten: "Phường Hòa Bình", thu: 1845, keHoach: 92 },
-    { ten: "Phường Bến Thành Đông", thu: 1520, keHoach: 88 },
-    { ten: "Xã Tân Lập", thu: 1236, keHoach: 81 },
-    { ten: "Phường Quang Trung", thu: 1104, keHoach: 76 },
-    { ten: "Xã Đại Đồng", thu: 918, keHoach: 71 },
-    { ten: "Xã Nghĩa Hưng", thu: 764, keHoach: 64 }
+    { ten: "Phường Điện Biên Phủ", thu: 742, keHoach: 88 },
+    { ten: "Xã Tuần Giáo", thu: 268, keHoach: 82 },
+    { ten: "Xã Mường Ảng", thu: 196, keHoach: 79 },
+    { ten: "Xã Mường Chà", thu: 154, keHoach: 74 },
+    { ten: "Xã Tủa Chùa", thu: 121, keHoach: 68 },
+    { ten: "Xã Điện Biên Đông", thu: 98, keHoach: 63 }
   ],
 
   canhBaoMoi: [
@@ -247,16 +276,16 @@ window.IOC_DATA = {
 
   // ---- GIS – Bản đồ số ----
   gisDiaBan: [
-    { ten: "Phường Hòa Bình", lat: 12.245, lng: 109.19, thu: 1845, kh: 102 },
-    { ten: "Phường Bến Thành Đông", lat: 12.29, lng: 109.21, thu: 1520, kh: 96 },
-    { ten: "Xã Tân Lập", lat: 12.36, lng: 109.12, thu: 1236, kh: 88 },
-    { ten: "Phường Quang Trung", lat: 12.21, lng: 109.14, thu: 1104, kh: 84 },
-    { ten: "Xã Đại Đồng", lat: 12.42, lng: 109.02, thu: 918, kh: 78 },
-    { ten: "Xã Nghĩa Hưng", lat: 12.12, lng: 109.05, thu: 764, kh: 71 },
-    { ten: "Phường Tân Phú", lat: 12.32, lng: 109.27, thu: 689, kh: 105 },
-    { ten: "Phường Bến Thủy", lat: 12.17, lng: 109.25, thu: 573, kh: 92 },
-    { ten: "Xã Sông Hiếu", lat: 12.52, lng: 109.15, thu: 421, kh: 76 },
-    { ten: "Xã Kênh Bắc", lat: 12.48, lng: 108.94, thu: 312, kh: 81 }
+    { ten: "Phường Điện Biên Phủ", lat: 21.386, lng: 103.017, thu: 742, kh: 104 },
+    { ten: "Phường Mường Thanh", lat: 21.383, lng: 103.005, thu: 415, kh: 97 },
+    { ten: "Xã Mường Phăng", lat: 21.42, lng: 103.145, thu: 86, kh: 79 },
+    { ten: "Xã Tuần Giáo", lat: 21.585, lng: 103.42, thu: 268, kh: 88 },
+    { ten: "Xã Mường Ảng", lat: 21.52, lng: 103.28, thu: 196, kh: 84 },
+    { ten: "Xã Tủa Chùa", lat: 21.90, lng: 103.35, thu: 121, kh: 71 },
+    { ten: "Xã Mường Chà", lat: 21.75, lng: 103.10, thu: 154, kh: 76 },
+    { ten: "Xã Mường Nhé", lat: 22.18, lng: 102.47, thu: 64, kh: 68 },
+    { ten: "Xã Nậm Pồ", lat: 22.02, lng: 102.75, thu: 58, kh: 72 },
+    { ten: "Xã Điện Biên Đông", lat: 21.22, lng: 103.20, thu: 98, kh: 74 }
   ],
 
   // ---- Quản trị người dùng ----

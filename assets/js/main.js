@@ -79,8 +79,8 @@
     '<div class="sidebar-brand">' +
     '  <div class="brand-logo"><i class="ri-pulse-line"></i></div>' +
     '  <div class="brand-text">' +
-    '    <div class="brand-name">IOC</div>' +
-    '    <div class="brand-sub">Tài chính – Kinh tế số</div>' +
+    '    <div class="brand-name">IOC Điện Biên</div>' +
+    '    <div class="brand-sub">Kinh tế số &amp; Tài chính số</div>' +
     "  </div>" +
     '  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Thu gọn menu"><i class="ri-arrow-left-double-line"></i></button>' +
     "</div>" +
@@ -366,7 +366,7 @@
   var footer = document.getElementById("footer");
   if (footer) {
     footer.innerHTML =
-      "<span>© 2026, IOC Tài chính – Kinh tế số ❤️</span>" +
+      "<span>© 2026, Trung tâm điều hành Kinh tế số &amp; Tài chính số tỉnh Điện Biên ❤️</span>" +
       '<span class="flinks"><a href="#">Tài liệu</a><a href="#">Hỗ trợ</a><a href="#">Giới thiệu</a></span>';
   }
 

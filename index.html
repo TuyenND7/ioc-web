@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard điều hành | IOC – Tài chính – Kinh tế số</title>
+  <title>Dashboard điều hành | Trung tâm điều hành Kinh tế số & Tài chính số tỉnh Điện Biên</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
       <div class="page-head">
         <h1 class="page-title">Dashboard điều hành</h1>
         <div class="page-breadcrumb">
-          <a href="index.html">IOC</a><span class="sep">/</span><span class="current">Tổng quan điều hành Tài chính – Kinh tế</span>
+          <a href="index.html">IOC Điện Biên</a><span class="sep">/</span><span class="current">Tổng quan điều hành Kinh tế số &amp; Tài chính số</span>
         </div>
       </div>
 
@@ -36,11 +36,67 @@
         <div class="card welcome-card col-12">
           <div class="card-body">
             <div class="welcome-body">
-              <div class="welcome-title">Chào mừng đồng chí! 🎉</div>
-              <div class="welcome-text">Thu NSNN toàn tỉnh đã đạt <strong>68% dự toán năm</strong>, cao hơn 4,1 điểm % so với cùng kỳ. Xem chi tiết diễn biến thu – chi và các chỉ tiêu điều hành trong báo cáo tuần này.</div>
+              <div class="welcome-title">Chào mừng đồng chí! 👋</div>
+              <div class="welcome-text">GRDP tỉnh Điện Biên năm 2025 tăng <strong>7,34%</strong>, quy mô đạt <strong>17.548 tỷ đồng</strong> (giá SS 2010). Dịch vụ tiếp tục là khu vực dẫn dắt, đóng góp <strong>65,4%</strong> mức tăng trưởng; xây dựng đã chuyển từ lực cản (2024) sang động lực. Xem phân tích chi tiết theo quý và cơ cấu ngành bên dưới.</div>
               <a href="bao-cao.html" class="btn btn-primary">Xem báo cáo</a>
             </div>
-            <div class="welcome-art">🏆</div>
+            <div class="welcome-art">📊</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRDP: số liệu thật tỉnh Điện Biên -->
+      <div class="row">
+        <div class="card col-8">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Tăng trưởng GRDP theo quý</div>
+              <div class="card-subtitle">2023–2025 · % so cùng kỳ năm trước · chuỗi hiệu chỉnh cuối năm</div>
+            </div>
+            <span class="badge badge-success"><i class="ri-arrow-up-s-line"></i>Cả năm 2025: +7,34%</span>
+          </div>
+          <div class="card-body">
+            <div id="chartGrdpQuy" class="chart-box"></div>
+          </div>
+        </div>
+
+        <div class="card col-4">
+          <div class="card-header">
+            <div>
+              <div class="card-title">GRDP cả năm</div>
+              <div class="card-subtitle">% tăng · quy mô (giá SS 2010)</div>
+            </div>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+          </div>
+          <div class="card-body" style="display:flex;flex-direction:column;gap:10px" id="grdpNamList"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card col-6">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Đóng góp vào mức tăng GRDP 2025</div>
+              <div class="card-subtitle">Điểm % · tỷ trọng trong mức tăng 7,34%</div>
+            </div>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+          </div>
+          <div class="card-body">
+            <div id="chartDongGop2025" class="chart-box"></div>
+          </div>
+        </div>
+
+        <div class="card col-6">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Độ nhạy GRDP theo cơ cấu 2025</div>
+              <div class="card-subtitle">Ngành tăng thêm 1 điểm % → GRDP tăng thêm (điểm %)</div>
+            </div>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+          </div>
+          <div class="card-body">
+            <div id="chartDoNhay" class="chart-box"></div>
+            <div class="card-subtitle" style="margin-top:6px">Mô hình kế toán tĩnh — minh họa độ nhạy, không phải dự báo nhân quả.</div>
           </div>
         </div>
       </div>
@@ -56,7 +112,7 @@
           <div class="card-header">
             <div>
               <div class="card-title">Thu – Chi NSNN theo tháng</div>
-              <div class="card-subtitle">Năm 2026 · đơn vị: tỷ đồng</div>
+              <div class="card-subtitle">Năm 2026 · đơn vị: tỷ đồng · số liệu minh họa</div>
             </div>
             <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
           </div>
@@ -116,7 +172,7 @@
           <div class="card-header">
             <div>
               <div class="card-title">Top địa bàn thu ngân sách</div>
-              <div class="card-subtitle">Lũy kế năm 2026 · tỷ đồng · % so kế hoạch</div>
+              <div class="card-subtitle">Lũy kế năm 2026 · tỷ đồng · % so kế hoạch · số liệu minh họa</div>
             </div>
             <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
           </div>
@@ -180,18 +236,33 @@
 
   /* Stat cards */
   document.getElementById("statRow").innerHTML =
-    IOC.statCard({ icon: "ri-money-dollar-circle-line", tint: "tint-primary", badge: "+8,2%", value: "12.480", unit: "tỷ đồng", label: "Tổng thu NSNN", note: "So với cùng kỳ 2025" }) +
-    IOC.statCard({ icon: "ri-bank-card-line", tint: "tint-info", badge: "+5,6%", value: "11.120", unit: "tỷ đồng", label: "Tổng chi NSNN", note: "So với cùng kỳ 2025" }) +
+    IOC.statCard({ icon: "ri-line-chart-line", tint: "tint-primary", badge: "+7,34%", value: "17.548", unit: "tỷ đồng", label: "Quy mô GRDP 2025", note: "Giá so sánh 2010" }) +
+    IOC.statCard({ icon: "ri-bar-chart-grouped-line", tint: "tint-success", badge: "cao nhất 3 năm", value: "8,51", unit: "%", label: "Tăng trưởng GRDP 2024", note: "Nhờ năm sự kiện 70 năm ĐBP" }) +
     '<div class="card stat-card col-3"><div class="card-body" style="padding-bottom:12px">' +
     '  <div class="stat-top" style="margin-bottom:0">' +
-    '    <div class="stat-icon tint-success"><i class="ri-funds-box-line"></i></div>' +
-    '    <span class="badge badge-success"><i class="ri-arrow-up-s-line"></i>+4,1 điểm</span>' +
+    '    <div class="stat-icon tint-info"><i class="ri-service-line"></i></div>' +
+    '    <span class="badge badge-success">Dẫn dắt</span>' +
     "  </div>" +
     '  <div id="chartGiaiNganRadial" class="chart-box" style="margin:-4px 0 -10px"></div>' +
-    '  <div class="stat-label" style="text-align:center">Tỷ lệ giải ngân đầu tư công</div>' +
-    '  <span class="stat-note" style="align-self:center">Kế hoạch năm: 8.520 tỷ đồng</span>' +
+    '  <div class="stat-label" style="text-align:center">Tỷ trọng dịch vụ trong GRDP</div>' +
+    '  <span class="stat-note" style="align-self:center">Cơ cấu kinh tế năm 2025</span>' +
     "</div></div>" +
-    IOC.statCard({ icon: "ri-alarm-warning-line", tint: "tint-danger", badge: "+5", dir: "down", badgeClass: "badge-danger", value: "23", unit: "cảnh báo", label: "Cảnh báo đang mở", note: "Tăng trong tuần này" });
+    IOC.statCard({ icon: "ri-alarm-warning-line", tint: "tint-danger", badge: "minh họa", value: "23", unit: "cảnh báo", label: "Cảnh báo đang mở", note: "Số liệu demo hệ thống" });
+
+  /* GRDP cả năm (số liệu thật) */
+  (function () {
+    var g = D.grdp.nam, colors = ["#6D788D", "#72E128", "#666CFF"];
+    document.getElementById("grdpNamList").innerHTML = g.labels.map(function (nam, i) {
+      var w = Math.round(g.tang[i] / 9 * 100);
+      return '<div>' +
+        '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px">' +
+        '  <span style="font-weight:600">' + nam + '</span>' +
+        '  <span><strong style="font-size:1.15rem;color:' + colors[i] + '">' + g.tang[i].toFixed(2).replace(".", ",") + '%</strong> <span class="stat-note">· ' + IOC.fmt(g.quyMo[i]) + ' tỷ</span></span>' +
+        '</div>' +
+        '<div class="progress"><div class="progress-bar" style="width:' + w + '%;background:' + colors[i] + '"></div></div>' +
+        '</div>';
+    }).join("");
+  })();
 
   /* Cảnh báo mới nhất */
   var tintMucDo = { "cao": "tint-danger", "trung binh": "tint-warning", "thap": "tint-info" };

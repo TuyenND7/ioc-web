@@ -112,6 +112,91 @@
   else if (mqMobile.addListener) mqMobile.addListener(rebuildAll);
 
   var tyDong = function (v) { return v == null ? "" : fmt(v) + " tỷ đồng"; };
+  var pct = function (v) { return v == null ? "" : v.toFixed(2).replace(".", ",") + "%"; };
+  var diem = function (v) { return v == null ? "" : v.toFixed(2).replace(".", ",") + " điểm %"; };
+
+  /* =============== GRDP (số liệu thật) =============== */
+
+  /* 0a. Line: tăng trưởng GRDP theo quý 2023–2025 */
+  make("#chartGrdpQuy", function () {
+    var g = D.grdp.quy;
+    return base({
+      chart: { type: "line", height: H(300, 250) },
+      series: [{ name: "Tăng trưởng GRDP (so cùng kỳ)", data: g.tang }],
+      colors: [BRAND.primary],
+      stroke: { curve: "smooth", width: 3 },
+      markers: { size: 4, strokeWidth: 2, strokeColors: T().cardBg, colors: [BRAND.primary], hover: { size: 6 } },
+      dataLabels: {
+        enabled: true,
+        formatter: function (v) { return v.toFixed(2).replace(".", ",").replace(",00", "").replace(/,(\d)0$/, ",$1"); },
+        style: { fontSize: "10px", fontWeight: 600, colors: [T().muted] },
+        background: { enabled: false }, offsetY: -6
+      },
+      xaxis: { categories: g.labels, axisBorder: { show: false }, axisTicks: { show: false }, labels: deepMerge(axisLabels(), { rotate: -45, rotateAlways: true, style: { fontSize: "10px" } }) },
+      yaxis: { labels: deepMerge(axisLabels(), { formatter: function (v) { return v.toFixed(0) + "%"; } }) },
+      annotations: {
+        xaxis: [
+          { x: "24-Q2", borderColor: BRAND.warning, strokeDashArray: 4, label: { text: "Năm sự kiện 70 năm ĐBP", orientation: "horizontal", style: { fontSize: "10px", color: "#fff", background: BRAND.warning } } },
+          { x: "24-Q4", borderColor: BRAND.danger, strokeDashArray: 4, label: { text: "Xây dựng kéo giảm", orientation: "horizontal", style: { fontSize: "10px", color: "#fff", background: BRAND.danger } } }
+        ]
+      },
+      tooltip: { y: { formatter: pct } }
+    });
+  });
+
+  /* 0b. Cột ngang: đóng góp các khu vực vào mức tăng GRDP 2025 */
+  make("#chartDongGop2025", function () {
+    var t = T();
+    var d = D.grdp.dongGop2025;
+    return base({
+      chart: { type: "bar", height: H(280, 260) },
+      series: [{ name: "Đóng góp", data: d.map(function (x) { return x.diem; }) }],
+      colors: [BRAND.primary, BRAND.info, BRAND.success, BRAND.warning],
+      plotOptions: { bar: { horizontal: true, distributed: true, barHeight: "58%", borderRadius: 4, borderRadiusApplication: "end" } },
+      dataLabels: {
+        enabled: true, textAnchor: "start", offsetX: 8,
+        style: { fontSize: "12px", fontWeight: 700, colors: [t.fore] },
+        formatter: function (v, opt) { return d[opt.dataPointIndex].tyTrong.toFixed(1).replace(".", ",") + "%"; },
+        dropShadow: { enabled: false }
+      },
+      xaxis: {
+        categories: d.map(function (x) { return x.ten; }), max: 5.6,
+        axisBorder: { show: false }, axisTicks: { show: false },
+        labels: deepMerge(axisLabels(), { formatter: function (v) { return Number(v).toFixed(1); } })
+      },
+      yaxis: { labels: { style: { colors: t.fore, fontSize: "12px" } } },
+      legend: { show: false },
+      grid: { borderColor: t.grid, strokeDashArray: 5, padding: { top: -14 } },
+      tooltip: { y: { formatter: function (v, o) { var i = o.dataPointIndex; return diem(v) + " (khu vực tăng " + pct(d[i].tang) + ", chiếm " + d[i].tyTrong.toFixed(1).replace(".", ",") + "% mức tăng)"; } } }
+    });
+  });
+
+  /* 0c. Cột ngang: hệ số độ nhạy GRDP theo cơ cấu 2025 */
+  make("#chartDoNhay", function () {
+    var t = T();
+    var d = D.grdp.doNhay;
+    return base({
+      chart: { type: "bar", height: H(250, 240) },
+      series: [{ name: "Hệ số độ nhạy", data: d.heSo }],
+      colors: [BRAND.primary, BRAND.info, BRAND.success, BRAND.warning],
+      plotOptions: { bar: { horizontal: true, distributed: true, barHeight: "54%", borderRadius: 4, borderRadiusApplication: "end" } },
+      dataLabels: {
+        enabled: true, textAnchor: "start", offsetX: 8,
+        style: { fontSize: "12px", fontWeight: 700, colors: [t.fore] },
+        formatter: function (v) { return v.toFixed(3).replace(".", ","); },
+        dropShadow: { enabled: false }
+      },
+      xaxis: {
+        categories: d.labels, max: 0.72,
+        axisBorder: { show: false }, axisTicks: { show: false },
+        labels: deepMerge(axisLabels(), { formatter: function (v) { return Number(v).toFixed(1); } })
+      },
+      yaxis: { labels: { style: { colors: t.fore, fontSize: "12px" } } },
+      legend: { show: false },
+      grid: { borderColor: t.grid, strokeDashArray: 5, padding: { top: -14 } },
+      tooltip: { y: { formatter: function (v) { return "+1 điểm % ngành → GRDP +" + v.toFixed(3).replace(".", ",") + " điểm %"; } } }
+    });
+  });
 
   /* =============== DASHBOARD =============== */
 
@@ -119,12 +204,12 @@
   make("#chartGiaiNganRadial", function () {
     return {
       chart: { type: "radialBar", height: 148, sparkline: { enabled: true }, fontFamily: '"Inter", sans-serif', animations: { enabled: false } },
-      series: [58.4],
-      colors: [BRAND.primary],
+      series: [59.7],
+      colors: [BRAND.info],
       plotOptions: {
         radialBar: {
           hollow: { size: "55%" },
-          track: { background: "rgba(102,108,255,0.12)" },
+          track: { background: "rgba(38,198,249,0.14)" },
           dataLabels: {
             name: { show: false },
             value: {

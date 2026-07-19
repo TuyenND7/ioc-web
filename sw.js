@@ -6,7 +6,7 @@
    Đường dẫn tương đối để chạy được dưới subpath GitHub Pages.
    ============================================================ */
 
-var CACHE = "ioc-v1";
+var CACHE = "ioc-v2";
 
 var ASSETS = [
   "./",
