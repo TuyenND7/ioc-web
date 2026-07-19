@@ -527,4 +527,93 @@
       tooltip: { shared: true, y: { formatter: function (v) { return v == null ? "" : fmt(v) + " hồ sơ"; } } }
     });
   });
+
+  /* =============== 4 LĨNH VỰC ĐỘNG LỰC GRDP =============== */
+
+  /* Dịch vụ: du lịch theo năm — cột lượt khách + đường doanh thu (2 trục) */
+  make("#chartDuLich", function () {
+    var d = D.linhVuc.dichVu.duLichNam;
+    return base({
+      chart: { type: "line", height: H(320, 270) },
+      series: [
+        { name: "Lượt khách (triệu)", type: "column", data: d.luotKhach },
+        { name: "Doanh thu du lịch (tỷ đồng)", type: "line", data: d.doanhThu }
+      ],
+      colors: [BRAND.primary, BRAND.warning],
+      stroke: { width: [0, 3], curve: "straight" },
+      markers: { size: [0, 5], colors: [BRAND.warning], strokeColors: T().cardBg, strokeWidth: 2 },
+      plotOptions: { bar: { columnWidth: "42%", borderRadius: 4, borderRadiusApplication: "end" } },
+      xaxis: { categories: d.labels, axisBorder: { show: false }, axisTicks: { show: false }, labels: axisLabels() },
+      yaxis: [
+        { seriesName: "Lượt khách (triệu)", labels: deepMerge(axisLabels(), { formatter: function (v) { return v.toFixed(1).replace(".", ",") + "tr"; } }), title: { text: "Lượt khách (triệu)", style: { color: T().muted, fontWeight: 500 } } },
+        { opposite: true, seriesName: "Doanh thu du lịch (tỷ đồng)", labels: deepMerge(axisLabels(), { formatter: function (v) { return fmt(v); } }), title: { text: "Doanh thu (tỷ đồng)", style: { color: T().muted, fontWeight: 500 } } }
+      ],
+      legend: legendTop(),
+      tooltip: { shared: true, intersect: false, y: { formatter: function (v, o) { return o.seriesIndex === 0 ? v.toFixed(3).replace(".", ",") + " triệu lượt" : fmt(v) + " tỷ đồng"; } } }
+    });
+  });
+
+  /* Dịch vụ: cơ cấu khu vực dịch vụ */
+  make("#chartDichVuCoCau", function () {
+    var t = T();
+    return {
+      chart: { type: "donut", height: H(300, 280), fontFamily: '"Inter", sans-serif', animations: { enabled: false } },
+      series: D.linhVuc.dichVu.coCau.values,
+      labels: D.linhVuc.dichVu.coCau.labels,
+      colors: [BRAND.primary, BRAND.info, BRAND.warning, BRAND.success, BRAND.secondary],
+      stroke: { width: 3, colors: [t.cardBg] },
+      dataLabels: { enabled: true, formatter: function (v) { return v.toFixed(0) + "%"; }, style: { fontSize: "11px", fontWeight: 600 } },
+      legend: { position: "bottom", markers: { size: 5, shape: "circle" }, labels: { colors: t.fore }, itemMargin: { horizontal: 6, vertical: 2 } },
+      plotOptions: { pie: { donut: { size: "64%", labels: { show: true, name: { show: true, fontSize: "12px", color: t.muted, offsetY: 18 }, value: { show: true, fontSize: "20px", fontWeight: 700, color: t.heading, offsetY: -16, formatter: function (v) { return v + "%"; } }, total: { show: true, label: "khu vực dịch vụ", fontSize: "11px", color: t.muted, formatter: function () { return "100%"; } } } } } },
+      tooltip: { theme: t.tooltip, y: { formatter: function (v) { return v + "% (minh họa)"; } } }
+    };
+  });
+
+  /* Công nghiệp: tăng trưởng IIP theo ngành 2025 */
+  make("#chartIip2025", function () {
+    var t = T();
+    return base({
+      chart: { type: "bar", height: H(300, 280) },
+      series: [{ name: "Tăng trưởng 2025", data: D.linhVuc.congNghiep.iip2025.values }],
+      colors: [BRAND.primary, BRAND.info, BRAND.warning, BRAND.success],
+      plotOptions: { bar: { horizontal: true, distributed: true, barHeight: "56%", borderRadius: 4, borderRadiusApplication: "end" } },
+      dataLabels: { enabled: true, textAnchor: "start", offsetX: 8, style: { fontSize: "12px", fontWeight: 700, colors: [t.fore] }, formatter: function (v) { return "+" + v.toFixed(2).replace(".", ",") + "%"; }, dropShadow: { enabled: false } },
+      xaxis: { categories: D.linhVuc.congNghiep.iip2025.labels, max: 20, axisBorder: { show: false }, axisTicks: { show: false }, labels: deepMerge(axisLabels(), { formatter: function (v) { return Number(v).toFixed(0) + "%"; } }) },
+      yaxis: { labels: { style: { colors: t.fore, fontSize: "12px" } } },
+      legend: { show: false },
+      grid: { borderColor: t.grid, strokeDashArray: 5, padding: { top: -14 } },
+      tooltip: { y: { formatter: pct } }
+    });
+  });
+
+  /* Công nghiệp: sản lượng điện theo tháng (mùa vụ thủy điện) */
+  make("#chartSanLuongDien", function () {
+    return base({
+      chart: { type: "area", height: H(300, 250) },
+      series: [{ name: "Sản lượng điện", data: D.linhVuc.congNghiep.sanLuongDien }],
+      colors: [BRAND.info],
+      stroke: { curve: "smooth", width: 3 },
+      fill: { type: "gradient", gradient: { opacityFrom: 0.4, opacityTo: 0.05 } },
+      markers: { size: 0, hover: { size: 5 } },
+      xaxis: { categories: D.months, axisBorder: { show: false }, axisTicks: { show: false }, labels: axisLabels() },
+      yaxis: { labels: deepMerge(axisLabels(), { formatter: function (v) { return fmt(v); } }) },
+      annotations: { xaxis: [{ x: "T6", x2: "T10", fillColor: BRAND.info, opacity: 0.06, label: { text: "Cao điểm mùa mưa", style: { fontSize: "10px", color: "#fff", background: BRAND.info } } }] },
+      tooltip: { y: { formatter: function (v) { return fmt(v) + " triệu kWh"; } } }
+    });
+  });
+
+  /* Nông nghiệp: chỉ số giá nông sản chủ lực */
+  make("#chartGiaNongSan", function () {
+    return base({
+      chart: { type: "line", height: H(320, 260) },
+      series: D.linhVuc.nongNghiep.giaNongSan,
+      colors: [BRAND.danger, BRAND.warning, BRAND.primary, BRAND.success],
+      stroke: { curve: "smooth", width: 2.5 },
+      markers: { size: 0, hover: { size: 5 } },
+      xaxis: { categories: D.months, axisBorder: { show: false }, axisTicks: { show: false }, labels: axisLabels() },
+      yaxis: { labels: deepMerge(axisLabels(), { formatter: function (v) { return v.toFixed(0); } }) },
+      legend: legendTop(),
+      tooltip: { shared: true, y: { formatter: function (v) { return v == null ? "" : v.toFixed(1).replace(".", ",") + " điểm"; } } }
+    });
+  });
 })();

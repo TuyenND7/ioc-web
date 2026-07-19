@@ -34,6 +34,72 @@ window.IOC_DATA = {
     }
   },
 
+  // ---- 4 lĩnh vực động lực GRDP (theo tài liệu phân tích GRDP Điện Biên) ----
+  linhVuc: {
+    // 1) DỊCH VỤ – DU LỊCH – THƯƠNG MẠI · động lực số 1 (đóng góp 65,4% mức tăng 2025)
+    dichVu: {
+      tang2025: 8.16, diem2025: 4.80, tyTrongGrdp: 59.7,
+      // Du lịch theo năm — số liệu thật
+      duLichNam: {
+        labels: ["2023", "2024", "2025"],
+        luotKhach: [1.01, 1.85, 1.454], // triệu lượt
+        doanhThu: [1750, 3300, 2645]    // tỷ đồng
+      },
+      // Cơ cấu khu vực dịch vụ (minh họa)
+      coCau: {
+        labels: ["Du lịch – lưu trú – ăn uống", "Bán lẻ hàng hóa", "Vận tải – kho bãi", "Tài chính – ngân hàng", "Dịch vụ khác"],
+        values: [34, 28, 14, 9, 15]
+      },
+      // Điểm du lịch trọng yếu (lượt khách nghìn · doanh thu tỷ) — minh họa, địa danh thật
+      diemDen: [
+        { ten: "Cụm di tích Chiến trường Điện Biên Phủ", khach: 620, doanhThu: 1180, xu: "tang" },
+        { ten: "Sở Chỉ huy Chiến dịch – Mường Phăng", khach: 245, doanhThu: 386, xu: "tang" },
+        { ten: "Suối khoáng nóng Hua Pe – U Va", khach: 168, doanhThu: 214, xu: "tang" },
+        { ten: "Đèo Pha Đin – hồ Pá Khoang", khach: 132, doanhThu: 168, xu: "giam" },
+        { ten: "A Pa Chải (ngã ba biên giới)", khach: 96, doanhThu: 142, xu: "tang" },
+        { ten: "Cao nguyên đá Tủa Chùa", khach: 74, doanhThu: 88, xu: "giam" }
+      ]
+    },
+
+    // 3) CÔNG NGHIỆP – NĂNG LƯỢNG · thứ 3, tăng nhanh nhưng phụ thuộc thời tiết
+    congNghiep: {
+      tang2025: 8.80,
+      // Tăng trưởng IIP theo ngành năm 2025 (%) — số liệu thật
+      iip2025: {
+        labels: ["Khai khoáng", "Chế biến – chế tạo", "Sản xuất & phân phối điện", "Cung cấp nước, xử lý rác"],
+        values: [15.73, 10.55, 6.98, 7.20]
+      },
+      // Sản xuất điện theo năm: 2024 đột biến (+2 nhà máy thủy điện, mưa thuận) vs 2025 bình thường — thật
+      dienNam: {
+        labels: ["2023", "2024", "2025"],
+        tang: [12.4, 49.49, 6.98]
+      },
+      // Sản lượng điện theo tháng (triệu kWh) — minh họa mùa vụ, cao điểm mùa mưa T6–T10
+      sanLuongDien: [168, 152, 176, 205, 268, 342, 388, 372, 331, 286, 214, 182]
+    },
+
+    // 4) NÔNG, LÂM NGHIỆP & THỦY SẢN · ổn định, chưa phải đầu tàu
+    nongNghiep: {
+      tang2025: 2.94, diem2025: 0.46,
+      // Chỉ số giá nông sản chủ lực (T1 = 100) — minh họa, nông sản chủ lực thật
+      giaNongSan: [
+        { name: "Cà phê", data: [100, 103, 108, 112, 118, 121, 119, 124, 128, 126, 131, 134] },
+        { name: "Mắc ca", data: [100, 101, 102, 104, 106, 108, 110, 111, 113, 114, 116, 118] },
+        { name: "Lúa gạo", data: [100, 100.4, 101, 101.6, 102.1, 102.4, 102.8, 103.5, 104.2, 104.6, 105.1, 105.6] },
+        { name: "Chè búp tươi", data: [100, 99, 98.5, 100, 102, 103.5, 104, 103, 102, 101.5, 102.5, 103] }
+      ],
+      // Nông sản chủ lực (sản lượng nghìn tấn · vùng trồng ha · % đã có hợp đồng tiêu thụ) — minh họa
+      chuLuc: [
+        { ten: "Lúa gạo (gạo Điện Biên)", sanLuong: 214, vung: 52000, tieuThu: 78, xu: "on dinh" },
+        { ten: "Cà phê", sanLuong: 68, vung: 4600, tieuThu: 84, xu: "tang" },
+        { ten: "Mắc ca", sanLuong: 12, vung: 8200, tieuThu: 72, xu: "tang" },
+        { ten: "Cao su", sanLuong: 9.4, vung: 5100, tieuThu: 65, xu: "giam" },
+        { ten: "Chè", sanLuong: 6.8, vung: 620, tieuThu: 69, xu: "on dinh" }
+      ],
+      ocop: { tong: 76, sao5: 2, sao4: 21, sao3: 53 }
+    }
+  },
+
   // ---- Dashboard tổng quan ----
   thuChi: {
     thu: [980, 890, 1050, 1120, 1010, 1080, 1150, 1090, 1160, 1210, 1180, 560],
