@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>M02 · Giám sát GRDP theo ngành | IOC Kinh tế số & Tài chính số tỉnh Điện Biên</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#666CFF">
+  <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="IOC">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="grdp-nganh">
+<div class="layout-wrapper">
+  <aside class="layout-sidebar" id="sidebar"></aside>
+  <div class="layout-page">
+    <nav class="navbar" id="navbar"></nav>
+    <main class="content">
+      <div class="page-head">
+        <h1 class="page-title">Giám sát GRDP theo ngành</h1>
+        <div class="page-breadcrumb">
+          <a href="index.html">IOC Điện Biên</a><span class="sep">/</span>Kinh tế – Ngành<span class="sep">/</span><span class="current">M02 · Giám sát GRDP theo ngành</span>
+        </div>
+      </div>
+
+      <div class="row" id="statRow"></div>
+
+      <div class="row">
+        <div class="card col-8">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Tăng trưởng GRDP theo quý</div>
+              <div class="card-subtitle">2023–2025 · % so cùng kỳ · chuỗi hiệu chỉnh cuối năm</div>
+            </div>
+            <span class="badge badge-success"><i class="ri-arrow-up-s-line"></i>Cả năm 2025: +7,34%</span>
+          </div>
+          <div class="card-body"><div id="chartGrdpQuy" class="chart-box"></div></div>
+        </div>
+        <div class="card col-4">
+          <div class="card-header">
+            <div>
+              <div class="card-title">GRDP cả năm</div>
+              <div class="card-subtitle">% tăng · quy mô (giá SS 2010)</div>
+            </div>
+          </div>
+          <div class="card-body" style="display:flex;flex-direction:column;gap:10px" id="grdpNamList"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card col-6">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Đóng góp vào mức tăng GRDP 2025</div>
+              <div class="card-subtitle">Điểm % · tỷ trọng trong mức tăng 7,34%</div>
+            </div>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+          </div>
+          <div class="card-body"><div id="chartDongGop2025" class="chart-box"></div></div>
+        </div>
+        <div class="card col-6">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Độ nhạy GRDP theo cơ cấu 2025</div>
+              <div class="card-subtitle">Ngành tăng thêm 1 điểm % → GRDP tăng thêm (điểm %)</div>
+            </div>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+          </div>
+          <div class="card-body">
+            <div id="chartDoNhay" class="chart-box"></div>
+            <div class="card-subtitle" style="margin-top:6px">Mô hình kế toán tĩnh — minh họa độ nhạy, không phải dự báo nhân quả.</div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="footer" id="footer"></footer>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/charts.js"></script>
+<script>
+(function () {
+  var D = window.IOC_DATA, IOC = window.IOC, g = D.grdp;
+  document.getElementById("statRow").innerHTML =
+    IOC.statCard({ icon: "ri-line-chart-line", tint: "tint-primary", badge: "+7,34%", value: "17.548", unit: "tỷ đồng", label: "Quy mô GRDP 2025", note: "Giá so sánh 2010" }) +
+    IOC.statCard({ icon: "ri-service-line", tint: "tint-info", badge: "dẫn dắt", value: "65,4", unit: "%", label: "Dịch vụ trong mức tăng", note: "4,80 điểm %" }) +
+    IOC.statCard({ icon: "ri-building-2-line", tint: "tint-warning", badge: "phục hồi", value: "24,8", unit: "%", label: "Công nghiệp – xây dựng", note: "1,82 điểm %" }) +
+    IOC.statCard({ icon: "ri-plant-line", tint: "tint-success", badge: "ổn định", value: "6,3", unit: "%", label: "Nông, lâm nghiệp & TS", note: "0,46 điểm %" });
+
+  var colors = ["#6D788D", "#72E128", "#666CFF"];
+  document.getElementById("grdpNamList").innerHTML = g.nam.labels.map(function (nam, i) {
+    var w = Math.round(g.nam.tang[i] / 9 * 100);
+    return '<div><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px">' +
+      '<span style="font-weight:600">' + nam + '</span>' +
+      '<span><strong style="font-size:1.15rem;color:' + colors[i] + '">' + g.nam.tang[i].toFixed(2).replace(".", ",") + '%</strong> <span class="stat-note">· ' + IOC.fmt(g.nam.quyMo[i]) + ' tỷ</span></span></div>' +
+      '<div class="progress"><div class="progress-bar" style="width:' + w + '%;background:' + colors[i] + '"></div></div></div>';
+  }).join("");
+})();
+</script>
+</body>
+</html>

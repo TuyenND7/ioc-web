@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>M13 · Ước tính & Dự báo | IOC Kinh tế số & Tài chính số tỉnh Điện Biên</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#666CFF">
+  <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="IOC">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="du-bao">
+<div class="layout-wrapper">
+  <aside class="layout-sidebar" id="sidebar"></aside>
+  <div class="layout-page">
+    <nav class="navbar" id="navbar"></nav>
+    <main class="content">
+      <div class="page-head">
+        <h1 class="page-title">Ước tính & Dự báo GRDP</h1>
+        <div class="page-breadcrumb">
+          <a href="index.html">IOC Điện Biên</a><span class="sep">/</span>Phân tích – Điều hành<span class="sep">/</span><span class="current">M13 · Ước tính & Dự báo</span>
+        </div>
+      </div>
+
+      <div class="card welcome-card col-12" style="margin-bottom:0">
+        <div class="card-body">
+          <div class="welcome-body">
+            <div class="welcome-title">Nowcasting — ước tính GRDP sớm từ chỉ số dẫn dắt</div>
+            <div class="welcome-text">GRDP công bố trễ; mô hình nowcasting dùng các <strong>chỉ số dẫn dắt tần suất cao</strong> (thu thuế, sản lượng điện, khách du lịch, giải ngân đầu tư công) để ước GRDP quý trước khi thống kê công bố. Chuỗi cấp tỉnh chỉ ~12 điểm quý nên <strong>chưa đủ cho deep learning</strong> — giai đoạn đầu dùng Bridge Equation / Ridge từ dữ liệu tháng, sau bổ sung XGBoost + SHAP khi đủ dữ liệu.</div>
+          </div>
+          <div class="welcome-art">🔮</div>
+        </div>
+      </div>
+
+      <div class="row" id="statRow"></div>
+
+      <div class="row">
+        <div class="card col-8">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Chuỗi GRDP theo quý (nền hiệu chỉnh)</div>
+              <div class="card-subtitle">2023–2025 · dữ liệu huấn luyện mô hình</div>
+            </div>
+            <span class="badge badge-info">12 điểm quý</span>
+          </div>
+          <div class="card-body"><div id="chartGrdpQuy" class="chart-box"></div></div>
+        </div>
+        <div class="card col-4">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Hệ số độ nhạy theo ngành</div>
+              <div class="card-subtitle">Trọng số mô hình kế toán 2025</div>
+            </div>
+          </div>
+          <div class="card-body"><div id="chartDoNhay" class="chart-box"></div></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card col-12">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Chỉ số dẫn dắt nạp vào mô hình nowcasting</div>
+              <div class="card-subtitle">Dữ liệu tần suất tháng, ra sớm hơn GRDP quý</div>
+            </div>
+          </div>
+          <div class="card-body"><ul class="item-list" id="listDanDat"></ul></div>
+        </div>
+      </div>
+    </main>
+    <footer class="footer" id="footer"></footer>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/charts.js"></script>
+<script>
+(function () {
+  var D = window.IOC_DATA, IOC = window.IOC;
+  document.getElementById("statRow").innerHTML =
+    IOC.statCard({ icon: "ri-timer-flash-line", tint: "tint-primary", badge: "nowcasting", value: "Quý", unit: "hiện tại", label: "Kỳ ước tính sớm", note: "Trước khi Thống kê công bố" }) +
+    IOC.statCard({ icon: "ri-service-line", tint: "tint-info", badge: "trọng số lớn nhất", value: "0,588", unit: "", label: "Hệ số dịch vụ", note: "+1 điểm % → GRDP +0,59 điểm" }) +
+    IOC.statCard({ icon: "ri-database-2-line", tint: "tint-warning", badge: "chuỗi ngắn", value: "12", unit: "điểm quý", label: "Dữ liệu huấn luyện", note: "Cần 5–10 năm cho ML mạnh" }) +
+    IOC.statCard({ icon: "ri-function-line", tint: "tint-success", badge: "GĐ1", value: "Bridge", unit: "/ Ridge", label: "Mô hình khuyến nghị", note: "Dễ giải thích cho lãnh đạo" });
+
+  var danDat = [
+    { icon: "ri-money-dollar-circle-line", tint: "tint-primary", t: "Thu thuế theo tháng", s: "Phản ánh sớm hoạt động sản xuất – tiêu dùng", vs: "dịch vụ, thương mại" },
+    { icon: "ri-flashlight-line", tint: "tint-info", t: "Sản lượng điện", s: "Đại diện công nghiệp – thủy điện; gắn dữ liệu khí tượng", vs: "công nghiệp" },
+    { icon: "ri-group-line", tint: "tint-warning", t: "Khách du lịch & lưu trú", s: "Lượt khách, ngày khách, công suất phòng, doanh thu", vs: "dịch vụ – du lịch" },
+    { icon: "ri-funds-box-line", tint: "tint-success", t: "Giải ngân đầu tư công", s: "Dự báo được sớm qua dữ liệu dự án", vs: "xây dựng – đầu tư" },
+    { icon: "ri-shopping-cart-2-line", tint: "tint-danger", t: "Tổng mức bán lẻ", s: "Tiêu dùng cuối cùng theo tháng", vs: "thương mại" },
+    { icon: "ri-ship-line", tint: "tint-secondary", t: "Kim ngạch XNK biên mậu", s: "Thương mại qua cửa khẩu", vs: "vận tải – biên mậu" }
+  ];
+  document.getElementById("listDanDat").innerHTML = danDat.map(function (x) {
+    return '<li class="item-row">' +
+      '<div class="item-icon ' + x.tint + '"><i class="' + x.icon + '"></i></div>' +
+      '<div class="item-body"><div class="item-title">' + x.t + '</div><div class="item-sub">' + x.s + '</div></div>' +
+      '<div class="item-end"><span class="badge badge-secondary">' + x.vs + '</span></div></li>';
+  }).join("");
+})();
+</script>
+</body>
+</html>

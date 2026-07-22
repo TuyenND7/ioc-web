@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>M07 · Vận tải & Logistics | IOC Kinh tế số & Tài chính số tỉnh Điện Biên</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#666CFF">
+  <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="IOC">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="van-tai">
+<div class="layout-wrapper">
+  <aside class="layout-sidebar" id="sidebar"></aside>
+  <div class="layout-page">
+    <nav class="navbar" id="navbar"></nav>
+    <main class="content">
+      <div class="page-head">
+        <h1 class="page-title">Vận tải & Logistics</h1>
+        <div class="page-breadcrumb">
+          <a href="index.html">IOC Điện Biên</a><span class="sep">/</span>Kinh tế – Ngành<span class="sep">/</span><span class="current">M07 · Vận tải & Logistics</span>
+        </div>
+      </div>
+
+      <div class="card welcome-card col-12" style="margin-bottom:0">
+        <div class="card-body">
+          <div class="welcome-body">
+            <div class="welcome-title">Kênh truyền dẫn của du lịch – thương mại</div>
+            <div class="welcome-text">Cảng hàng không Điện Biên hoạt động trở lại từ tháng 12/2023 khiến vận chuyển hành khách năm 2024 tăng <strong>+51,65%</strong>, doanh thu vận tải – kho bãi tăng <strong>+25,76%</strong>. Vận tải là mắt xích nối du lịch – lưu trú – bán lẻ và logistics biên mậu qua cửa khẩu.</div>
+          </div>
+          <div class="welcome-art">🚚</div>
+        </div>
+      </div>
+
+      <div class="row" id="statRow"></div>
+
+      <div class="row">
+        <div class="card col-4">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Cơ cấu khối lượng vận tải</div>
+              <div class="card-subtitle">Theo phương thức · số liệu minh họa</div>
+            </div>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+          </div>
+          <div class="card-body"><div id="chartVanTai" class="chart-box"></div></div>
+        </div>
+        <div class="card col-8">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Biến số theo dõi</div>
+              <div class="card-subtitle">Nhóm chỉ số vận tải – logistics cho điều hành và dự báo</div>
+            </div>
+          </div>
+          <div class="card-body"><ul class="item-list" id="listBienSo"></ul></div>
+        </div>
+      </div>
+    </main>
+    <footer class="footer" id="footer"></footer>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/charts.js"></script>
+<script>
+(function () {
+  var D = window.IOC_DATA, IOC = window.IOC;
+  document.getElementById("statRow").innerHTML =
+    IOC.statCard({ icon: "ri-plane-line", tint: "tint-primary", badge: "2024", value: "51,65", unit: "%", label: "Tăng vận chuyển hành khách", note: "Cảng hàng không mở lại 12/2023" }) +
+    IOC.statCard({ icon: "ri-truck-line", tint: "tint-info", badge: "2024", value: "25,76", unit: "%", label: "Doanh thu vận tải – kho bãi", note: "Kéo theo du lịch – thương mại" }) +
+    IOC.statCard({ icon: "ri-road-map-line", tint: "tint-warning", badge: "chủ đạo", value: "64", unit: "%", label: "Tỷ trọng đường bộ", note: "Địa hình miền núi" }) +
+    IOC.statCard({ icon: "ri-global-line", tint: "tint-success", badge: "biên mậu", value: "Cửa khẩu", unit: "", label: "Logistics biên giới", note: "Gắn kim ngạch XNK" });
+
+  var bienSo = [
+    { icon: "ri-plane-line", tint: "tint-primary", t: "Số chuyến bay & hệ số sử dụng ghế", s: "Kênh truyền dẫn trực tiếp từ du lịch" },
+    { icon: "ri-bus-2-line", tint: "tint-info", t: "Lượng hành khách vận tải đường bộ", s: "Xe khách liên tỉnh, nội tỉnh" },
+    { icon: "ri-archive-2-line", tint: "tint-warning", t: "Khối lượng hàng hóa & luân chuyển", s: "Vận tải hàng, kho bãi, dịch vụ hỗ trợ" },
+    { icon: "ri-global-line", tint: "tint-success", t: "Thông quan & logistics cửa khẩu", s: "Thời gian thông quan, ùn tắc, chi phí logistics" },
+    { icon: "ri-gas-station-line", tint: "tint-danger", t: "Chi phí nhiên liệu & giá cước", s: "Ảnh hưởng giá thành vận tải" }
+  ];
+  document.getElementById("listBienSo").innerHTML = bienSo.map(function (x) {
+    return '<li class="item-row"><div class="item-icon ' + x.tint + '"><i class="' + x.icon + '"></i></div>' +
+      '<div class="item-body"><div class="item-title">' + x.t + '</div><div class="item-sub">' + x.s + '</div></div></li>';
+  }).join("");
+})();
+</script>
+</body>
+</html>
