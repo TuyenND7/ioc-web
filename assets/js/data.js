@@ -31,7 +31,16 @@ window.IOC_DATA = {
     doNhay: {
       labels: ["Dịch vụ", "Công nghiệp – xây dựng", "Nông, lâm nghiệp & TS", "Thuế sản phẩm"],
       heSo: [0.588, 0.214, 0.157, 0.042]
-    }
+    },
+    // Kịch bản mô phỏng GRDP (mô hình độ nhạy 2025) — số liệu thật từ tài liệu phân tích
+    kichBan: [
+      { ten: "Cơ sở (thực hiện 2025)", grdp: 7.34, loai: "co so" },
+      { ten: "Dịch vụ tăng thêm 2 điểm %", grdp: 8.52, loai: "tich cuc" },
+      { ten: "Công nghiệp – xây dựng tăng thêm 3 điểm %", grdp: 7.98, loai: "tich cuc" },
+      { ten: "Nông nghiệp giảm 2 điểm %", grdp: 7.03, loai: "bat loi" },
+      { ten: "Dịch vụ giảm 2 điểm %", grdp: 6.16, loai: "bat loi" },
+      { ten: "Dịch vụ giảm 2 điểm %, CN–XD tăng 3 điểm %", grdp: 6.80, loai: "bat loi" }
+    ]
   },
 
   // ---- 4 lĩnh vực động lực GRDP (theo tài liệu phân tích GRDP Điện Biên) ----
@@ -97,6 +106,36 @@ window.IOC_DATA = {
         { ten: "Chè", sanLuong: 6.8, vung: 620, tieuThu: 69, xu: "on dinh" }
       ],
       ocop: { tong: 76, sao5: 2, sao4: 21, sao3: 53 }
+    },
+
+    // 7) VẬN TẢI & LOGISTICS
+    vanTai: {
+      hanhKhach2024: 51.65,   // % tăng vận chuyển hành khách 2024 (hàng không mở lại)
+      doanhThuKhoBai2024: 25.76, // % tăng doanh thu vận tải – kho bãi 2024
+      // Cơ cấu khối lượng vận tải theo phương thức (minh họa)
+      phuongThuc: {
+        labels: ["Đường bộ", "Hàng không", "Đường thủy nội địa", "Kho bãi – hỗ trợ"],
+        values: [64, 18, 6, 12]
+      }
+    },
+
+    // 9) DỊCH VỤ KINH TẾ & XÃ HỘI (ngoài du lịch – thương mại – vận tải)
+    dichVuXH: {
+      // Cơ cấu nhóm dịch vụ KT-XH (minh họa)
+      coCau: {
+        labels: ["Tài chính – ngân hàng", "Thông tin – truyền thông", "Y tế – giáo dục (dịch vụ)", "KHCN – tư vấn", "Hành chính công – khác"],
+        values: [31, 22, 24, 11, 12]
+      }
+    },
+
+    // 10) THUẾ SẢN PHẨM TRỪ TRỢ CẤP
+    thue: {
+      tang2025: 6.20, diem2025: 0.26, tyTrong: 3.5,
+      // Cơ cấu nguồn thuế sản phẩm (minh họa)
+      nguon: {
+        labels: ["Thuế GTGT hàng hóa – dịch vụ", "Thuế tiêu thụ đặc biệt", "Thuế xuất – nhập khẩu", "Trợ cấp sản phẩm (trừ)"],
+        values: [58, 22, 24, -4]
+      }
     }
   },
 

@@ -602,6 +602,76 @@
     });
   });
 
+  /* M14 – Mô phỏng: kết quả GRDP theo kịch bản */
+  make("#chartKichBan", function () {
+    var t = T();
+    var d = D.grdp.kichBan;
+    var mau = { "co so": BRAND.secondary, "tich cuc": BRAND.success, "bat loi": BRAND.danger };
+    return base({
+      chart: { type: "bar", height: H(320, 300) },
+      series: [{ name: "GRDP mô phỏng", data: d.map(function (x) { return x.grdp; }) }],
+      colors: d.map(function (x) { return mau[x.loai]; }),
+      plotOptions: { bar: { horizontal: true, distributed: true, barHeight: "56%", borderRadius: 4, borderRadiusApplication: "end" } },
+      dataLabels: { enabled: true, textAnchor: "start", offsetX: 8, style: { fontSize: "12px", fontWeight: 700, colors: [t.fore] }, formatter: function (v) { return v.toFixed(2).replace(".", ",") + "%"; }, dropShadow: { enabled: false } },
+      xaxis: { categories: d.map(function (x) { return x.ten; }), max: 9, axisBorder: { show: false }, axisTicks: { show: false }, labels: deepMerge(axisLabels(), { formatter: function (v) { return Number(v).toFixed(0) + "%"; } }) },
+      yaxis: { labels: { style: { colors: t.fore, fontSize: "11px" }, maxWidth: 260 } },
+      legend: { show: false },
+      annotations: { xaxis: [{ x: 7.34, borderColor: BRAND.secondary, strokeDashArray: 4, label: { text: "Cơ sở 7,34%", style: { fontSize: "10px", color: "#fff", background: BRAND.secondary } } }] },
+      grid: { borderColor: t.grid, strokeDashArray: 5, padding: { top: -14 } },
+      tooltip: { y: { formatter: pct } }
+    });
+  });
+
+  /* M07 – Vận tải: cơ cấu khối lượng theo phương thức */
+  make("#chartVanTai", function () {
+    var t = T();
+    return {
+      chart: { type: "donut", height: H(300, 280), fontFamily: '"Inter", sans-serif', animations: { enabled: false } },
+      series: D.linhVuc.vanTai.phuongThuc.values,
+      labels: D.linhVuc.vanTai.phuongThuc.labels,
+      colors: [BRAND.primary, BRAND.info, BRAND.warning, BRAND.secondary],
+      stroke: { width: 3, colors: [t.cardBg] },
+      dataLabels: { enabled: true, formatter: function (v) { return v.toFixed(0) + "%"; }, style: { fontSize: "11px", fontWeight: 600 } },
+      legend: { position: "bottom", markers: { size: 5, shape: "circle" }, labels: { colors: t.fore }, itemMargin: { horizontal: 6, vertical: 2 } },
+      plotOptions: { pie: { donut: { size: "64%", labels: { show: true, name: { show: true, fontSize: "12px", color: t.muted, offsetY: 18 }, value: { show: true, fontSize: "20px", fontWeight: 700, color: t.heading, offsetY: -16, formatter: function (v) { return v + "%"; } }, total: { show: true, label: "khối lượng vận tải", fontSize: "11px", color: t.muted, formatter: function () { return "100%"; } } } } } },
+      tooltip: { theme: t.tooltip, y: { formatter: function (v) { return v + "% (minh họa)"; } } }
+    };
+  });
+
+  /* M09 – Dịch vụ KT-XH: cơ cấu nhóm */
+  make("#chartDichVuXH", function () {
+    var t = T();
+    return {
+      chart: { type: "donut", height: H(300, 280), fontFamily: '"Inter", sans-serif', animations: { enabled: false } },
+      series: D.linhVuc.dichVuXH.coCau.values,
+      labels: D.linhVuc.dichVuXH.coCau.labels,
+      colors: [BRAND.primary, BRAND.info, BRAND.success, BRAND.warning, BRAND.secondary],
+      stroke: { width: 3, colors: [t.cardBg] },
+      dataLabels: { enabled: true, formatter: function (v) { return v.toFixed(0) + "%"; }, style: { fontSize: "11px", fontWeight: 600 } },
+      legend: { position: "bottom", markers: { size: 5, shape: "circle" }, labels: { colors: t.fore }, itemMargin: { horizontal: 6, vertical: 2 } },
+      plotOptions: { pie: { donut: { size: "64%", labels: { show: true, name: { show: true, fontSize: "12px", color: t.muted, offsetY: 18 }, value: { show: true, fontSize: "20px", fontWeight: 700, color: t.heading, offsetY: -16, formatter: function (v) { return v + "%"; } }, total: { show: true, label: "dịch vụ KT-XH", fontSize: "11px", color: t.muted, formatter: function () { return "100%"; } } } } } },
+      tooltip: { theme: t.tooltip, y: { formatter: function (v) { return v + "% (minh họa)"; } } }
+    };
+  });
+
+  /* M10 – Thuế sản phẩm: cơ cấu nguồn (có trợ cấp âm) */
+  make("#chartThue", function () {
+    var t = T();
+    var d = D.linhVuc.thue.nguon;
+    return base({
+      chart: { type: "bar", height: H(280, 260) },
+      series: [{ name: "Tỷ trọng", data: d.values }],
+      colors: [BRAND.primary, BRAND.info, BRAND.warning, BRAND.danger],
+      plotOptions: { bar: { horizontal: true, distributed: true, barHeight: "54%", borderRadius: 4, borderRadiusApplication: "end" } },
+      dataLabels: { enabled: true, textAnchor: "start", offsetX: 8, style: { fontSize: "12px", fontWeight: 700, colors: [t.fore] }, formatter: function (v) { return v + "%"; }, dropShadow: { enabled: false } },
+      xaxis: { categories: d.labels, axisBorder: { show: false }, axisTicks: { show: false }, labels: deepMerge(axisLabels(), { formatter: function (v) { return Number(v).toFixed(0) + "%"; } }) },
+      yaxis: { labels: { style: { colors: t.fore, fontSize: "11px" }, maxWidth: 220 } },
+      legend: { show: false },
+      grid: { borderColor: t.grid, strokeDashArray: 5, padding: { top: -14 } },
+      tooltip: { y: { formatter: function (v) { return v + "% (minh họa)"; } } }
+    });
+  });
+
   /* Nông nghiệp: chỉ số giá nông sản chủ lực */
   make("#chartGiaNongSan", function () {
     return base({

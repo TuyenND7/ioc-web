@@ -42,29 +42,35 @@
 
   var MENU = [
     {
-      group: "Dashboards", icon: "ri-home-smile-2-line",
-      children: [{ id: "index", href: "index.html", label: "Dashboard điều hành" }]
+      group: "Tổng quan", icon: "ri-home-smile-2-line",
+      children: [{ id: "index", href: "index.html", label: "M01 · Điều hành tăng trưởng" }]
     },
-    { section: "Nghiệp vụ – Động lực GRDP" },
-    { id: "dich-vu", href: "dich-vu.html", icon: "ri-suitcase-line", label: "Dịch vụ – Du lịch" },
-    { id: "dau-tu-cong", href: "dau-tu-cong.html", icon: "ri-building-4-line", label: "Đầu tư công – Xây dựng" },
-    { id: "cong-nghiep", href: "cong-nghiep.html", icon: "ri-flashlight-line", label: "Công nghiệp – Năng lượng" },
-    { id: "nong-nghiep", href: "nong-nghiep.html", icon: "ri-plant-line", label: "Nông nghiệp – OCOP" },
-    { section: "Tài chính – Hành chính" },
+    { section: "Kinh tế – Ngành (M02–M10)" },
+    { id: "grdp-nganh", href: "grdp-nganh.html", icon: "ri-funds-line", label: "M02 · Giám sát GRDP theo ngành" },
+    { id: "nong-nghiep", href: "nong-nghiep.html", icon: "ri-plant-line", label: "M03 · Nông, lâm nghiệp & thủy sản" },
+    { id: "cong-nghiep", href: "cong-nghiep.html", icon: "ri-flashlight-line", label: "M04 · Công nghiệp, năng lượng & MT" },
+    { id: "dau-tu-cong", href: "dau-tu-cong.html", icon: "ri-building-4-line", label: "M05 · Xây dựng & Đầu tư" },
+    { id: "gia-thi-truong", href: "gia-thi-truong.html", icon: "ri-store-2-line", label: "M06 · Thương mại & Thị trường" },
+    { id: "van-tai", href: "van-tai.html", icon: "ri-truck-line", label: "M07 · Vận tải & Logistics" },
+    { id: "dich-vu", href: "dich-vu.html", icon: "ri-suitcase-line", label: "M08 · Du lịch, Văn hóa & Thể thao" },
+    { id: "dich-vu-xh", href: "dich-vu-xh.html", icon: "ri-service-line", label: "M09 · Dịch vụ kinh tế & xã hội" },
+    { id: "thue", href: "thue.html", icon: "ri-percent-line", label: "M10 · Thuế sản phẩm" },
+    { section: "Phân tích – Điều hành (M11–M15)" },
+    { id: "gis", href: "gis.html", icon: "ri-map-pin-line", label: "M11 · Hồ sơ KT địa phương & GIS" },
+    { id: "canh-bao", href: "canh-bao.html", icon: "ri-alarm-warning-line", label: "M12 · Cảnh báo, nhiệm vụ & chỉ đạo", badge: "23" },
+    { id: "nhiem-vu", href: "nhiem-vu.html", icon: "ri-task-line", label: "Giao việc & Nhiệm vụ" },
+    { id: "du-bao", href: "du-bao.html", icon: "ri-line-chart-line", label: "M13 · Ước tính & Dự báo" },
+    { id: "mo-phong", href: "mo-phong.html", icon: "ri-flow-chart", label: "M14 · Mô phỏng & Đánh giá chính sách" },
+    { id: "bao-cao", href: "bao-cao.html", icon: "ri-file-chart-line", label: "M15 · Báo cáo, BI & Phát hành" },
+    { section: "Nền tảng & Quản trị (M16)" },
+    { id: "quan-tri-nguoi-dung", href: "quan-tri-nguoi-dung.html", icon: "ri-user-settings-line", label: "M16 · Quản trị người dùng" },
+    { id: "cau-hinh-kpi", href: "cau-hinh-kpi.html", icon: "ri-equalizer-line", label: "Cấu hình KPI & danh mục" },
+    { section: "Tài chính – Hành chính (ngoài danh mục IOC GRDP)" },
     { id: "ngan-sach", href: "ngan-sach.html", icon: "ri-wallet-3-line", label: "Ngân sách" },
     { id: "tai-san-cong", href: "tai-san-cong.html", icon: "ri-community-line", label: "Tài sản công" },
-    { id: "gia-thi-truong", href: "gia-thi-truong.html", icon: "ri-line-chart-line", label: "Giá & Thị trường" },
-    { id: "doanh-nghiep", href: "doanh-nghiep.html", icon: "ri-briefcase-4-line", label: "Doanh nghiệp – Kinh tế" },
+    { id: "doanh-nghiep", href: "doanh-nghiep.html", icon: "ri-briefcase-4-line", label: "Doanh nghiệp – ĐKKD" },
     { id: "thanh-tra", href: "thanh-tra.html", icon: "ri-shield-check-line", label: "Thanh tra / Kiểm toán" },
-    { id: "cai-cach-hanh-chinh", href: "cai-cach-hanh-chinh.html", icon: "ri-government-line", label: "Cải cách hành chính" },
-    { section: "Điều hành" },
-    { id: "canh-bao", href: "canh-bao.html", icon: "ri-alarm-warning-line", label: "Cảnh báo & Giám sát", badge: "23" },
-    { id: "nhiem-vu", href: "nhiem-vu.html", icon: "ri-task-line", label: "Giao việc & Nhiệm vụ" },
-    { id: "bao-cao", href: "bao-cao.html", icon: "ri-file-chart-line", label: "Báo cáo & Xuất dữ liệu" },
-    { id: "gis", href: "gis.html", icon: "ri-map-pin-line", label: "GIS – Bản đồ số" },
-    { section: "Hệ thống" },
-    { id: "quan-tri-nguoi-dung", href: "quan-tri-nguoi-dung.html", icon: "ri-user-settings-line", label: "Quản trị người dùng" },
-    { id: "cau-hinh-kpi", href: "cau-hinh-kpi.html", icon: "ri-equalizer-line", label: "Cấu hình KPI" }
+    { id: "cai-cach-hanh-chinh", href: "cai-cach-hanh-chinh.html", icon: "ri-government-line", label: "Cải cách hành chính" }
   ];
 
   function itemHtml(m, isSub) {
