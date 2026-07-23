@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css" rel="stylesheet">
   <link rel="manifest" href="./manifest.webmanifest">
   <meta name="theme-color" content="#161D31">
   <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
@@ -40,7 +40,7 @@
               <div class="card-title">Phân loại tài sản</div>
               <div class="card-subtitle">Theo nguyên giá · tỷ đồng</div>
             </div>
-            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ti ti-dots-vertical"></i></button>
           </div>
           <div class="card-body">
             <div id="chartTaiSanPhanLoai" class="chart-box"></div>
@@ -53,7 +53,7 @@
               <div class="card-title">Nguyên giá theo đơn vị quản lý</div>
               <div class="card-subtitle">Top 6 sở, ngành có giá trị tài sản lớn nhất · tỷ đồng</div>
             </div>
-            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ti ti-dots-vertical"></i></button>
           </div>
           <div class="card-body">
             <div id="chartTaiSanDonVi" class="chart-box"></div>
@@ -68,7 +68,7 @@
               <div class="card-title">Danh mục tài sản giá trị lớn</div>
               <div class="card-subtitle">12 tài sản tiêu biểu · đơn vị: tỷ đồng</div>
             </div>
-            <button class="btn btn-outline btn-sm"><i class="ri-download-2-line"></i>Xuất danh mục</button>
+            <button class="btn btn-outline btn-sm"><i class="ti ti-download"></i>Xuất danh mục</button>
           </div>
           <div class="card-body no-pad table-wrap" style="padding-top:14px">
             <table class="table">
@@ -102,10 +102,10 @@
   var D = window.IOC_DATA, IOC = window.IOC;
 
   document.getElementById("statRow").innerHTML =
-    IOC.statCard({ icon: "ri-archive-2-line", tint: "tint-primary", badge: "+3,1%", value: "12.640", unit: "tài sản", label: "Tổng số tài sản theo dõi", note: "So với đầu năm" }) +
-    IOC.statCard({ icon: "ri-money-dollar-circle-line", tint: "tint-info", badge: "+5,4%", value: "28.450", unit: "tỷ đồng", label: "Tổng nguyên giá", note: "So với đầu năm" }) +
-    IOC.statCard({ icon: "ri-funds-line", tint: "tint-success", badge: "69,8%", badgeClass: "badge-success", value: "19.870", unit: "tỷ đồng", label: "Giá trị còn lại", note: "Tỷ lệ còn lại / nguyên giá" }) +
-    IOC.statCard({ icon: "ri-delete-bin-6-line", tint: "tint-warning", badge: "+4", dir: "down", value: "37", unit: "tài sản", label: "Chờ xử lý / thanh lý", note: "Tăng so với quý trước" });
+    IOC.statCard({ icon: "ti ti-archive", tint: "tint-primary", badge: "+3,1%", value: "12.640", unit: "tài sản", label: "Tổng số tài sản theo dõi", note: "So với đầu năm" }) +
+    IOC.statCard({ icon: "ti ti-currency-dollar", tint: "tint-info", badge: "+5,4%", value: "28.450", unit: "tỷ đồng", label: "Tổng nguyên giá", note: "So với đầu năm" }) +
+    IOC.statCard({ icon: "ti ti-chart-line", tint: "tint-success", badge: "69,8%", badgeClass: "badge-success", value: "19.870", unit: "tỷ đồng", label: "Giá trị còn lại", note: "Tỷ lệ còn lại / nguyên giá" }) +
+    IOC.statCard({ icon: "ti ti-trash", tint: "tint-warning", badge: "+4", dir: "down", value: "37", unit: "tài sản", label: "Chờ xử lý / thanh lý", note: "Tăng so với quý trước" });
 
   document.getElementById("tblTaiSan").innerHTML = D.taiSanCong.taiSan.map(function (x) {
     return "<tr>" +

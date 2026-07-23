@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css" rel="stylesheet">
   <link rel="manifest" href="./manifest.webmanifest">
   <meta name="theme-color" content="#161D31">
   <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
@@ -62,8 +62,8 @@
                 <option>Xã Đại Đồng</option>
               </select>
             </div>
-            <button class="btn btn-primary"><i class="ri-filter-3-line"></i>Áp dụng</button>
-            <button class="btn btn-outline"><i class="ri-download-2-line"></i>Xuất Excel</button>
+            <button class="btn btn-primary"><i class="ti ti-filter"></i>Áp dụng</button>
+            <button class="btn btn-outline"><i class="ti ti-download"></i>Xuất Excel</button>
           </div>
         </div>
       </div>
@@ -79,7 +79,7 @@
               <div class="card-title">Dự toán vs Thực hiện thu theo tháng</div>
               <div class="card-subtitle">Năm 2026 · đơn vị: tỷ đồng · đường nét đứt là dự toán được giao</div>
             </div>
-            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ti ti-dots-vertical"></i></button>
           </div>
           <div class="card-body">
             <div id="chartNganSach" class="chart-box"></div>
@@ -129,10 +129,10 @@
   var D = window.IOC_DATA, IOC = window.IOC;
 
   document.getElementById("statRow").innerHTML =
-    IOC.statCard({ icon: "ri-file-list-3-line", tint: "tint-secondary", badge: "+6,0%", value: "16.980", unit: "tỷ đồng", label: "Dự toán thu năm", note: "So với dự toán 2025" }) +
-    IOC.statCard({ icon: "ri-money-dollar-circle-line", tint: "tint-primary", badge: "56,7%", badgeClass: "badge-primary", value: "9.620", unit: "tỷ đồng", label: "Đã thu (lũy kế)", note: "Tỷ lệ so dự toán năm" }) +
-    IOC.statCard({ icon: "ri-bank-card-line", tint: "tint-info", badge: "52,4%", badgeClass: "badge-info", value: "8.410", unit: "tỷ đồng", label: "Đã chi (lũy kế)", note: "Tỷ lệ so dự toán năm" }) +
-    IOC.statCard({ icon: "ri-scales-3-line", tint: "tint-success", badge: "+14,2%", value: "1.210", unit: "tỷ đồng", label: "Kết dư / chênh lệch", note: "So với cùng kỳ 2025" });
+    IOC.statCard({ icon: "ti ti-file-text", tint: "tint-secondary", badge: "+6,0%", value: "16.980", unit: "tỷ đồng", label: "Dự toán thu năm", note: "So với dự toán 2025" }) +
+    IOC.statCard({ icon: "ti ti-currency-dollar", tint: "tint-primary", badge: "56,7%", badgeClass: "badge-primary", value: "9.620", unit: "tỷ đồng", label: "Đã thu (lũy kế)", note: "Tỷ lệ so dự toán năm" }) +
+    IOC.statCard({ icon: "ti ti-credit-card", tint: "tint-info", badge: "52,4%", badgeClass: "badge-info", value: "8.410", unit: "tỷ đồng", label: "Đã chi (lũy kế)", note: "Tỷ lệ so dự toán năm" }) +
+    IOC.statCard({ icon: "ti ti-scale", tint: "tint-success", badge: "+14,2%", value: "1.210", unit: "tỷ đồng", label: "Kết dư / chênh lệch", note: "So với cùng kỳ 2025" });
 
   document.getElementById("tblSacThue").innerHTML = D.nganSach.sacThue.map(function (x, i) {
     var pct = Math.round(x.thucHien / x.duToan * 1000) / 10;

@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css" rel="stylesheet">
   <link rel="manifest" href="./manifest.webmanifest">
   <meta name="theme-color" content="#161D31">
   <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
@@ -40,7 +40,7 @@
               <div class="card-title">Diễn biến giá mặt hàng thiết yếu 12 tháng</div>
               <div class="card-subtitle">Chỉ số giá quy về tháng 1 = 100 điểm (một thang đo chung)</div>
             </div>
-            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ti ti-dots-vertical"></i></button>
           </div>
           <div class="card-body">
             <div id="chartGiaHangHoa" class="chart-box"></div>
@@ -89,17 +89,17 @@
   var D = window.IOC_DATA, IOC = window.IOC;
 
   document.getElementById("statRow").innerHTML =
-    IOC.statCard({ icon: "ri-line-chart-line", tint: "tint-warning", badge: "+0,5%", badgeClass: "badge-warning", value: "103,1", unit: "điểm", label: "CPI tháng này", note: "So với tháng trước" }) +
-    IOC.statCard({ icon: "ri-shopping-basket-2-line", tint: "tint-primary", value: "48", unit: "mặt hàng", label: "Mặt hàng theo dõi giá", note: "Khảo sát 2 kỳ/tháng" }) +
-    IOC.statCard({ icon: "ri-arrow-up-circle-line", tint: "tint-danger", badge: "+3", dir: "down", value: "12", unit: "mặt hàng", label: "Mặt hàng tăng giá", note: "So với kỳ trước" }) +
-    IOC.statCard({ icon: "ri-store-2-line", tint: "tint-success", badge: "+2", value: "26", unit: "điểm bán", label: "Điểm bán bình ổn giá", note: "Toàn tỉnh" });
+    IOC.statCard({ icon: "ti ti-chart-line", tint: "tint-warning", badge: "+0,5%", badgeClass: "badge-warning", value: "103,1", unit: "điểm", label: "CPI tháng này", note: "So với tháng trước" }) +
+    IOC.statCard({ icon: "ti ti-shopping-cart", tint: "tint-primary", value: "48", unit: "mặt hàng", label: "Mặt hàng theo dõi giá", note: "Khảo sát 2 kỳ/tháng" }) +
+    IOC.statCard({ icon: "ti ti-circle-arrow-up", tint: "tint-danger", badge: "+3", dir: "down", value: "12", unit: "mặt hàng", label: "Mặt hàng tăng giá", note: "So với kỳ trước" }) +
+    IOC.statCard({ icon: "ti ti-building-store", tint: "tint-success", badge: "+2", value: "26", unit: "điểm bán", label: "Điểm bán bình ổn giá", note: "Toàn tỉnh" });
 
   document.getElementById("tblGia").innerHTML = D.giaThiTruong.bangGia.map(function (x, i) {
     var delta;
     if (x.bienDong > 0) {
-      delta = '<span class="delta up"><i class="ri-arrow-up-s-line"></i>+' + String(x.bienDong.toFixed(1)).replace(".", ",") + "%</span>";
+      delta = '<span class="delta up"><i class="ti ti-chevron-up"></i>+' + String(x.bienDong.toFixed(1)).replace(".", ",") + "%</span>";
     } else if (x.bienDong < 0) {
-      delta = '<span class="delta down"><i class="ri-arrow-down-s-line"></i>' + String(x.bienDong.toFixed(1)).replace(".", ",") + "%</span>";
+      delta = '<span class="delta down"><i class="ti ti-chevron-down"></i>' + String(x.bienDong.toFixed(1)).replace(".", ",") + "%</span>";
     } else {
       delta = '<span class="delta flat">0%</span>';
     }

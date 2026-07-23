@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css" rel="stylesheet">
   <link rel="manifest" href="./manifest.webmanifest">
   <meta name="theme-color" content="#161D31">
   <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
@@ -82,8 +82,8 @@
       var canTai = x.trangThai === "da phat hanh";
       var taiVe = canTai
         ? '<div style="display:flex;gap:6px">' +
-          '<button class="icon-action pdf btn-tai" title="Tải PDF"><i class="ri-file-pdf-2-line"></i></button>' +
-          '<button class="icon-action xls btn-tai" title="Tải Excel"><i class="ri-file-excel-2-line"></i></button></div>'
+          '<button class="icon-action pdf btn-tai" title="Tải PDF"><i class="ti ti-file-type-pdf"></i></button>' +
+          '<button class="icon-action xls btn-tai" title="Tải Excel"><i class="ti ti-file-spreadsheet"></i></button></div>'
         : '<span style="color:var(--text-faint)">—</span>';
       return "<tr>" +
         '<td class="td-main">' + x.ten + "</td>" +
@@ -116,7 +116,7 @@
     var btn = e.target.closest(".btn-tai");
     if (!btn) return;
     var old = btn.innerHTML;
-    btn.innerHTML = '<i class="ri-check-line"></i>';
+    btn.innerHTML = '<i class="ti ti-check"></i>';
     btn.disabled = true;
     setTimeout(function () { btn.innerHTML = old; btn.disabled = false; }, 1200);
   });

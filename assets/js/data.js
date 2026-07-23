@@ -162,11 +162,11 @@ window.IOC_DATA = {
   ],
 
   canhBaoMoi: [
-    { mucDo: "cao", icon: "ri-alarm-warning-line", noiDung: "Giải ngân dự án Đường vành đai 2 dưới 30% kế hoạch", thoiGian: "10 phút trước" },
-    { mucDo: "cao", icon: "ri-funds-line", noiDung: "Thu tiền sử dụng đất Quý III đạt 41% dự toán", thoiGian: "2 giờ trước" },
-    { mucDo: "trung binh", icon: "ri-line-chart-line", noiDung: "CPI nhóm lương thực tăng 1,8% so với tháng trước", thoiGian: "5 giờ trước" },
-    { mucDo: "trung binh", icon: "ri-building-2-line", noiDung: "12 doanh nghiệp chậm nộp thuế trên 90 ngày", thoiGian: "Hôm qua" },
-    { mucDo: "thap", icon: "ri-file-list-3-line", noiDung: "3 đơn vị chưa nộp báo cáo quyết toán tháng 6", thoiGian: "2 ngày trước" }
+    { mucDo: "cao", icon: "ti ti-alert-triangle", noiDung: "Giải ngân dự án Đường vành đai 2 dưới 30% kế hoạch", thoiGian: "10 phút trước" },
+    { mucDo: "cao", icon: "ti ti-chart-line", noiDung: "Thu tiền sử dụng đất Quý III đạt 41% dự toán", thoiGian: "2 giờ trước" },
+    { mucDo: "trung binh", icon: "ti ti-chart-line", noiDung: "CPI nhóm lương thực tăng 1,8% so với tháng trước", thoiGian: "5 giờ trước" },
+    { mucDo: "trung binh", icon: "ti ti-building", noiDung: "12 doanh nghiệp chậm nộp thuế trên 90 ngày", thoiGian: "Hôm qua" },
+    { mucDo: "thap", icon: "ti ti-file-text", noiDung: "3 đơn vị chưa nộp báo cáo quyết toán tháng 6", thoiGian: "2 ngày trước" }
   ],
 
   nhiemVuTheoDoi: [

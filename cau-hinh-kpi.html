@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css" rel="stylesheet">
   <link rel="manifest" href="./manifest.webmanifest">
   <meta name="theme-color" content="#161D31">
   <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
@@ -40,7 +40,7 @@
               <div class="card-title">Bộ chỉ tiêu điều hành</div>
               <div class="card-subtitle">Dashboard hiển thị theo cấu hình — bật/tắt để thay đổi chỉ tiêu được theo dõi</div>
             </div>
-            <button class="btn btn-primary btn-sm"><i class="ri-add-line"></i>Thêm chỉ tiêu</button>
+            <button class="btn btn-primary btn-sm"><i class="ti ti-plus"></i>Thêm chỉ tiêu</button>
           </div>
           <div class="card-body no-pad table-wrap" style="padding-top:14px">
             <table class="table">
@@ -73,9 +73,9 @@
   var D = window.IOC_DATA, IOC = window.IOC;
 
   document.getElementById("statRow").innerHTML =
-    IOC.statCard({ col: "col-4", icon: "ri-dashboard-3-line", tint: "tint-primary", badge: "+5", value: "86", unit: "chỉ tiêu", label: "Tổng chỉ tiêu định nghĩa", note: "Trong bộ KPI điều hành" }) +
-    IOC.statCard({ col: "col-4", icon: "ri-eye-line", tint: "tint-success", badge: "74,4%", badgeClass: "badge-success", value: "64", unit: "chỉ tiêu", label: "Đang hiển thị trên dashboard", note: "Tỷ lệ so tổng chỉ tiêu" }) +
-    IOC.statCard({ col: "col-4", icon: "ri-alarm-warning-line", tint: "tint-warning", value: "41", unit: "chỉ tiêu", label: "Có ngưỡng cảnh báo", note: "Sinh cảnh báo tự động" });
+    IOC.statCard({ col: "col-4", icon: "ti ti-layout-dashboard", tint: "tint-primary", badge: "+5", value: "86", unit: "chỉ tiêu", label: "Tổng chỉ tiêu định nghĩa", note: "Trong bộ KPI điều hành" }) +
+    IOC.statCard({ col: "col-4", icon: "ti ti-eye", tint: "tint-success", badge: "74,4%", badgeClass: "badge-success", value: "64", unit: "chỉ tiêu", label: "Đang hiển thị trên dashboard", note: "Tỷ lệ so tổng chỉ tiêu" }) +
+    IOC.statCard({ col: "col-4", icon: "ti ti-alert-triangle", tint: "tint-warning", value: "41", unit: "chỉ tiêu", label: "Có ngưỡng cảnh báo", note: "Sinh cảnh báo tự động" });
 
   document.getElementById("tblKpi").innerHTML = D.kpiConfig.map(function (x, i) {
     return "<tr>" +

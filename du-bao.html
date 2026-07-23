@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css" rel="stylesheet">
   <link rel="manifest" href="./manifest.webmanifest">
   <meta name="theme-color" content="#161D31">
   <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
@@ -86,18 +86,18 @@
 (function () {
   var D = window.IOC_DATA, IOC = window.IOC;
   document.getElementById("statRow").innerHTML =
-    IOC.statCard({ icon: "ri-timer-flash-line", tint: "tint-primary", badge: "nowcasting", value: "Quý", unit: "hiện tại", label: "Kỳ ước tính sớm", note: "Trước khi Thống kê công bố" }) +
-    IOC.statCard({ icon: "ri-service-line", tint: "tint-info", badge: "trọng số lớn nhất", value: "0,588", unit: "", label: "Hệ số dịch vụ", note: "+1 điểm % → GRDP +0,59 điểm" }) +
-    IOC.statCard({ icon: "ri-database-2-line", tint: "tint-warning", badge: "chuỗi ngắn", value: "12", unit: "điểm quý", label: "Dữ liệu huấn luyện", note: "Cần 5–10 năm cho ML mạnh" }) +
-    IOC.statCard({ icon: "ri-function-line", tint: "tint-success", badge: "GĐ1", value: "Bridge", unit: "/ Ridge", label: "Mô hình khuyến nghị", note: "Dễ giải thích cho lãnh đạo" });
+    IOC.statCard({ icon: "ti ti-clock-bolt", tint: "tint-primary", badge: "nowcasting", value: "Quý", unit: "hiện tại", label: "Kỳ ước tính sớm", note: "Trước khi Thống kê công bố" }) +
+    IOC.statCard({ icon: "ti ti-tool", tint: "tint-info", badge: "trọng số lớn nhất", value: "0,588", unit: "", label: "Hệ số dịch vụ", note: "+1 điểm % → GRDP +0,59 điểm" }) +
+    IOC.statCard({ icon: "ti ti-database", tint: "tint-warning", badge: "chuỗi ngắn", value: "12", unit: "điểm quý", label: "Dữ liệu huấn luyện", note: "Cần 5–10 năm cho ML mạnh" }) +
+    IOC.statCard({ icon: "ti ti-math-function", tint: "tint-success", badge: "GĐ1", value: "Bridge", unit: "/ Ridge", label: "Mô hình khuyến nghị", note: "Dễ giải thích cho lãnh đạo" });
 
   var danDat = [
-    { icon: "ri-money-dollar-circle-line", tint: "tint-primary", t: "Thu thuế theo tháng", s: "Phản ánh sớm hoạt động sản xuất – tiêu dùng", vs: "dịch vụ, thương mại" },
-    { icon: "ri-flashlight-line", tint: "tint-info", t: "Sản lượng điện", s: "Đại diện công nghiệp – thủy điện; gắn dữ liệu khí tượng", vs: "công nghiệp" },
-    { icon: "ri-group-line", tint: "tint-warning", t: "Khách du lịch & lưu trú", s: "Lượt khách, ngày khách, công suất phòng, doanh thu", vs: "dịch vụ – du lịch" },
-    { icon: "ri-funds-box-line", tint: "tint-success", t: "Giải ngân đầu tư công", s: "Dự báo được sớm qua dữ liệu dự án", vs: "xây dựng – đầu tư" },
-    { icon: "ri-shopping-cart-2-line", tint: "tint-danger", t: "Tổng mức bán lẻ", s: "Tiêu dùng cuối cùng theo tháng", vs: "thương mại" },
-    { icon: "ri-ship-line", tint: "tint-secondary", t: "Kim ngạch XNK biên mậu", s: "Thương mại qua cửa khẩu", vs: "vận tải – biên mậu" }
+    { icon: "ti ti-currency-dollar", tint: "tint-primary", t: "Thu thuế theo tháng", s: "Phản ánh sớm hoạt động sản xuất – tiêu dùng", vs: "dịch vụ, thương mại" },
+    { icon: "ti ti-bolt", tint: "tint-info", t: "Sản lượng điện", s: "Đại diện công nghiệp – thủy điện; gắn dữ liệu khí tượng", vs: "công nghiệp" },
+    { icon: "ti ti-users", tint: "tint-warning", t: "Khách du lịch & lưu trú", s: "Lượt khách, ngày khách, công suất phòng, doanh thu", vs: "dịch vụ – du lịch" },
+    { icon: "ti ti-chart-line", tint: "tint-success", t: "Giải ngân đầu tư công", s: "Dự báo được sớm qua dữ liệu dự án", vs: "xây dựng – đầu tư" },
+    { icon: "ti ti-shopping-cart", tint: "tint-danger", t: "Tổng mức bán lẻ", s: "Tiêu dùng cuối cùng theo tháng", vs: "thương mại" },
+    { icon: "ti ti-ship", tint: "tint-secondary", t: "Kim ngạch XNK biên mậu", s: "Thương mại qua cửa khẩu", vs: "vận tải – biên mậu" }
   ];
   document.getElementById("listDanDat").innerHTML = danDat.map(function (x) {
     return '<li class="item-row">' +

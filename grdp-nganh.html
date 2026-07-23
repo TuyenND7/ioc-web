@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css" rel="stylesheet">
   <link rel="manifest" href="./manifest.webmanifest">
   <meta name="theme-color" content="#161D31">
   <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
@@ -38,7 +38,7 @@
               <div class="card-title">Tăng trưởng GRDP theo quý</div>
               <div class="card-subtitle">2023–2025 · % so cùng kỳ · chuỗi hiệu chỉnh cuối năm</div>
             </div>
-            <span class="badge badge-success"><i class="ri-arrow-up-s-line"></i>Cả năm 2025: +7,34%</span>
+            <span class="badge badge-success"><i class="ti ti-chevron-up"></i>Cả năm 2025: +7,34%</span>
           </div>
           <div class="card-body"><div id="chartGrdpQuy" class="chart-box"></div></div>
         </div>
@@ -60,7 +60,7 @@
               <div class="card-title">Đóng góp vào mức tăng GRDP 2025</div>
               <div class="card-subtitle">Điểm % · tỷ trọng trong mức tăng 7,34%</div>
             </div>
-            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ti ti-dots-vertical"></i></button>
           </div>
           <div class="card-body"><div id="chartDongGop2025" class="chart-box"></div></div>
         </div>
@@ -70,7 +70,7 @@
               <div class="card-title">Độ nhạy GRDP theo cơ cấu 2025</div>
               <div class="card-subtitle">Ngành tăng thêm 1 điểm % → GRDP tăng thêm (điểm %)</div>
             </div>
-            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ti ti-dots-vertical"></i></button>
           </div>
           <div class="card-body">
             <div id="chartDoNhay" class="chart-box"></div>
@@ -90,10 +90,10 @@
 (function () {
   var D = window.IOC_DATA, IOC = window.IOC, g = D.grdp;
   document.getElementById("statRow").innerHTML =
-    IOC.statCard({ icon: "ri-line-chart-line", tint: "tint-primary", badge: "+7,34%", value: "17.548", unit: "tỷ đồng", label: "Quy mô GRDP 2025", note: "Giá so sánh 2010" }) +
-    IOC.statCard({ icon: "ri-service-line", tint: "tint-info", badge: "dẫn dắt", value: "65,4", unit: "%", label: "Dịch vụ trong mức tăng", note: "4,80 điểm %" }) +
-    IOC.statCard({ icon: "ri-building-2-line", tint: "tint-warning", badge: "phục hồi", value: "24,8", unit: "%", label: "Công nghiệp – xây dựng", note: "1,82 điểm %" }) +
-    IOC.statCard({ icon: "ri-plant-line", tint: "tint-success", badge: "ổn định", value: "6,3", unit: "%", label: "Nông, lâm nghiệp & TS", note: "0,46 điểm %" });
+    IOC.statCard({ icon: "ti ti-chart-line", tint: "tint-primary", badge: "+7,34%", value: "17.548", unit: "tỷ đồng", label: "Quy mô GRDP 2025", note: "Giá so sánh 2010" }) +
+    IOC.statCard({ icon: "ti ti-tool", tint: "tint-info", badge: "dẫn dắt", value: "65,4", unit: "%", label: "Dịch vụ trong mức tăng", note: "4,80 điểm %" }) +
+    IOC.statCard({ icon: "ti ti-building", tint: "tint-warning", badge: "phục hồi", value: "24,8", unit: "%", label: "Công nghiệp – xây dựng", note: "1,82 điểm %" }) +
+    IOC.statCard({ icon: "ti ti-plant-2", tint: "tint-success", badge: "ổn định", value: "6,3", unit: "%", label: "Nông, lâm nghiệp & TS", note: "0,46 điểm %" });
 
   var colors = ["#82868B", "#28C76F", "#7367F0"];
   document.getElementById("grdpNamList").innerHTML = g.nam.labels.map(function (nam, i) {

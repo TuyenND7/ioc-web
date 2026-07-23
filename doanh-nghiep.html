@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css" rel="stylesheet">
   <link rel="manifest" href="./manifest.webmanifest">
   <meta name="theme-color" content="#161D31">
   <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
@@ -40,7 +40,7 @@
               <div class="card-title">Doanh nghiệp thành lập mới theo tháng</div>
               <div class="card-subtitle">12 tháng gần nhất · toàn tỉnh</div>
             </div>
-            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ti ti-dots-vertical"></i></button>
           </div>
           <div class="card-body">
             <div id="chartDnThang" class="chart-box"></div>
@@ -53,7 +53,7 @@
               <div class="card-title">Cơ cấu theo ngành nghề</div>
               <div class="card-subtitle">Doanh nghiệp đang hoạt động</div>
             </div>
-            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ti ti-dots-vertical"></i></button>
           </div>
           <div class="card-body">
             <div id="chartDnNganh" class="chart-box"></div>
@@ -68,7 +68,7 @@
               <div class="card-title">Doanh nghiệp đăng ký mới nhất</div>
               <div class="card-subtitle">10 hồ sơ đăng ký gần đây · vốn điều lệ: tỷ đồng</div>
             </div>
-            <button class="btn btn-outline btn-sm"><i class="ri-download-2-line"></i>Xuất danh sách</button>
+            <button class="btn btn-outline btn-sm"><i class="ti ti-download"></i>Xuất danh sách</button>
           </div>
           <div class="card-body no-pad table-wrap" style="padding-top:14px">
             <table class="table">
@@ -101,10 +101,10 @@
   var D = window.IOC_DATA, IOC = window.IOC;
 
   document.getElementById("statRow").innerHTML =
-    IOC.statCard({ icon: "ri-building-line", tint: "tint-primary", badge: "+5,2%", value: "8.642", unit: "DN", label: "Doanh nghiệp đang hoạt động", note: "So với cùng kỳ 2025" }) +
-    IOC.statCard({ icon: "ri-briefcase-4-line", tint: "tint-success", badge: "+12,4%", value: "756", unit: "DN", label: "Thành lập mới (từ đầu năm)", note: "So với cùng kỳ 2025" }) +
-    IOC.statCard({ icon: "ri-close-circle-line", tint: "tint-danger", badge: "+8", dir: "down", value: "118", unit: "DN", label: "Giải thể (từ đầu năm)", note: "So với cùng kỳ 2025" }) +
-    IOC.statCard({ icon: "ri-pause-circle-line", tint: "tint-warning", badge: "+15", dir: "down", value: "234", unit: "DN", label: "Tạm ngừng hoạt động", note: "So với cùng kỳ 2025" });
+    IOC.statCard({ icon: "ti ti-building", tint: "tint-primary", badge: "+5,2%", value: "8.642", unit: "DN", label: "Doanh nghiệp đang hoạt động", note: "So với cùng kỳ 2025" }) +
+    IOC.statCard({ icon: "ti ti-briefcase", tint: "tint-success", badge: "+12,4%", value: "756", unit: "DN", label: "Thành lập mới (từ đầu năm)", note: "So với cùng kỳ 2025" }) +
+    IOC.statCard({ icon: "ti ti-circle-x", tint: "tint-danger", badge: "+8", dir: "down", value: "118", unit: "DN", label: "Giải thể (từ đầu năm)", note: "So với cùng kỳ 2025" }) +
+    IOC.statCard({ icon: "ti ti-player-pause", tint: "tint-warning", badge: "+15", dir: "down", value: "234", unit: "DN", label: "Tạm ngừng hoạt động", note: "So với cùng kỳ 2025" });
 
   document.getElementById("tblDn").innerHTML = D.doanhNghiep.dnMoi.map(function (x) {
     return "<tr>" +

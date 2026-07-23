@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css" rel="stylesheet">
   <link rel="manifest" href="./manifest.webmanifest">
   <meta name="theme-color" content="#161D31">
   <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
@@ -51,7 +51,7 @@
               <div class="card-title">Chỉ số giá nông sản chủ lực</div>
               <div class="card-subtitle">Gốc so sánh: tháng 1 = 100 · số liệu minh họa</div>
             </div>
-            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ti ti-dots-vertical"></i></button>
           </div>
           <div class="card-body">
             <div id="chartGiaNongSan" class="chart-box"></div>
@@ -66,7 +66,7 @@
               <div class="card-title">Nông sản chủ lực &amp; vùng nguyên liệu</div>
               <div class="card-subtitle">Sản lượng (nghìn tấn) · vùng trồng (ha) · % đã có hợp đồng tiêu thụ · số liệu minh họa</div>
             </div>
-            <button class="btn btn-outline btn-sm"><i class="ri-download-2-line"></i>Xuất báo cáo</button>
+            <button class="btn btn-outline btn-sm"><i class="ti ti-download"></i>Xuất báo cáo</button>
           </div>
           <div class="card-body no-pad table-wrap" style="padding-top:14px">
             <table class="table">
@@ -99,14 +99,14 @@
   var D = window.IOC_DATA, IOC = window.IOC, nn = D.linhVuc.nongNghiep;
 
   document.getElementById("statRow").innerHTML =
-    IOC.statCard({ icon: "ri-plant-line", tint: "tint-success", badge: "2025", value: "2,94", unit: "%", label: "Tăng trưởng NLTS", note: "Khu vực ổn định" }) +
-    IOC.statCard({ icon: "ri-seedling-line", tint: "tint-primary", badge: "2025", value: "0,46", unit: "điểm %", label: "Đóng góp vào GRDP", note: "6,3% mức tăng chung" }) +
-    IOC.statCard({ icon: "ri-award-line", tint: "tint-warning", badge: "2 sản phẩm 5 sao", value: "76", unit: "sản phẩm", label: "Sản phẩm OCOP", note: "21 sản phẩm 4 sao, 53 sản phẩm 3 sao" }) +
-    IOC.statCard({ icon: "ri-map-2-line", tint: "tint-info", badge: "chủ lực", value: "5", unit: "nông sản", label: "Nhóm cây trồng chủ lực", note: "Lúa gạo, cà phê, mắc ca, cao su, chè" });
+    IOC.statCard({ icon: "ti ti-plant-2", tint: "tint-success", badge: "2025", value: "2,94", unit: "%", label: "Tăng trưởng NLTS", note: "Khu vực ổn định" }) +
+    IOC.statCard({ icon: "ti ti-seeding", tint: "tint-primary", badge: "2025", value: "0,46", unit: "điểm %", label: "Đóng góp vào GRDP", note: "6,3% mức tăng chung" }) +
+    IOC.statCard({ icon: "ti ti-award", tint: "tint-warning", badge: "2 sản phẩm 5 sao", value: "76", unit: "sản phẩm", label: "Sản phẩm OCOP", note: "21 sản phẩm 4 sao, 53 sản phẩm 3 sao" }) +
+    IOC.statCard({ icon: "ti ti-map-2", tint: "tint-info", badge: "chủ lực", value: "5", unit: "nông sản", label: "Nhóm cây trồng chủ lực", note: "Lúa gạo, cà phê, mắc ca, cao su, chè" });
 
   var xuBadge = function (xu) {
-    if (xu === "tang") return '<span class="badge badge-success"><i class="ri-arrow-up-s-line"></i>Tăng</span>';
-    if (xu === "giam") return '<span class="badge badge-danger"><i class="ri-arrow-down-s-line"></i>Giảm</span>';
+    if (xu === "tang") return '<span class="badge badge-success"><i class="ti ti-chevron-up"></i>Tăng</span>';
+    if (xu === "giam") return '<span class="badge badge-danger"><i class="ti ti-chevron-down"></i>Giảm</span>';
     return '<span class="badge badge-warning">Ổn định</span>';
   };
 

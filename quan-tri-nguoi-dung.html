@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css" rel="stylesheet">
   <link rel="manifest" href="./manifest.webmanifest">
   <meta name="theme-color" content="#161D31">
   <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
@@ -40,7 +40,7 @@
               <div class="card-title">Danh sách người dùng</div>
               <div class="card-subtitle">Tài khoản truy cập hệ thống IOC theo vai trò và đơn vị</div>
             </div>
-            <button class="btn btn-primary btn-sm"><i class="ri-add-line"></i>Thêm người dùng</button>
+            <button class="btn btn-primary btn-sm"><i class="ti ti-plus"></i>Thêm người dùng</button>
           </div>
           <div class="card-body no-pad table-wrap" style="padding-top:14px">
             <table class="table">
@@ -71,9 +71,9 @@
   var D = window.IOC_DATA, IOC = window.IOC;
 
   document.getElementById("statRow").innerHTML =
-    IOC.statCard({ col: "col-4", icon: "ri-group-line", tint: "tint-primary", badge: "+12", value: "248", unit: "tài khoản", label: "Tổng người dùng", note: "So với quý trước" }) +
-    IOC.statCard({ col: "col-4", icon: "ri-user-follow-line", tint: "tint-success", badge: "93,1%", badgeClass: "badge-success", value: "231", unit: "tài khoản", label: "Đang hoạt động", note: "Đăng nhập trong 30 ngày" }) +
-    IOC.statCard({ col: "col-4", icon: "ri-user-add-line", tint: "tint-warning", badge: "+3", dir: "down", value: "7", unit: "tài khoản", label: "Chờ phê duyệt", note: "Yêu cầu mới trong tuần" });
+    IOC.statCard({ col: "col-4", icon: "ti ti-users", tint: "tint-primary", badge: "+12", value: "248", unit: "tài khoản", label: "Tổng người dùng", note: "So với quý trước" }) +
+    IOC.statCard({ col: "col-4", icon: "ti ti-user-check", tint: "tint-success", badge: "93,1%", badgeClass: "badge-success", value: "231", unit: "tài khoản", label: "Đang hoạt động", note: "Đăng nhập trong 30 ngày" }) +
+    IOC.statCard({ col: "col-4", icon: "ti ti-user-plus", tint: "tint-warning", badge: "+3", dir: "down", value: "7", unit: "tài khoản", label: "Chờ phê duyệt", note: "Yêu cầu mới trong tuần" });
 
   var tints = ["tint-primary", "tint-info", "tint-warning", "tint-success", "tint-danger", "tint-secondary"];
 

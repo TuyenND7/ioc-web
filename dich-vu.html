@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css" rel="stylesheet">
   <link rel="manifest" href="./manifest.webmanifest">
   <meta name="theme-color" content="#161D31">
   <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
@@ -51,7 +51,7 @@
               <div class="card-title">Du lịch Điện Biên theo năm</div>
               <div class="card-subtitle">Lượt khách &amp; doanh thu · 2024 là năm sự kiện 70 năm Chiến thắng ĐBP</div>
             </div>
-            <span class="badge badge-success"><i class="ri-arrow-up-s-line"></i>Dịch vụ 2025: +8,16%</span>
+            <span class="badge badge-success"><i class="ti ti-chevron-up"></i>Dịch vụ 2025: +8,16%</span>
           </div>
           <div class="card-body">
             <div id="chartDuLich" class="chart-box"></div>
@@ -64,7 +64,7 @@
               <div class="card-title">Cơ cấu khu vực dịch vụ</div>
               <div class="card-subtitle">Số liệu minh họa</div>
             </div>
-            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ti ti-dots-vertical"></i></button>
           </div>
           <div class="card-body">
             <div id="chartDichVuCoCau" class="chart-box"></div>
@@ -79,7 +79,7 @@
               <div class="card-title">Điểm du lịch trọng yếu</div>
               <div class="card-subtitle">Lượt khách (nghìn) · doanh thu (tỷ đồng) · số liệu minh họa</div>
             </div>
-            <button class="btn btn-outline btn-sm"><i class="ri-download-2-line"></i>Xuất báo cáo</button>
+            <button class="btn btn-outline btn-sm"><i class="ti ti-download"></i>Xuất báo cáo</button>
           </div>
           <div class="card-body no-pad table-wrap" style="padding-top:14px">
             <table class="table">
@@ -111,15 +111,15 @@
   var D = window.IOC_DATA, IOC = window.IOC, dv = D.linhVuc.dichVu;
 
   document.getElementById("statRow").innerHTML =
-    IOC.statCard({ icon: "ri-service-line", tint: "tint-primary", badge: "+8,16%", value: "4,80", unit: "điểm %", label: "Đóng góp GRDP 2025", note: "Chiếm 65,4% mức tăng" }) +
-    IOC.statCard({ icon: "ri-group-line", tint: "tint-info", badge: "so 2024: 1,85tr", value: "1,454", unit: "triệu lượt", label: "Khách du lịch 2025", note: "13.331 lượt khách quốc tế" }) +
-    IOC.statCard({ icon: "ri-money-dollar-circle-line", tint: "tint-warning", badge: "mục tiêu +15%/năm", value: "2.645", unit: "tỷ đồng", label: "Doanh thu du lịch 2025", note: "Lưu trú bình quân ~3 ngày" }) +
-    IOC.statCard({ icon: "ri-pie-chart-2-line", tint: "tint-success", badge: "dẫn dắt", value: "59,7", unit: "%", label: "Tỷ trọng dịch vụ trong GRDP", note: "Cơ cấu kinh tế 2025" });
+    IOC.statCard({ icon: "ti ti-tool", tint: "tint-primary", badge: "+8,16%", value: "4,80", unit: "điểm %", label: "Đóng góp GRDP 2025", note: "Chiếm 65,4% mức tăng" }) +
+    IOC.statCard({ icon: "ti ti-users", tint: "tint-info", badge: "so 2024: 1,85tr", value: "1,454", unit: "triệu lượt", label: "Khách du lịch 2025", note: "13.331 lượt khách quốc tế" }) +
+    IOC.statCard({ icon: "ti ti-currency-dollar", tint: "tint-warning", badge: "mục tiêu +15%/năm", value: "2.645", unit: "tỷ đồng", label: "Doanh thu du lịch 2025", note: "Lưu trú bình quân ~3 ngày" }) +
+    IOC.statCard({ icon: "ti ti-chart-pie", tint: "tint-success", badge: "dẫn dắt", value: "59,7", unit: "%", label: "Tỷ trọng dịch vụ trong GRDP", note: "Cơ cấu kinh tế 2025" });
 
   var xuBadge = function (xu) {
     return xu === "tang"
-      ? '<span class="badge badge-success"><i class="ri-arrow-up-s-line"></i>Tăng</span>'
-      : '<span class="badge badge-danger"><i class="ri-arrow-down-s-line"></i>Giảm</span>';
+      ? '<span class="badge badge-success"><i class="ti ti-chevron-up"></i>Tăng</span>'
+      : '<span class="badge badge-danger"><i class="ti ti-chevron-down"></i>Giảm</span>';
   };
 
   document.getElementById("tblDiemDen").innerHTML = dv.diemDen.map(function (x) {

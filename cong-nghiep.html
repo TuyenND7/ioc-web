@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css" rel="stylesheet">
   <link rel="manifest" href="./manifest.webmanifest">
   <meta name="theme-color" content="#161D31">
   <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
@@ -51,7 +51,7 @@
               <div class="card-title">Tăng trưởng IIP theo ngành 2025</div>
               <div class="card-subtitle">Chỉ số sản xuất công nghiệp · % so 2024</div>
             </div>
-            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ti ti-dots-vertical"></i></button>
           </div>
           <div class="card-body">
             <div id="chartIip2025" class="chart-box"></div>
@@ -64,7 +64,7 @@
               <div class="card-title">Sản lượng điện theo tháng</div>
               <div class="card-subtitle">Triệu kWh · cao điểm mùa mưa · số liệu minh họa</div>
             </div>
-            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ti ti-dots-vertical"></i></button>
           </div>
           <div class="card-body">
             <div id="chartSanLuongDien" class="chart-box"></div>
@@ -100,17 +100,17 @@
   var D = window.IOC_DATA, IOC = window.IOC, cn = D.linhVuc.congNghiep;
 
   document.getElementById("statRow").innerHTML =
-    IOC.statCard({ icon: "ri-flashlight-line", tint: "tint-primary", badge: "2025", value: "8,80", unit: "%", label: "Tăng trưởng công nghiệp", note: "2024 tăng mạnh 22,43%" }) +
-    IOC.statCard({ icon: "ri-lightbulb-flash-line", tint: "tint-info", badge: "2024: +49,49%", value: "6,98", unit: "%", label: "Sản xuất & phân phối điện", note: "Trở lại bình thường sau đột biến" }) +
-    IOC.statCard({ icon: "ri-hammer-line", tint: "tint-warning", badge: "2025", value: "15,73", unit: "%", label: "Khai khoáng", note: "Ngành tăng nhanh nhất" }) +
-    IOC.statCard({ icon: "ri-settings-5-line", tint: "tint-success", badge: "2025", value: "10,55", unit: "%", label: "Chế biến – chế tạo", note: "Tiềm năng bền vững hơn thủy điện" });
+    IOC.statCard({ icon: "ti ti-bolt", tint: "tint-primary", badge: "2025", value: "8,80", unit: "%", label: "Tăng trưởng công nghiệp", note: "2024 tăng mạnh 22,43%" }) +
+    IOC.statCard({ icon: "ti ti-bulb", tint: "tint-info", badge: "2024: +49,49%", value: "6,98", unit: "%", label: "Sản xuất & phân phối điện", note: "Trở lại bình thường sau đột biến" }) +
+    IOC.statCard({ icon: "ti ti-hammer", tint: "tint-warning", badge: "2025", value: "15,73", unit: "%", label: "Khai khoáng", note: "Ngành tăng nhanh nhất" }) +
+    IOC.statCard({ icon: "ti ti-settings", tint: "tint-success", badge: "2025", value: "10,55", unit: "%", label: "Chế biến – chế tạo", note: "Tiềm năng bền vững hơn thủy điện" });
 
   var bienSo = [
-    { icon: "ri-bar-chart-box-line", tint: "tint-primary", t: "IIP theo từng ngành", s: "Khai khoáng, chế biến – chế tạo, sản xuất điện, cung cấp nước" },
-    { icon: "ri-flashlight-line", tint: "tint-info", t: "Sản lượng điện từng nhà máy", s: "Thủy điện, thời điểm nhà máy mới hòa lưới" },
-    { icon: "ri-rainy-line", tint: "tint-warning", t: "Lượng mưa, lưu lượng & mực nước hồ", s: "Yếu tố khí tượng – thủy văn quyết định sản lượng thủy điện" },
-    { icon: "ri-building-2-line", tint: "tint-success", t: "Sản lượng xi măng, đá, vật liệu xây dựng", s: "Liên thông với đầu tư công – xây dựng" },
-    { icon: "ri-scales-3-line", tint: "tint-danger", t: "Công nghiệp chế biến nông sản", s: "Gạo, cà phê, chè, mắc ca – gắn với nông nghiệp" }
+    { icon: "ti ti-chart-bar", tint: "tint-primary", t: "IIP theo từng ngành", s: "Khai khoáng, chế biến – chế tạo, sản xuất điện, cung cấp nước" },
+    { icon: "ti ti-bolt", tint: "tint-info", t: "Sản lượng điện từng nhà máy", s: "Thủy điện, thời điểm nhà máy mới hòa lưới" },
+    { icon: "ti ti-cloud-rain", tint: "tint-warning", t: "Lượng mưa, lưu lượng & mực nước hồ", s: "Yếu tố khí tượng – thủy văn quyết định sản lượng thủy điện" },
+    { icon: "ti ti-building", tint: "tint-success", t: "Sản lượng xi măng, đá, vật liệu xây dựng", s: "Liên thông với đầu tư công – xây dựng" },
+    { icon: "ti ti-scale", tint: "tint-danger", t: "Công nghiệp chế biến nông sản", s: "Gạo, cà phê, chè, mắc ca – gắn với nông nghiệp" }
   ];
   document.getElementById("listBienSo").innerHTML = bienSo.map(function (x) {
     return '<li class="item-row">' +

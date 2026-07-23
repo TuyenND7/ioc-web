@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css" rel="stylesheet">
   <link rel="manifest" href="./manifest.webmanifest">
   <meta name="theme-color" content="#161D31">
   <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
@@ -48,7 +48,7 @@
               <div class="card-title">Cơ cấu nguồn thuế sản phẩm</div>
               <div class="card-subtitle">Tỷ trọng · trợ cấp sản phẩm ghi âm · số liệu minh họa</div>
             </div>
-            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ti ti-dots-vertical"></i></button>
           </div>
           <div class="card-body"><div id="chartThue" class="chart-box"></div></div>
         </div>
@@ -74,16 +74,16 @@
 (function () {
   var D = window.IOC_DATA, IOC = window.IOC;
   document.getElementById("statRow").innerHTML =
-    IOC.statCard({ icon: "ri-percent-line", tint: "tint-primary", badge: "2025", value: "6,20", unit: "%", label: "Tăng trưởng thuế sản phẩm", note: "So với năm 2024" }) +
-    IOC.statCard({ icon: "ri-add-circle-line", tint: "tint-info", badge: "GRDP", value: "0,26", unit: "điểm %", label: "Đóng góp vào mức tăng", note: "Chiếm 3,5% mức tăng 2025" }) +
-    IOC.statCard({ icon: "ri-shopping-bag-3-line", tint: "tint-warning", badge: "GTGT", value: "58", unit: "%", label: "Thuế GTGT hàng – dịch vụ", note: "Nguồn lớn nhất" }) +
-    IOC.statCard({ icon: "ri-exchange-line", tint: "tint-success", badge: "biên mậu", value: "24", unit: "%", label: "Thuế xuất – nhập khẩu", note: "Gắn thương mại cửa khẩu" });
+    IOC.statCard({ icon: "ti ti-percentage", tint: "tint-primary", badge: "2025", value: "6,20", unit: "%", label: "Tăng trưởng thuế sản phẩm", note: "So với năm 2024" }) +
+    IOC.statCard({ icon: "ti ti-circle-plus", tint: "tint-info", badge: "GRDP", value: "0,26", unit: "điểm %", label: "Đóng góp vào mức tăng", note: "Chiếm 3,5% mức tăng 2025" }) +
+    IOC.statCard({ icon: "ti ti-shopping-bag", tint: "tint-warning", badge: "GTGT", value: "58", unit: "%", label: "Thuế GTGT hàng – dịch vụ", note: "Nguồn lớn nhất" }) +
+    IOC.statCard({ icon: "ti ti-arrows-exchange", tint: "tint-success", badge: "biên mậu", value: "24", unit: "%", label: "Thuế xuất – nhập khẩu", note: "Gắn thương mại cửa khẩu" });
 
   var vaiTro = [
-    { icon: "ri-stack-line", tint: "tint-primary", t: "Cấu phần thứ 4 của GRDP", s: "Cộng vào giá trị tăng thêm 3 khu vực" },
-    { icon: "ri-shopping-cart-2-line", tint: "tint-info", t: "Biến động theo tiêu dùng", s: "Thuế GTGT phản ánh sức mua nội địa" },
-    { icon: "ri-exchange-dollar-line", tint: "tint-warning", t: "Nhạy với xuất nhập khẩu", s: "Thuế XNK gắn kim ngạch biên mậu" },
-    { icon: "ri-government-line", tint: "tint-danger", t: "Chịu tác động chính sách", s: "Miễn – giảm – gia hạn thuế, trợ cấp sản phẩm" }
+    { icon: "ti ti-stack-2", tint: "tint-primary", t: "Cấu phần thứ 4 của GRDP", s: "Cộng vào giá trị tăng thêm 3 khu vực" },
+    { icon: "ti ti-shopping-cart", tint: "tint-info", t: "Biến động theo tiêu dùng", s: "Thuế GTGT phản ánh sức mua nội địa" },
+    { icon: "ti ti-currency-dollar", tint: "tint-warning", t: "Nhạy với xuất nhập khẩu", s: "Thuế XNK gắn kim ngạch biên mậu" },
+    { icon: "ti ti-building-bank", tint: "tint-danger", t: "Chịu tác động chính sách", s: "Miễn – giảm – gia hạn thuế, trợ cấp sản phẩm" }
   ];
   document.getElementById("listVaiTro").innerHTML = vaiTro.map(function (x) {
     return '<li class="item-row"><div class="item-icon ' + x.tint + '"><i class="' + x.icon + '"></i></div>' +

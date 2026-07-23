@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css" rel="stylesheet">
   <link rel="manifest" href="./manifest.webmanifest">
   <meta name="theme-color" content="#161D31">
   <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
@@ -90,7 +90,7 @@
         "<td>" + x.nguon + "</td>" +
         '<td style="white-space:nowrap">' + x.thoiGian + "</td>" +
         "<td>" + IOC.badgeTrangThai(x.trangThai) + "</td>" +
-        '<td style="white-space:nowrap"><button class="btn btn-outline btn-sm btn-giao-viec" style="white-space:nowrap"><i class="ri-send-plane-line"></i>Giao việc</button></td>' +
+        '<td style="white-space:nowrap"><button class="btn btn-outline btn-sm btn-giao-viec" style="white-space:nowrap"><i class="ti ti-send"></i>Giao việc</button></td>' +
         "</tr>";
     }).join("");
     if (!rows.length) {
@@ -112,7 +112,7 @@
   document.addEventListener("click", function (e) {
     var btn = e.target.closest(".btn-giao-viec");
     if (btn) {
-      btn.innerHTML = '<i class="ri-check-line"></i>Đã chuyển';
+      btn.innerHTML = '<i class="ti ti-check"></i>Đã chuyển';
       btn.disabled = true;
       btn.style.opacity = "0.55";
     }

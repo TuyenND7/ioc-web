@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css" rel="stylesheet">
   <link rel="manifest" href="./manifest.webmanifest">
   <meta name="theme-color" content="#161D31">
   <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
@@ -48,7 +48,7 @@
               <div class="card-title">Cơ cấu nhóm dịch vụ KT-XH</div>
               <div class="card-subtitle">Số liệu minh họa</div>
             </div>
-            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ti ti-dots-vertical"></i></button>
           </div>
           <div class="card-body"><div id="chartDichVuXH" class="chart-box"></div></div>
         </div>
@@ -74,17 +74,17 @@
 (function () {
   var D = window.IOC_DATA, IOC = window.IOC;
   document.getElementById("statRow").innerHTML =
-    IOC.statCard({ icon: "ri-bank-line", tint: "tint-primary", badge: "lớn nhất", value: "31", unit: "%", label: "Tài chính – ngân hàng", note: "Trong nhóm dịch vụ KT-XH" }) +
-    IOC.statCard({ icon: "ri-base-station-line", tint: "tint-info", badge: "hạ tầng số", value: "22", unit: "%", label: "Thông tin – truyền thông", note: "Gắn kinh tế số" }) +
-    IOC.statCard({ icon: "ri-hospital-line", tint: "tint-success", badge: "an sinh", value: "24", unit: "%", label: "Y tế – giáo dục (dịch vụ)", note: "Dịch vụ công thiết yếu" }) +
-    IOC.statCard({ icon: "ri-flask-line", tint: "tint-warning", badge: "đổi mới", value: "11", unit: "%", label: "KHCN – tư vấn", note: "Dịch vụ giá trị cao" });
+    IOC.statCard({ icon: "ti ti-building-bank", tint: "tint-primary", badge: "lớn nhất", value: "31", unit: "%", label: "Tài chính – ngân hàng", note: "Trong nhóm dịch vụ KT-XH" }) +
+    IOC.statCard({ icon: "ti ti-broadcast", tint: "tint-info", badge: "hạ tầng số", value: "22", unit: "%", label: "Thông tin – truyền thông", note: "Gắn kinh tế số" }) +
+    IOC.statCard({ icon: "ti ti-building-hospital", tint: "tint-success", badge: "an sinh", value: "24", unit: "%", label: "Y tế – giáo dục (dịch vụ)", note: "Dịch vụ công thiết yếu" }) +
+    IOC.statCard({ icon: "ti ti-flask", tint: "tint-warning", badge: "đổi mới", value: "11", unit: "%", label: "KHCN – tư vấn", note: "Dịch vụ giá trị cao" });
 
   var bienSo = [
-    { icon: "ri-bank-line", tint: "tint-primary", t: "Tín dụng, huy động, thanh toán số", s: "Quy mô tín dụng, tỷ lệ thanh toán không tiền mặt" },
-    { icon: "ri-base-station-line", tint: "tint-info", t: "Thuê bao, hạ tầng viễn thông", s: "Phủ sóng 4G/5G, Internet cáp quang" },
-    { icon: "ri-hospital-line", tint: "tint-success", t: "Dịch vụ y tế – giáo dục", s: "Doanh thu dịch vụ, mức độ xã hội hóa" },
-    { icon: "ri-flask-line", tint: "tint-warning", t: "KHCN, tư vấn, dịch vụ chuyên môn", s: "Số doanh nghiệp, giá trị dịch vụ" },
-    { icon: "ri-government-line", tint: "tint-secondary", t: "Dịch vụ hành chính công", s: "Hồ sơ DVC trực tuyến, mức độ hài lòng" }
+    { icon: "ti ti-building-bank", tint: "tint-primary", t: "Tín dụng, huy động, thanh toán số", s: "Quy mô tín dụng, tỷ lệ thanh toán không tiền mặt" },
+    { icon: "ti ti-broadcast", tint: "tint-info", t: "Thuê bao, hạ tầng viễn thông", s: "Phủ sóng 4G/5G, Internet cáp quang" },
+    { icon: "ti ti-building-hospital", tint: "tint-success", t: "Dịch vụ y tế – giáo dục", s: "Doanh thu dịch vụ, mức độ xã hội hóa" },
+    { icon: "ti ti-flask", tint: "tint-warning", t: "KHCN, tư vấn, dịch vụ chuyên môn", s: "Số doanh nghiệp, giá trị dịch vụ" },
+    { icon: "ti ti-building-bank", tint: "tint-secondary", t: "Dịch vụ hành chính công", s: "Hồ sơ DVC trực tuyến, mức độ hài lòng" }
   ];
   document.getElementById("listBienSo").innerHTML = bienSo.map(function (x) {
     return '<li class="item-row"><div class="item-icon ' + x.tint + '"><i class="' + x.icon + '"></i></div>' +

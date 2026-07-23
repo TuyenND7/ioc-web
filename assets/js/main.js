@@ -26,7 +26,7 @@
     document.documentElement.setAttribute("data-theme", t);
     var navIcon = document.getElementById("themeIcon");
     if (navIcon) {
-      navIcon.className = pref === "dark" ? "ri-moon-clear-line" : pref === "system" ? "ri-computer-line" : "ri-sun-line";
+      navIcon.className = pref === "dark" ? "ti ti-moon" : pref === "system" ? "ti ti-device-desktop" : "ti ti-sun";
     }
     document.querySelectorAll("[data-theme-opt]").forEach(function (el) {
       el.classList.toggle("active", el.getAttribute("data-theme-opt") === pref);
@@ -42,35 +42,35 @@
 
   var MENU = [
     {
-      group: "Tổng quan", icon: "ri-home-smile-2-line",
+      group: "Tổng quan", icon: "ti ti-home",
       children: [{ id: "index", href: "index.html", label: "M01 · Điều hành tăng trưởng" }]
     },
     { section: "Kinh tế – Ngành (M02–M10)" },
-    { id: "grdp-nganh", href: "grdp-nganh.html", icon: "ri-funds-line", label: "M02 · Giám sát GRDP theo ngành" },
-    { id: "nong-nghiep", href: "nong-nghiep.html", icon: "ri-plant-line", label: "M03 · Nông, lâm nghiệp & thủy sản" },
-    { id: "cong-nghiep", href: "cong-nghiep.html", icon: "ri-flashlight-line", label: "M04 · Công nghiệp, năng lượng & MT" },
-    { id: "dau-tu-cong", href: "dau-tu-cong.html", icon: "ri-building-4-line", label: "M05 · Xây dựng & Đầu tư" },
-    { id: "gia-thi-truong", href: "gia-thi-truong.html", icon: "ri-store-2-line", label: "M06 · Thương mại & Thị trường" },
-    { id: "van-tai", href: "van-tai.html", icon: "ri-truck-line", label: "M07 · Vận tải & Logistics" },
-    { id: "dich-vu", href: "dich-vu.html", icon: "ri-suitcase-line", label: "M08 · Du lịch, Văn hóa & Thể thao" },
-    { id: "dich-vu-xh", href: "dich-vu-xh.html", icon: "ri-service-line", label: "M09 · Dịch vụ kinh tế & xã hội" },
-    { id: "thue", href: "thue.html", icon: "ri-percent-line", label: "M10 · Thuế sản phẩm" },
+    { id: "grdp-nganh", href: "grdp-nganh.html", icon: "ti ti-chart-line", label: "M02 · Giám sát GRDP theo ngành" },
+    { id: "nong-nghiep", href: "nong-nghiep.html", icon: "ti ti-plant-2", label: "M03 · Nông, lâm nghiệp & thủy sản" },
+    { id: "cong-nghiep", href: "cong-nghiep.html", icon: "ti ti-bolt", label: "M04 · Công nghiệp, năng lượng & MT" },
+    { id: "dau-tu-cong", href: "dau-tu-cong.html", icon: "ti ti-building-skyscraper", label: "M05 · Xây dựng & Đầu tư" },
+    { id: "gia-thi-truong", href: "gia-thi-truong.html", icon: "ti ti-building-store", label: "M06 · Thương mại & Thị trường" },
+    { id: "van-tai", href: "van-tai.html", icon: "ti ti-truck", label: "M07 · Vận tải & Logistics" },
+    { id: "dich-vu", href: "dich-vu.html", icon: "ti ti-briefcase", label: "M08 · Du lịch, Văn hóa & Thể thao" },
+    { id: "dich-vu-xh", href: "dich-vu-xh.html", icon: "ti ti-tool", label: "M09 · Dịch vụ kinh tế & xã hội" },
+    { id: "thue", href: "thue.html", icon: "ti ti-percentage", label: "M10 · Thuế sản phẩm" },
     { section: "Phân tích – Điều hành (M11–M15)" },
-    { id: "gis", href: "gis.html", icon: "ri-map-pin-line", label: "M11 · Hồ sơ KT địa phương & GIS" },
-    { id: "canh-bao", href: "canh-bao.html", icon: "ri-alarm-warning-line", label: "M12 · Cảnh báo, nhiệm vụ & chỉ đạo", badge: "23" },
-    { id: "nhiem-vu", href: "nhiem-vu.html", icon: "ri-task-line", label: "Giao việc & Nhiệm vụ" },
-    { id: "du-bao", href: "du-bao.html", icon: "ri-line-chart-line", label: "M13 · Ước tính & Dự báo" },
-    { id: "mo-phong", href: "mo-phong.html", icon: "ri-flow-chart", label: "M14 · Mô phỏng & Đánh giá chính sách" },
-    { id: "bao-cao", href: "bao-cao.html", icon: "ri-file-chart-line", label: "M15 · Báo cáo, BI & Phát hành" },
+    { id: "gis", href: "gis.html", icon: "ti ti-map-pin", label: "M11 · Hồ sơ KT địa phương & GIS" },
+    { id: "canh-bao", href: "canh-bao.html", icon: "ti ti-alert-triangle", label: "M12 · Cảnh báo, nhiệm vụ & chỉ đạo", badge: "23" },
+    { id: "nhiem-vu", href: "nhiem-vu.html", icon: "ti ti-checklist", label: "Giao việc & Nhiệm vụ" },
+    { id: "du-bao", href: "du-bao.html", icon: "ti ti-chart-line", label: "M13 · Ước tính & Dự báo" },
+    { id: "mo-phong", href: "mo-phong.html", icon: "ti ti-sitemap", label: "M14 · Mô phỏng & Đánh giá chính sách" },
+    { id: "bao-cao", href: "bao-cao.html", icon: "ti ti-report", label: "M15 · Báo cáo, BI & Phát hành" },
     { section: "Nền tảng & Quản trị (M16)" },
-    { id: "quan-tri-nguoi-dung", href: "quan-tri-nguoi-dung.html", icon: "ri-user-settings-line", label: "M16 · Quản trị người dùng" },
-    { id: "cau-hinh-kpi", href: "cau-hinh-kpi.html", icon: "ri-equalizer-line", label: "Cấu hình KPI & danh mục" },
+    { id: "quan-tri-nguoi-dung", href: "quan-tri-nguoi-dung.html", icon: "ti ti-user-cog", label: "M16 · Quản trị người dùng" },
+    { id: "cau-hinh-kpi", href: "cau-hinh-kpi.html", icon: "ti ti-adjustments", label: "Cấu hình KPI & danh mục" },
     { section: "Tài chính – Hành chính (ngoài danh mục IOC GRDP)" },
-    { id: "ngan-sach", href: "ngan-sach.html", icon: "ri-wallet-3-line", label: "Ngân sách" },
-    { id: "tai-san-cong", href: "tai-san-cong.html", icon: "ri-community-line", label: "Tài sản công" },
-    { id: "doanh-nghiep", href: "doanh-nghiep.html", icon: "ri-briefcase-4-line", label: "Doanh nghiệp – ĐKKD" },
-    { id: "thanh-tra", href: "thanh-tra.html", icon: "ri-shield-check-line", label: "Thanh tra / Kiểm toán" },
-    { id: "cai-cach-hanh-chinh", href: "cai-cach-hanh-chinh.html", icon: "ri-government-line", label: "Cải cách hành chính" }
+    { id: "ngan-sach", href: "ngan-sach.html", icon: "ti ti-wallet", label: "Ngân sách" },
+    { id: "tai-san-cong", href: "tai-san-cong.html", icon: "ti ti-building-community", label: "Tài sản công" },
+    { id: "doanh-nghiep", href: "doanh-nghiep.html", icon: "ti ti-briefcase", label: "Doanh nghiệp – ĐKKD" },
+    { id: "thanh-tra", href: "thanh-tra.html", icon: "ti ti-shield-check", label: "Thanh tra / Kiểm toán" },
+    { id: "cai-cach-hanh-chinh", href: "cai-cach-hanh-chinh.html", icon: "ti ti-building-bank", label: "Cải cách hành chính" }
   ];
 
   function itemHtml(m, isSub) {
@@ -87,12 +87,12 @@
 
   var sidebarHtml =
     '<div class="sidebar-brand">' +
-    '  <div class="brand-logo"><i class="ri-pulse-line"></i></div>' +
+    '  <div class="brand-logo"><i class="ti ti-activity"></i></div>' +
     '  <div class="brand-text">' +
     '    <div class="brand-name">IOC Điện Biên</div>' +
     '    <div class="brand-sub">Kinh tế số &amp; Tài chính số</div>' +
     "  </div>" +
-    '  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Thu gọn menu"><i class="ri-arrow-left-double-line"></i></button>' +
+    '  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Thu gọn menu"><i class="ti ti-chevrons-left"></i></button>' +
     "</div>" +
     '<ul class="menu">';
 
@@ -104,7 +104,7 @@
         '<li class="menu-item has-sub open">' +
         '<a class="menu-link grp-toggle">' +
         '<i class="mi ' + m.icon + '"></i><span class="lbl">' + m.group + "</span>" +
-        '<i class="chevron ri-arrow-right-s-line"></i></a>' +
+        '<i class="chevron ti ti-chevron-right"></i></a>' +
         '<ul class="submenu">' +
         m.children.map(function (c) { return itemHtml(c, true); }).join("") +
         "</ul></li>";
@@ -143,14 +143,14 @@
   var navbar = document.getElementById("navbar");
   if (navbar) {
     navbar.innerHTML =
-      '<button class="nav-toggle" id="navToggle" aria-label="Mở menu"><i class="ri-menu-line"></i></button>' +
+      '<button class="nav-toggle" id="navToggle" aria-label="Mở menu"><i class="ti ti-menu-2"></i></button>' +
 
       /* nhóm icon trái (kiểu Vuexy) */
       '<div class="nav-actions-left">' +
-      '  <button class="nav-ic-btn" aria-label="Thư"><i class="ri-mail-line"></i></button>' +
-      '  <button class="nav-ic-btn" aria-label="Trò chuyện"><i class="ri-wechat-2-line"></i></button>' +
-      '  <button class="nav-ic-btn" aria-label="Công việc"><i class="ri-checkbox-line"></i></button>' +
-      '  <button class="nav-ic-btn" aria-label="Lịch"><i class="ri-calendar-line"></i></button>' +
+      '  <button class="nav-ic-btn" aria-label="Thư"><i class="ti ti-mail"></i></button>' +
+      '  <button class="nav-ic-btn" aria-label="Trò chuyện"><i class="ti ti-brand-wechat"></i></button>' +
+      '  <button class="nav-ic-btn" aria-label="Công việc"><i class="ti ti-checkbox"></i></button>' +
+      '  <button class="nav-ic-btn" aria-label="Lịch"><i class="ti ti-calendar"></i></button>' +
       "</div>" +
 
       '<div class="nav-right">' +
@@ -159,62 +159,62 @@
       '<div class="dd" id="ddLang">' +
       '  <button class="nav-lang-btn" data-dd aria-label="Ngôn ngữ"><span class="flag">🇻🇳</span><span class="lg">Tiếng Việt</span></button>' +
       '  <div class="dd-menu">' +
-      '    <div class="dd-item active"><i class="ri-check-line"></i>Tiếng Việt</div>' +
-      '    <div class="dd-item"><i class="ri-earth-line"></i>English</div>' +
+      '    <div class="dd-item active"><i class="ti ti-check"></i>Tiếng Việt</div>' +
+      '    <div class="dd-item"><i class="ti ti-world"></i>English</div>' +
       "  </div>" +
       "</div>" +
 
       /* theme */
       '<div class="dd" id="ddTheme">' +
-      '  <button class="nav-icon-btn" data-dd aria-label="Giao diện"><i id="themeIcon" class="ri-sun-line"></i></button>' +
+      '  <button class="nav-icon-btn" data-dd aria-label="Giao diện"><i id="themeIcon" class="ti ti-sun"></i></button>' +
       '  <div class="dd-menu">' +
-      '    <div class="dd-item" data-theme-opt="light"><i class="ri-sun-line"></i>Sáng</div>' +
-      '    <div class="dd-item" data-theme-opt="dark"><i class="ri-moon-clear-line"></i>Tối</div>' +
-      '    <div class="dd-item" data-theme-opt="system"><i class="ri-computer-line"></i>Hệ thống</div>' +
+      '    <div class="dd-item" data-theme-opt="light"><i class="ti ti-sun"></i>Sáng</div>' +
+      '    <div class="dd-item" data-theme-opt="dark"><i class="ti ti-moon"></i>Tối</div>' +
+      '    <div class="dd-item" data-theme-opt="system"><i class="ti ti-device-desktop"></i>Hệ thống</div>' +
       "  </div>" +
       "</div>" +
 
       /* tìm kiếm (icon) */
-      '<button class="nav-icon-btn" id="searchTrigger" aria-label="Tìm kiếm"><i class="ri-search-line"></i></button>' +
+      '<button class="nav-icon-btn" id="searchTrigger" aria-label="Tìm kiếm"><i class="ti ti-search"></i></button>' +
 
       /* lối tắt */
       '<div class="dd" id="ddShortcut">' +
-      '  <button class="nav-icon-btn" data-dd aria-label="Lối tắt"><i class="ri-star-line"></i></button>' +
+      '  <button class="nav-icon-btn" data-dd aria-label="Lối tắt"><i class="ti ti-star"></i></button>' +
       '  <div class="dd-menu dd-shortcuts">' +
       '    <div class="shortcut-head">Lối tắt</div>' +
       '    <div class="shortcut-grid">' +
-      '      <a class="shortcut-tile" href="ngan-sach.html"><span class="ico"><i class="ri-wallet-3-line"></i></span>Ngân sách</a>' +
-      '      <a class="shortcut-tile" href="dau-tu-cong.html"><span class="ico"><i class="ri-building-4-line"></i></span>Đầu tư công</a>' +
-      '      <a class="shortcut-tile" href="canh-bao.html"><span class="ico"><i class="ri-alarm-warning-line"></i></span>Cảnh báo</a>' +
-      '      <a class="shortcut-tile" href="nhiem-vu.html"><span class="ico"><i class="ri-task-line"></i></span>Nhiệm vụ</a>' +
-      '      <a class="shortcut-tile" href="bao-cao.html"><span class="ico"><i class="ri-file-chart-line"></i></span>Báo cáo</a>' +
-      '      <a class="shortcut-tile" href="cau-hinh-kpi.html"><span class="ico"><i class="ri-equalizer-line"></i></span>Cấu hình KPI</a>' +
+      '      <a class="shortcut-tile" href="ngan-sach.html"><span class="ico"><i class="ti ti-wallet"></i></span>Ngân sách</a>' +
+      '      <a class="shortcut-tile" href="dau-tu-cong.html"><span class="ico"><i class="ti ti-building-skyscraper"></i></span>Đầu tư công</a>' +
+      '      <a class="shortcut-tile" href="canh-bao.html"><span class="ico"><i class="ti ti-alert-triangle"></i></span>Cảnh báo</a>' +
+      '      <a class="shortcut-tile" href="nhiem-vu.html"><span class="ico"><i class="ti ti-checklist"></i></span>Nhiệm vụ</a>' +
+      '      <a class="shortcut-tile" href="bao-cao.html"><span class="ico"><i class="ti ti-report"></i></span>Báo cáo</a>' +
+      '      <a class="shortcut-tile" href="cau-hinh-kpi.html"><span class="ico"><i class="ti ti-adjustments"></i></span>Cấu hình KPI</a>' +
       "    </div>" +
       "  </div>" +
       "</div>" +
 
       /* giỏ hàng (trang trí, đúng template) */
-      '<button class="nav-icon-btn" aria-label="Giỏ"><i class="ri-shopping-cart-2-line"></i><span class="nav-badge">5</span></button>' +
+      '<button class="nav-icon-btn" aria-label="Giỏ"><i class="ti ti-shopping-cart"></i><span class="nav-badge">5</span></button>' +
 
       /* thông báo */
       '<div class="dd" id="ddNotif">' +
-      '  <button class="nav-icon-btn" data-dd aria-label="Thông báo"><i class="ri-notification-3-line"></i><span class="nav-badge red" id="notifDot">7</span></button>' +
+      '  <button class="nav-icon-btn" data-dd aria-label="Thông báo"><i class="ti ti-bell"></i><span class="nav-badge red" id="notifDot">7</span></button>' +
       '  <div class="dd-menu dd-notif">' +
       '    <div class="notif-head"><span>Thông báo</span>' +
-      '      <button class="mark-read" id="markRead" title="Đánh dấu đã đọc"><i class="ri-check-double-line"></i></button></div>' +
-      '    <div class="notif-item"><div class="notif-icon tint-danger"><i class="ri-alarm-warning-line"></i></div>' +
+      '      <button class="mark-read" id="markRead" title="Đánh dấu đã đọc"><i class="ti ti-checks"></i></button></div>' +
+      '    <div class="notif-item"><div class="notif-icon tint-danger"><i class="ti ti-alert-triangle"></i></div>' +
       '      <div class="notif-body"><div class="notif-title">Giải ngân chậm</div>' +
       '      <div class="notif-text">Dự án Đường vành đai 2 dưới 30% kế hoạch</div>' +
       '      <div class="notif-time">10 phút trước</div></div></div>' +
-      '    <div class="notif-item"><div class="notif-icon tint-danger"><i class="ri-funds-line"></i></div>' +
+      '    <div class="notif-item"><div class="notif-icon tint-danger"><i class="ti ti-chart-line"></i></div>' +
       '      <div class="notif-body"><div class="notif-title">Hụt thu tiền sử dụng đất</div>' +
       '      <div class="notif-text">Quý III mới đạt 41% dự toán</div>' +
       '      <div class="notif-time">2 giờ trước</div></div></div>' +
-      '    <div class="notif-item"><div class="notif-icon tint-warning"><i class="ri-line-chart-line"></i></div>' +
+      '    <div class="notif-item"><div class="notif-icon tint-warning"><i class="ti ti-chart-line"></i></div>' +
       '      <div class="notif-body"><div class="notif-title">CPI lương thực tăng</div>' +
       '      <div class="notif-text">+1,8% so với tháng trước</div>' +
       '      <div class="notif-time">5 giờ trước</div></div></div>' +
-      '    <div class="notif-item"><div class="notif-icon tint-info"><i class="ri-file-list-3-line"></i></div>' +
+      '    <div class="notif-item"><div class="notif-icon tint-info"><i class="ti ti-file-text"></i></div>' +
       '      <div class="notif-body"><div class="notif-title">Thiếu báo cáo quyết toán</div>' +
       '      <div class="notif-text">3 đơn vị chưa nộp báo cáo tháng 6</div>' +
       '      <div class="notif-time">Hôm qua</div></div></div>' +
@@ -230,10 +230,10 @@
       '  <div class="dd-menu">' +
       '    <div class="dd-header"><span class="avatar sm">LT</span>' +
       '      <div><div class="t">Lãnh đạo Tỉnh</div><div class="s">Chủ tịch UBND tỉnh</div></div></div>' +
-      '    <div class="dd-item"><i class="ri-user-3-line"></i>Hồ sơ cá nhân</div>' +
-      '    <div class="dd-item"><i class="ri-settings-3-line"></i>Cài đặt</div>' +
+      '    <div class="dd-item"><i class="ti ti-user"></i>Hồ sơ cá nhân</div>' +
+      '    <div class="dd-item"><i class="ti ti-settings"></i>Cài đặt</div>' +
       '    <div class="dd-divider"></div>' +
-      '    <div class="dd-item danger"><i class="ri-logout-box-r-line"></i>Đăng xuất</div>' +
+      '    <div class="dd-item danger"><i class="ti ti-logout"></i>Đăng xuất</div>' +
       "  </div>" +
       "</div>" +
 
@@ -313,7 +313,7 @@
   overlay.innerHTML =
     '<div class="search-panel">' +
     '  <div class="search-input-row">' +
-    '    <i class="ri-search-line"></i>' +
+    '    <i class="ti ti-search"></i>' +
     '    <input type="text" id="searchInput" placeholder="Tìm trang, chỉ tiêu, module…">' +
     '    <span class="kbd">ESC</span>' +
     "  </div>" +
@@ -406,9 +406,9 @@
       dd = document.createElement("div");
       dd.className = "card-dd";
       dd.innerHTML =
-        '<div class="dd-item"><i class="ri-eye-line"></i>Xem chi tiết</div>' +
-        '<div class="dd-item"><i class="ri-refresh-line"></i>Làm mới</div>' +
-        '<div class="dd-item"><i class="ri-download-2-line"></i>Xuất Excel</div>';
+        '<div class="dd-item"><i class="ti ti-eye"></i>Xem chi tiết</div>' +
+        '<div class="dd-item"><i class="ti ti-refresh"></i>Làm mới</div>' +
+        '<div class="dd-item"><i class="ti ti-download"></i>Xuất Excel</div>';
       btn.after(dd);
       dd.addEventListener("click", function (ev) { ev.stopPropagation(); dd.classList.remove("open"); });
     }
@@ -444,9 +444,9 @@
   };
 
   window.IOC.badgeMucDo = function (mucDo) {
-    if (mucDo === "cao") return '<span class="badge badge-danger"><i class="ri-error-warning-line"></i>Cao</span>';
-    if (mucDo === "trung binh") return '<span class="badge badge-warning"><i class="ri-alert-line"></i>Trung bình</span>';
-    return '<span class="badge badge-info"><i class="ri-information-line"></i>Thấp</span>';
+    if (mucDo === "cao") return '<span class="badge badge-danger"><i class="ti ti-alert-circle"></i>Cao</span>';
+    if (mucDo === "trung binh") return '<span class="badge badge-warning"><i class="ti ti-alert-triangle"></i>Trung bình</span>';
+    return '<span class="badge badge-info"><i class="ti ti-info-circle"></i>Thấp</span>';
   };
 
   window.IOC.badgeTrangThai = function (tt) {
@@ -547,7 +547,7 @@
         installBar.innerHTML =
           '<span class="pwa-text">' + html + "</span>" +
           (ctaLabel ? '<button class="pwa-cta"></button>' : "") +
-          '<button class="pwa-close" aria-label="Đóng"><i class="ri-close-line"></i></button>';
+          '<button class="pwa-close" aria-label="Đóng"><i class="ti ti-x"></i></button>';
         if (ctaLabel) {
           var cta = installBar.querySelector(".pwa-cta");
           cta.textContent = ctaLabel;
@@ -579,7 +579,7 @@
         var isIos = /iphone|ipad|ipod/i.test(navigator.userAgent) ||
           (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
         if (isIos) {
-          showInstallBar('Cài lên màn hình chính: bấm nút Chia sẻ <i class="ri-share-box-line"></i> → «Thêm vào MH chính»', null, null);
+          showInstallBar('Cài lên màn hình chính: bấm nút Chia sẻ <i class="ti ti-external-link"></i> → «Thêm vào MH chính»', null, null);
         }
       }
     }

@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css" rel="stylesheet">
   <link rel="manifest" href="./manifest.webmanifest">
   <meta name="theme-color" content="#161D31">
   <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
@@ -40,7 +40,7 @@
               <div class="card-title">Hồ sơ TTHC tiếp nhận và giải quyết đúng hạn theo tháng</div>
               <div class="card-subtitle">Năm 2026 · toàn tỉnh · đơn vị: hồ sơ</div>
             </div>
-            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ti ti-dots-vertical"></i></button>
           </div>
           <div class="card-body">
             <div id="chartCchc" class="chart-box"></div>
@@ -88,10 +88,10 @@
   var D = window.IOC_DATA, IOC = window.IOC;
 
   document.getElementById("statRow").innerHTML =
-    IOC.statCard({ icon: "ri-file-list-3-line", tint: "tint-primary", badge: "+6,4%", value: "48.620", unit: "hồ sơ", label: "Hồ sơ TTHC tiếp nhận", note: "Lũy kế năm 2026" }) +
-    IOC.statCard({ icon: "ri-time-line", tint: "tint-success", badge: "+0,8 điểm", value: "96,4", unit: "%", label: "Tỷ lệ giải quyết đúng hạn", note: "So với cùng kỳ 2025" }) +
-    IOC.statCard({ icon: "ri-emotion-happy-line", tint: "tint-warning", badge: "+0,12", value: "4,42", unit: "/ 5", label: "Điểm hài lòng người dân", note: "Khảo sát Quý II/2026" }) +
-    IOC.statCard({ icon: "ri-computer-line", tint: "tint-info", badge: "+5,2 điểm", value: "68,5", unit: "%", label: "Tỷ lệ hồ sơ trực tuyến", note: "So với cùng kỳ 2025" });
+    IOC.statCard({ icon: "ti ti-file-text", tint: "tint-primary", badge: "+6,4%", value: "48.620", unit: "hồ sơ", label: "Hồ sơ TTHC tiếp nhận", note: "Lũy kế năm 2026" }) +
+    IOC.statCard({ icon: "ti ti-clock", tint: "tint-success", badge: "+0,8 điểm", value: "96,4", unit: "%", label: "Tỷ lệ giải quyết đúng hạn", note: "So với cùng kỳ 2025" }) +
+    IOC.statCard({ icon: "ti ti-mood-smile", tint: "tint-warning", badge: "+0,12", value: "4,42", unit: "/ 5", label: "Điểm hài lòng người dân", note: "Khảo sát Quý II/2026" }) +
+    IOC.statCard({ icon: "ti ti-device-desktop", tint: "tint-info", badge: "+5,2 điểm", value: "68,5", unit: "%", label: "Tỷ lệ hồ sơ trực tuyến", note: "So với cùng kỳ 2025" });
 
   document.getElementById("tblCchc").innerHTML = D.cchc.theoXa.map(function (x) {
     return "<tr>" +

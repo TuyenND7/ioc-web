@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css" rel="stylesheet">
   <link rel="manifest" href="./manifest.webmanifest">
   <meta name="theme-color" content="#161D31">
   <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
@@ -48,7 +48,7 @@
               <div class="card-title">GRDP mô phỏng theo kịch bản</div>
               <div class="card-subtitle">So với cơ sở 2025 = 7,34% · mô hình kế toán tĩnh</div>
             </div>
-            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ri-more-2-line"></i></button>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ti ti-dots-vertical"></i></button>
           </div>
           <div class="card-body"><div id="chartKichBan" class="chart-box"></div></div>
         </div>
@@ -93,10 +93,10 @@
   var D = window.IOC_DATA, IOC = window.IOC, kb = D.grdp.kichBan;
   var coSo = 7.34;
   document.getElementById("statRow").innerHTML =
-    IOC.statCard({ icon: "ri-focus-3-line", tint: "tint-secondary", badge: "thực hiện", value: "7,34", unit: "%", label: "Kịch bản cơ sở 2025", note: "Điểm neo mô phỏng" }) +
-    IOC.statCard({ icon: "ri-arrow-up-circle-line", tint: "tint-success", badge: "tốt nhất", value: "8,52", unit: "%", label: "Dịch vụ +2 điểm %", note: "Đòn bẩy mạnh nhất" }) +
-    IOC.statCard({ icon: "ri-arrow-down-circle-line", tint: "tint-danger", badge: "xấu nhất", value: "6,16", unit: "%", label: "Dịch vụ −2 điểm %", note: "CN–XD không bù đủ" }) +
-    IOC.statCard({ icon: "ri-scales-3-line", tint: "tint-primary", badge: "0,588", value: "Dịch vụ", unit: "", label: "Biến nhạy nhất", note: "Trọng số lớn nhất mô hình" });
+    IOC.statCard({ icon: "ti ti-target", tint: "tint-secondary", badge: "thực hiện", value: "7,34", unit: "%", label: "Kịch bản cơ sở 2025", note: "Điểm neo mô phỏng" }) +
+    IOC.statCard({ icon: "ti ti-circle-arrow-up", tint: "tint-success", badge: "tốt nhất", value: "8,52", unit: "%", label: "Dịch vụ +2 điểm %", note: "Đòn bẩy mạnh nhất" }) +
+    IOC.statCard({ icon: "ti ti-circle-arrow-down", tint: "tint-danger", badge: "xấu nhất", value: "6,16", unit: "%", label: "Dịch vụ −2 điểm %", note: "CN–XD không bù đủ" }) +
+    IOC.statCard({ icon: "ti ti-scale", tint: "tint-primary", badge: "0,588", value: "Dịch vụ", unit: "", label: "Biến nhạy nhất", note: "Trọng số lớn nhất mô hình" });
 
   var fmtP = function (v) { return v.toFixed(2).replace(".", ",") + "%"; };
   var badge = function (loai) {
