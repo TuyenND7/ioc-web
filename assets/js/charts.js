@@ -11,12 +11,12 @@
   var fmt = window.IOC.fmt;
 
   var BRAND = {
-    primary: "#666CFF",
-    info: "#26C6F9",
-    success: "#72E128",
-    warning: "#FDB528",
-    danger: "#FF4D49",
-    secondary: "#6D788D"
+    primary: "#7367F0",
+    info: "#00CFE8",
+    success: "#28C76F",
+    warning: "#FF9F43",
+    danger: "#EA5455",
+    secondary: "#82868B"
   };
 
   /* mobile ≤576px: chart thấp hơn, legend xuống dưới */
@@ -28,11 +28,11 @@
     var dark = window.IOC.isDark();
     return {
       dark: dark,
-      fore: dark ? "rgba(228,230,244,0.87)" : "rgba(76,78,100,0.87)",
-      muted: dark ? "rgba(228,230,244,0.6)" : "rgba(76,78,100,0.6)",
-      heading: dark ? "#E4E6F4" : "#4C4E64",
-      grid: dark ? "#3C3F59" : "#EEEEF1",
-      cardBg: dark ? "#30334E" : "#FFFFFF",
+      fore: dark ? "#D0D2D6" : "rgba(75,70,92,0.87)",
+      muted: dark ? "#7983A3" : "rgba(75,70,92,0.55)",
+      heading: dark ? "#E5E7EE" : "#5D586C",
+      grid: dark ? "#3B4253" : "#EEEEF1",
+      cardBg: dark ? "#283046" : "#FFFFFF",
       tooltip: dark ? "dark" : "light"
     };
   }

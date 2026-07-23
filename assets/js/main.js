@@ -12,7 +12,7 @@
 
   /* =============== 1. THEME (light / dark / system) =============== */
 
-  function themePref() { return localStorage.getItem("ioc-theme") || "light"; }
+  function themePref() { return localStorage.getItem("ioc-theme") || "dark"; }
 
   function resolvedTheme(pref) {
     if (pref === "system") {
@@ -412,23 +412,22 @@
     return n.toLocaleString("vi-VN", { minimumFractionDigits: d, maximumFractionDigits: d });
   };
 
-  // stat card theo anatomy mẫu: icon trên trái, badge % trên phải,
-  // số to, label dưới, pill ghi chú
+  // stat card kiểu Vuexy: icon-center trên, số to, label, delta màu, ghi chú nhỏ
   window.IOC.statCard = function (o) {
-    var badge = "";
+    var delta = "";
     if (o.badge) {
-      var cls = o.badgeClass || (o.dir === "down" ? "badge-danger" : "badge-success");
-      var arrow = o.dir === "down" ? "ri-arrow-down-s-line" : "ri-arrow-up-s-line";
-      badge = '<span class="badge ' + cls + '"><i class="' + arrow + '"></i>' + o.badge + "</span>";
+      // trung tính nếu badgeClass là secondary/info, ngược lại theo hướng lên/xuống
+      var neutral = o.badgeClass === "badge-secondary" || o.badgeClass === "badge-info" || o.badgeClass === "badge-warning";
+      var cls = neutral ? "" : (o.dir === "down" ? "down" : "up");
+      delta = '<div class="stat-delta ' + cls + '">' + o.badge + "</div>";
     }
     return '<div class="card stat-card ' + (o.col || "col-3") + '">' +
       '<div class="card-body">' +
-      '<div class="stat-top">' +
-      '<div class="stat-icon ' + o.tint + '"><i class="' + o.icon + '"></i></div>' + badge +
-      "</div>" +
+      '<div class="stat-icon ' + o.tint + '"><i class="' + o.icon + '"></i></div>' +
       '<div class="stat-value">' + o.value + (o.unit ? " <small>" + o.unit + "</small>" : "") + "</div>" +
       '<div class="stat-label">' + o.label + "</div>" +
-      (o.note ? '<span class="stat-note">' + o.note + "</span>" : "") +
+      delta +
+      (o.note ? '<div class="stat-note">' + o.note + "</div>" : "") +
       "</div></div>";
   };
 

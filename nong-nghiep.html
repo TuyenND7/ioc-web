@@ -6,10 +6,10 @@
   <title>Nông nghiệp – OCOP | IOC Kinh tế số & Tài chính số tỉnh Điện Biên</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
   <link rel="manifest" href="./manifest.webmanifest">
-  <meta name="theme-color" content="#666CFF">
+  <meta name="theme-color" content="#161D31">
   <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -113,7 +113,7 @@
   document.getElementById("tblChuLuc").innerHTML = nn.chuLuc.map(function (x) {
     return "<tr>" +
       '<td class="td-main">' + x.ten + "</td>" +
-      '<td class="num" style="font-weight:600;color:#4C4E64">' + IOC.fmt(x.sanLuong) + "</td>" +
+      '<td class="num" style="font-weight:600;color:var(--text-heading)">' + IOC.fmt(x.sanLuong) + "</td>" +
       '<td class="num">' + IOC.fmt(x.vung) + "</td>" +
       '<td><div class="progress-cell"><div class="progress"><div class="progress-bar ' + IOC.progressClass(x.tieuThu) + '" style="width:' + x.tieuThu + '%"></div></div><span class="pct">' + x.tieuThu + '%</span></div></td>' +
       "<td>" + xuBadge(x.xu) + "</td>" +

@@ -6,10 +6,10 @@
   <title>Ngân sách | IOC Kinh tế số & Tài chính số tỉnh Điện Biên</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
   <link rel="manifest" href="./manifest.webmanifest">
-  <meta name="theme-color" content="#666CFF">
+  <meta name="theme-color" content="#161D31">
   <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -144,7 +144,7 @@
       '<td style="color:rgba(76,78,100,.5)">' + (i + 1) + "</td>" +
       '<td class="td-main">' + x.ten + "</td>" +
       '<td class="num">' + IOC.fmt(x.duToan) + "</td>" +
-      '<td class="num" style="font-weight:600;color:#4C4E64">' + IOC.fmt(x.thucHien) + "</td>" +
+      '<td class="num" style="font-weight:600;color:var(--text-heading)">' + IOC.fmt(x.thucHien) + "</td>" +
       '<td><div class="progress-cell"><div class="progress"><div class="progress-bar ' + IOC.progressClass(pct) + '" style="width:' + Math.min(pct, 100) + '%"></div></div><span class="pct">' + String(pct).replace(".", ",") + '%</span></div></td>' +
       "<td>" + danhGia + "</td>" +
       "</tr>";

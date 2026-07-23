@@ -6,11 +6,11 @@
   <title>GIS – Bản đồ số | IOC Kinh tế số & Tài chính số tỉnh Điện Biên</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
   <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet">
   <link rel="manifest" href="./manifest.webmanifest">
-  <meta name="theme-color" content="#666CFF">
+  <meta name="theme-color" content="#161D31">
   <link rel="apple-touch-icon" href="./assets/img/icon-192.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -55,9 +55,9 @@
           </div>
           <div class="card-body">
             <div class="map-legend" style="margin-bottom:16px">
-              <div class="lg-row"><span class="lg-dot" style="background:#72E128"></span>Đạt / vượt kế hoạch (≥ 100%)</div>
-              <div class="lg-row"><span class="lg-dot" style="background:#FDB528"></span>Cận kế hoạch (80 – 99%)</div>
-              <div class="lg-row"><span class="lg-dot" style="background:#FF4D49"></span>Chậm kế hoạch (&lt; 80%)</div>
+              <div class="lg-row"><span class="lg-dot" style="background:#28C76F"></span>Đạt / vượt kế hoạch (≥ 100%)</div>
+              <div class="lg-row"><span class="lg-dot" style="background:#FF9F43"></span>Cận kế hoạch (80 – 99%)</div>
+              <div class="lg-row"><span class="lg-dot" style="background:#EA5455"></span>Chậm kế hoạch (&lt; 80%)</div>
             </div>
             <div class="table-wrap" style="margin:0 -22px">
               <table class="table">
@@ -88,9 +88,9 @@
   var D = window.IOC_DATA, IOC = window.IOC;
 
   function mauKH(kh) {
-    if (kh >= 100) return "#72E128";
-    if (kh >= 80) return "#FDB528";
-    return "#FF4D49";
+    if (kh >= 100) return "#28C76F";
+    if (kh >= 80) return "#FF9F43";
+    return "#EA5455";
   }
 
   /* bảng bên cạnh */
