@@ -145,15 +145,19 @@
     navbar.innerHTML =
       '<button class="nav-toggle" id="navToggle" aria-label="Mở menu"><i class="ri-menu-line"></i></button>' +
 
-      '<div class="nav-search-trigger" id="searchTrigger">' +
-      '  <i class="ri-search-line"></i><span class="hint">Tìm kiếm</span><span class="kbd">⌘K</span>' +
+      /* nhóm icon trái (kiểu Vuexy) */
+      '<div class="nav-actions-left">' +
+      '  <button class="nav-ic-btn" aria-label="Thư"><i class="ri-mail-line"></i></button>' +
+      '  <button class="nav-ic-btn" aria-label="Trò chuyện"><i class="ri-wechat-2-line"></i></button>' +
+      '  <button class="nav-ic-btn" aria-label="Công việc"><i class="ri-checkbox-line"></i></button>' +
+      '  <button class="nav-ic-btn" aria-label="Lịch"><i class="ri-calendar-line"></i></button>' +
       "</div>" +
 
       '<div class="nav-right">' +
 
       /* ngôn ngữ */
       '<div class="dd" id="ddLang">' +
-      '  <button class="nav-icon-btn" data-dd aria-label="Ngôn ngữ"><i class="ri-translate-2"></i></button>' +
+      '  <button class="nav-lang-btn" data-dd aria-label="Ngôn ngữ"><span class="flag">🇻🇳</span><span class="lg">Tiếng Việt</span></button>' +
       '  <div class="dd-menu">' +
       '    <div class="dd-item active"><i class="ri-check-line"></i>Tiếng Việt</div>' +
       '    <div class="dd-item"><i class="ri-earth-line"></i>English</div>' +
@@ -170,9 +174,12 @@
       "  </div>" +
       "</div>" +
 
+      /* tìm kiếm (icon) */
+      '<button class="nav-icon-btn" id="searchTrigger" aria-label="Tìm kiếm"><i class="ri-search-line"></i></button>' +
+
       /* lối tắt */
       '<div class="dd" id="ddShortcut">' +
-      '  <button class="nav-icon-btn" data-dd aria-label="Lối tắt"><i class="ri-star-smile-line"></i></button>' +
+      '  <button class="nav-icon-btn" data-dd aria-label="Lối tắt"><i class="ri-star-line"></i></button>' +
       '  <div class="dd-menu dd-shortcuts">' +
       '    <div class="shortcut-head">Lối tắt</div>' +
       '    <div class="shortcut-grid">' +
@@ -186,9 +193,12 @@
       "  </div>" +
       "</div>" +
 
+      /* giỏ hàng (trang trí, đúng template) */
+      '<button class="nav-icon-btn" aria-label="Giỏ"><i class="ri-shopping-cart-2-line"></i><span class="nav-badge">5</span></button>' +
+
       /* thông báo */
       '<div class="dd" id="ddNotif">' +
-      '  <button class="nav-icon-btn" data-dd aria-label="Thông báo"><i class="ri-notification-3-line"></i><span class="pulse-dot" id="notifDot"></span></button>' +
+      '  <button class="nav-icon-btn" data-dd aria-label="Thông báo"><i class="ri-notification-3-line"></i><span class="nav-badge red" id="notifDot">7</span></button>' +
       '  <div class="dd-menu dd-notif">' +
       '    <div class="notif-head"><span>Thông báo</span>' +
       '      <button class="mark-read" id="markRead" title="Đánh dấu đã đọc"><i class="ri-check-double-line"></i></button></div>' +
@@ -214,7 +224,9 @@
 
       /* user */
       '<div class="dd" id="ddUser">' +
-      '  <button class="nav-user-btn" data-dd aria-label="Tài khoản"><span class="avatar online">LT</span></button>' +
+      '  <button class="nav-user-btn" data-dd aria-label="Tài khoản">' +
+      '    <span class="nav-user-t"><span class="nm">Lãnh đạo Tỉnh</span><span class="rl">Chủ tịch UBND tỉnh</span></span>' +
+      '    <span class="avatar online">LT</span></button>' +
       '  <div class="dd-menu">' +
       '    <div class="dd-header"><span class="avatar sm">LT</span>' +
       '      <div><div class="t">Lãnh đạo Tỉnh</div><div class="s">Chủ tịch UBND tỉnh</div></div></div>' +
