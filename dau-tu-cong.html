@@ -34,8 +34,8 @@
       <div class="card welcome-card col-12" style="margin-bottom:0">
         <div class="card-body">
           <div class="welcome-body">
-            <div class="welcome-title">Biến số gây dao động lớn thứ hai</div>
-            <div class="welcome-text">Năm 2024 xây dựng kéo GRDP <strong>giảm 1,36 điểm %</strong> (quý IV chỉ còn 2,37%); năm 2025 chuyển sang đóng góp <strong>dương 1,13 điểm %</strong> — chênh lệch gần <strong>2,5 điểm % GRDP</strong> giữa hai năm. Đây là khu vực IOC <strong>dự báo được sớm</strong> qua dữ liệu dự án (giải ngân, GPMB, tiến độ, khối lượng nghiệm thu) mà không phải đợi GRDP quý công bố.</div>
+            <div class="welcome-title">Giải ngân vượt mục tiêu quý II, nhưng lệch trọng tâm</div>
+            <div class="welcome-text">Đến 30/6/2026 đã giải ngân <strong>2.428,5 tỷ đồng</strong> trên kế hoạch <strong>5.213,0 tỷ đồng</strong> (đạt <strong>46,6%</strong>), vượt mục tiêu quý II là 1.889,6 tỷ. Tuy nhiên phần vượt hầu như đến từ <strong>khối trường PTDTNT liên cấp</strong> (1.266,3/711,1 tỷ), trong khi <strong>nhóm dự án đầu tư công</strong> chỉ đạt 976,5/1.178,5 tỷ. Ngành <strong>Xây dựng vẫn hụt 10,98 điểm % so kịch bản</strong> — dòng vốn chưa chuyển thành khối lượng xây lắp.</div>
           </div>
           <div class="welcome-art">🏗️</div>
         </div>
@@ -49,13 +49,13 @@
         <div class="card col-12">
           <div class="card-header">
             <div>
-              <div class="card-title">Tiến độ giải ngân lũy kế vs kế hoạch</div>
-              <div class="card-subtitle">Năm 2026 · đơn vị: tỷ đồng · số liệu cập nhật đến tháng 9</div>
+              <div class="card-title">Kế hoạch vốn vs giải ngân đến 30/6/2026 theo nhóm</div>
+              <div class="card-subtitle">Tỷ đồng · nguồn: Phụ lục 2 – Dự án đầu tư công thực hiện kịch bản tăng trưởng 2026</div>
             </div>
-            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ti ti-dots-vertical"></i></button>
+            <span class="badge badge-success"><i class="ti ti-chevron-up"></i>46,6% kế hoạch năm</span>
           </div>
           <div class="card-body">
-            <div id="chartDauTuCong" class="chart-box"></div>
+            <div id="chartDtc2026" class="chart-box"></div>
           </div>
         </div>
       </div>
@@ -65,8 +65,8 @@
         <div class="card col-12">
           <div class="card-header">
             <div>
-              <div class="card-title">Danh sách dự án trọng điểm</div>
-              <div class="card-subtitle">10 dự án có tổng mức đầu tư lớn nhất · vốn: tỷ đồng</div>
+              <div class="card-title">Dự án đầu tư công trọng điểm</div>
+              <div class="card-subtitle">Kế hoạch vốn 2026 và giải ngân đến 30/6 · triệu đồng · số liệu thật</div>
             </div>
             <button class="btn btn-outline btn-sm"><i class="ti ti-download"></i>Xuất báo cáo</button>
           </div>
@@ -76,13 +76,40 @@
                 <tr>
                   <th style="width:42px">#</th>
                   <th>Dự án</th>
-                  <th>Chủ đầu tư</th>
                   <th class="num">Kế hoạch vốn</th>
+                  <th class="num">Giải ngân 30/6</th>
                   <th style="width:220px">% giải ngân</th>
-                  <th>Trạng thái</th>
+                  <th>Đánh giá</th>
                 </tr>
               </thead>
               <tbody id="tblDuAn"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dự án ngoài ngân sách -->
+      <div class="row">
+        <div class="card col-12">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Dự án ngoài ngân sách thực hiện mục tiêu tăng trưởng 2026</div>
+              <div class="card-subtitle">10 dự án vốn đăng ký lớn nhất · tỷ đồng · nguồn: Phụ lục 3 (Đô thị – Năng lượng – Nông nghiệp)</div>
+            </div>
+            <span class="badge badge-warning">Tổng đăng ký ~47.410 tỷ</span>
+          </div>
+          <div class="card-body no-pad table-wrap" style="padding-top:14px">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th style="width:42px">#</th>
+                  <th>Dự án</th>
+                  <th>Lĩnh vực</th>
+                  <th class="num">Vốn đăng ký</th>
+                  <th>Trạng thái</th>
+                </tr>
+              </thead>
+              <tbody id="tblNgoaiNS"></tbody>
             </table>
           </div>
         </div>
@@ -101,20 +128,44 @@
 (function () {
   var D = window.IOC_DATA, IOC = window.IOC;
 
-  document.getElementById("statRow").innerHTML =
-    IOC.statCard({ icon: "ti ti-stack-2", tint: "tint-secondary", badge: "+9,5%", value: "8.520", unit: "tỷ đồng", label: "Tổng kế hoạch vốn năm", note: "So với kế hoạch 2025" }) +
-    IOC.statCard({ icon: "ti ti-chart-line", tint: "tint-primary", badge: "+11,3%", value: "4.976", unit: "tỷ đồng", label: "Đã giải ngân (lũy kế)", note: "So với cùng kỳ 2025" }) +
-    IOC.statCard({ icon: "ti ti-percentage", tint: "tint-success", badge: "+4,1 điểm", value: "58,4", unit: "%", label: "Tỷ lệ giải ngân", note: "So với cùng kỳ 2025" }) +
-    IOC.statCard({ icon: "ti ti-clock", tint: "tint-danger", badge: "+1", dir: "down", value: "3", unit: "/ 10 dự án lớn", label: "Dự án chậm tiến độ", note: "So với tháng trước" });
+  var N = D.ns2026.dauTuCong, NN = D.ns2026.ngoaiNganSach;
 
-  document.getElementById("tblDuAn").innerHTML = D.dauTuCong.duAn.map(function (x, i) {
+  document.getElementById("statRow").innerHTML =
+    IOC.statCard({ icon: "ti ti-stack-2", tint: "tint-secondary", badge: "4 nhóm dự án", badgeClass: "badge-secondary",
+      value: "5.213", unit: "tỷ đồng", label: "Kế hoạch vốn đầu tư công 2026", note: "Phụ lục 2 – Kế hoạch của BTV Tỉnh uỷ" }) +
+    IOC.statCard({ icon: "ti ti-chart-line", tint: "tint-primary", badge: "vượt mục tiêu quý II",
+      value: "2.428", unit: "tỷ đồng", label: "Giải ngân đến 30/6/2026", note: "Mục tiêu quý II: 1.890 tỷ đồng" }) +
+    IOC.statCard({ icon: "ti ti-percentage", tint: "tint-success", badge: "46,6% kế hoạch năm", badgeClass: "badge-secondary",
+      value: "46,6", unit: "%", label: "Tỷ lệ giải ngân", note: "Trường nội trú 55% · đầu tư công 41%" }) +
+    IOC.statCard({ icon: "ti ti-clock", tint: "tint-danger", badge: "6 dự án chậm", dir: "down",
+      value: "0", unit: "%", label: "Cao tốc Sơn La – Điện Biên", note: "105 tỷ kế hoạch, chưa giải ngân" });
+
+  var nhanDanhGia = {
+    dat:  '<span class="badge badge-success"><i class="ti ti-check"></i>Đạt kế hoạch</span>',
+    vuot: '<span class="badge badge-info"><i class="ti ti-chevron-up"></i>Vượt kế hoạch</span>',
+    cham: '<span class="badge badge-danger"><i class="ti ti-alert-triangle"></i>Chưa đạt quý II</span>'
+  };
+
+  document.getElementById("tblDuAn").innerHTML = N.trongDiem.map(function (x, i) {
+    var pc = x.keHoach ? Math.round(x.giaiNgan / x.keHoach * 100) : 0;
     return "<tr>" +
-      '<td style="color:rgba(76,78,100,.5)">' + (i + 1) + "</td>" +
+      '<td style="color:var(--text-muted)">' + (i + 1) + "</td>" +
       '<td><div class="td-main">' + x.ten + "</div></td>" +
-      "<td>" + x.chuDauTu + "</td>" +
+      '<td class="num" style="font-weight:600;color:var(--text-heading)">' + IOC.fmt(x.keHoach) + "</td>" +
+      '<td class="num">' + IOC.fmt(x.giaiNgan) + "</td>" +
+      '<td><div class="progress-cell"><div class="progress"><div class="progress-bar ' + IOC.progressClass(pc) + '" style="width:' + pc + '%"></div></div><span class="pct">' + pc + '%</span></div></td>' +
+      "<td>" + nhanDanhGia[x.danhGia] + "</td>" +
+      "</tr>";
+  }).join("");
+
+  /* Dự án ngoài ngân sách (Phụ lục 3) */
+  document.getElementById("tblNgoaiNS").innerHTML = NN.lonNhat.map(function (x, i) {
+    return "<tr>" +
+      '<td style="color:var(--text-muted)">' + (i + 1) + "</td>" +
+      '<td><div class="td-main">' + x.ten + "</div></td>" +
+      "<td>" + x.linhVuc + "</td>" +
       '<td class="num" style="font-weight:600;color:var(--text-heading)">' + IOC.fmt(x.von) + "</td>" +
-      '<td><div class="progress-cell"><div class="progress"><div class="progress-bar ' + IOC.progressClass(x.giaiNgan) + '" style="width:' + x.giaiNgan + '%"></div></div><span class="pct">' + x.giaiNgan + '%</span></div></td>' +
-      "<td>" + IOC.badgeTrangThai(x.trangThai) + "</td>" +
+      '<td><span class="badge badge-secondary">' + x.trangThai + "</span></td>" +
       "</tr>";
   }).join("");
 })();

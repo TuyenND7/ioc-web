@@ -92,9 +92,11 @@
   function make(sel, build) {
     var el = document.querySelector(sel);
     if (!el) return;
-    var chart = new ApexCharts(el, build());
-    chart.render();
-    registry.push({ el: el, build: build, chart: chart });
+    try {
+      var chart = new ApexCharts(el, build());
+      chart.render();
+      registry.push({ el: el, build: build, chart: chart });
+    } catch (e) { el.setAttribute("data-err", sel + " :: " + e.message); }
   }
 
   function rebuildAll() {
@@ -114,6 +116,117 @@
   var tyDong = function (v) { return v == null ? "" : fmt(v) + " tỷ đồng"; };
   var pct = function (v) { return v == null ? "" : v.toFixed(2).replace(".", ",") + "%"; };
   var diem = function (v) { return v == null ? "" : v.toFixed(2).replace(".", ",") + " điểm %"; };
+
+  /* =============== KỊCH BẢN TĂNG TRƯỞNG 2026 (số liệu thật) =============== */
+
+  /* M01 – Quy mô GRDP theo quý 2026: đã thực hiện vs mục tiêu còn lại */
+  make("#chartKb2026Quy", function () {
+    var t = T(), k = D.kb2026.tong;
+    return base({
+      chart: { type: "bar", height: H(320, 280), stacked: false },
+      series: [
+        { name: "Đã thực hiện", data: [k.q1, k.q2, null, null] },
+        { name: "Mục tiêu phải đạt", data: [null, null, k.q3, k.q4] }
+      ],
+      colors: [BRAND.primary, BRAND.warning],
+      plotOptions: { bar: { columnWidth: "46%", borderRadius: 6, borderRadiusApplication: "end" } },
+      dataLabels: {
+        enabled: true, offsetY: -20,
+        style: { fontSize: "11px", fontWeight: 700, colors: [t.fore] },
+        formatter: function (v, o) {
+          if (v == null) return "";
+          var g = [k.q1Tang, k.q2Tang, k.q3Tang, k.q4Tang][o.dataPointIndex];
+          return "+" + g.toFixed(2).replace(".", ",") + "%";
+        }
+      },
+      xaxis: { categories: ["Quý I", "Quý II", "Quý III", "Quý IV"], axisBorder: { show: false }, axisTicks: { show: false }, labels: axisLabels() },
+      yaxis: { max: 11600, labels: deepMerge(axisLabels(), { formatter: function (v) { return fmt(Math.round(v)); } }) },
+      legend: legendTop(),
+      tooltip: { shared: false, y: { formatter: tyDong } }
+    });
+  });
+
+  /* M01 – 4 khu vực: kết quả 6T vs kịch bản 6T (% tăng) */
+  make("#chartKhuVuc2026", function () {
+    var t = T(), kv = D.kb2026.khuVuc;
+    return base({
+      chart: { type: "bar", height: H(300, 300) },
+      series: [
+        { name: "Kịch bản 6T", data: kv.map(function (x) { return x.kbTang6t; }) },
+        { name: "Thực hiện 6T", data: kv.map(function (x) { return x.kqTang6t; }) }
+      ],
+      colors: [BRAND.secondary, BRAND.primary],
+      plotOptions: { bar: { horizontal: true, barHeight: "62%", borderRadius: 4, borderRadiusApplication: "end" } },
+      dataLabels: { enabled: true, offsetX: 22, style: { fontSize: "11px", fontWeight: 700, colors: [t.fore] }, formatter: function (v) { return v.toFixed(2).replace(".", ",") + "%"; } },
+      xaxis: { categories: kv.map(function (x) { return x.ten; }), max: 23, axisBorder: { show: false }, axisTicks: { show: false }, labels: deepMerge(axisLabels(), { formatter: function (v) { return Number(v).toFixed(0) + "%"; } }) },
+      yaxis: { labels: { style: { colors: t.fore, fontSize: "11px" }, maxWidth: 170 } },
+      legend: legendTop(),
+      tooltip: { shared: true, intersect: false, y: { formatter: pct } }
+    });
+  });
+
+  /* M02 – Chênh lệch so kịch bản của 20 ngành cấp I (điểm %) */
+  make("#chartNganhLech", function () {
+    var t = T();
+    var d = D.kb2026.nganh.slice().sort(function (a, b) { return a.lech6t - b.lech6t; });
+    return base({
+      chart: { type: "bar", height: H(560, 620) },
+      series: [{ name: "So kịch bản 6T", data: d.map(function (x) { return x.lech6t; }) }],
+      colors: [BRAND.primary],
+      plotOptions: {
+        bar: {
+          horizontal: true, barHeight: "62%", borderRadius: 3,
+          colors: { ranges: [{ from: -99, to: -0.0001, color: BRAND.danger }, { from: 0, to: 99, color: BRAND.success }] }
+        }
+      },
+      dataLabels: { enabled: true, offsetX: 0, style: { fontSize: "11px", fontWeight: 700, colors: [t.fore] }, formatter: function (v) { return (v > 0 ? "+" : "") + v.toFixed(2).replace(".", ","); } },
+      xaxis: { categories: d.map(function (x) { return x.ma + ". " + x.ten; }), axisBorder: { show: false }, axisTicks: { show: false }, labels: deepMerge(axisLabels(), { formatter: function (v) { return Number(v).toFixed(0); } }) },
+      yaxis: { labels: { style: { colors: t.fore, fontSize: "11px" }, maxWidth: 260 } },
+      legend: { show: false },
+      tooltip: { y: { formatter: diem } }
+    });
+  });
+
+  /* M05 – Đầu tư công 2026: kế hoạch vs mục tiêu Q2 vs giải ngân 30/6 */
+  make("#chartDtc2026", function () {
+    var t = T(), n = D.ns2026.dauTuCong.nhom, ty = function (v) { return Math.round(v / 1000); };
+    return base({
+      chart: { type: "bar", height: H(320, 300) },
+      series: [
+        { name: "Kế hoạch vốn 2026", data: n.map(function (x) { return ty(x.keHoach); }) },
+        { name: "Giải ngân đến 30/6", data: n.map(function (x) { return ty(x.giaiNgan); }) }
+      ],
+      colors: [BRAND.secondary, BRAND.primary],
+      plotOptions: { bar: { horizontal: true, barHeight: "62%", borderRadius: 4, borderRadiusApplication: "end" } },
+      dataLabels: { enabled: true, offsetX: 26, style: { fontSize: "11px", fontWeight: 700, colors: [t.fore] }, formatter: function (v) { return fmt(v); } },
+      xaxis: { categories: n.map(function (x) { return x.ten; }), axisBorder: { show: false }, axisTicks: { show: false }, labels: deepMerge(axisLabels(), { formatter: function (v) { return fmt(Math.round(v)); } }) },
+      yaxis: { labels: { style: { colors: t.fore, fontSize: "11px" }, maxWidth: 200 } },
+      legend: legendTop(),
+      tooltip: { shared: true, intersect: false, y: { formatter: tyDong } }
+    });
+  });
+
+  /* M10 – Thu NSNN 6T/2026: % hoàn thành dự toán theo sắc thuế */
+  make("#chartThuNS2026", function () {
+    var t = T(), k = D.ns2026.thuNSNN.khoan;
+    return base({
+      chart: { type: "bar", height: H(470, 420) },
+      series: [{ name: "% dự toán", data: k.map(function (x) { return x.tyLe; }) }],
+      colors: [BRAND.primary],
+      plotOptions: {
+        bar: {
+          horizontal: true, barHeight: "60%", borderRadius: 4, borderRadiusApplication: "end",
+          colors: { ranges: [{ from: 0, to: 44.99, color: BRAND.danger }, { from: 45, to: 59.99, color: BRAND.warning }, { from: 60, to: 999, color: BRAND.success }] }
+        }
+      },
+      dataLabels: { enabled: true, offsetX: 26, style: { fontSize: "11px", fontWeight: 700, colors: [t.fore] }, formatter: function (v) { return v.toFixed(1).replace(".", ",") + "%"; } },
+      annotations: { xaxis: [{ x: 50, strokeDashArray: 4, borderColor: t.muted, label: { text: "Mốc 50% (6 tháng)", style: { background: t.cardBg, color: t.muted, fontSize: "11px" } } }] },
+      xaxis: { categories: k.map(function (x) { return x.ten; }), max: 125, axisBorder: { show: false }, axisTicks: { show: false }, labels: deepMerge(axisLabels(), { formatter: function (v) { return Number(v).toFixed(0) + "%"; } }) },
+      yaxis: { labels: { style: { colors: t.fore, fontSize: "11px" }, maxWidth: 230 } },
+      legend: { show: false },
+      tooltip: { y: { formatter: function (v) { return v.toFixed(1).replace(".", ",") + "% dự toán"; } } }
+    });
+  });
 
   /* =============== GRDP (số liệu thật) =============== */
 

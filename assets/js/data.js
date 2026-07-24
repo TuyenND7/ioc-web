@@ -43,6 +43,168 @@ window.IOC_DATA = {
     ]
   },
 
+  // ================= KỊCH BẢN TĂNG TRƯỞNG 2026 (SỐ LIỆU THẬT) =================
+  // Nguồn: PL-1 KBTT QIII-IV/2026 (Đảng uỷ UBND tỉnh, 17/7/2026), giá SS 2020, tỷ đồng
+  kb2026: {
+    tong: { nam2025: 30469, q1: 6704.28, q1Tang: 9.28, q2: 8733.04, q2Tang: 8.2, kq6t: 15437.3, kqTang6t: 8.67,
+            kbTang6t: 10.46, lech6t: -1.79, muc2026: 33826.4, mucTang2026: 11.02,
+            cuoiNam: 18389.1, cuoiTang: 13.07, q3: 8196.09, q3Tang: 11.67, q4: 10193, q4Tang: 14.22 },
+    khuVuc: [
+      { ten: "Nông, lâm nghiệp & thủy sản", nam2025: 4979.6, kq6t: 2668.16, kqTang6t: 4.16, kbTang6t: 3.89, lech6t: 0.27, muc2026: 5186.23, mucTang2026: 4.15, q3Tang: 4.2, q4Tang: 4.12, cuoiTang: 4.14 },
+      { ten: "Công nghiệp – xây dựng", nam2025: 5738.7, kq6t: 2550.91, kqTang6t: 12.92, kbTang6t: 19.59, lech6t: -6.67, muc2026: 6496.6, mucTang2026: 13.21, q3Tang: 11.84, q4Tang: 14.61, cuoiTang: 13.39 },
+      { ten: "Dịch vụ", nam2025: 18448.5, kq6t: 9580.98, kqTang6t: 8.98, kbTang6t: 10.38, lech6t: -1.39, muc2026: 20742.1, mucTang2026: 12.43, q3Tang: 13.04, q4Tang: 18.03, cuoiTang: 15.57 },
+      { ten: "Thuế sản phẩm trừ trợ cấp", nam2025: 1302.21, kq6t: 637.28, kqTang6t: 7.33, kbTang6t: 6.82, lech6t: 0.51, muc2026: 1401.47, mucTang2026: 7.62, q3Tang: 7.74, q4Tang: 7.97, cuoiTang: 7.87 },
+    ],
+    // 20 ngành kinh tế cấp I — kết quả 6T/2026 vs kịch bản, mục tiêu Q3–Q4
+    nganh: [
+      { ma: "A", ten: "Nông nghiệp, lâm nghiệp và thuỷ sản", nam2025: 4979.6, kq6t: 2668.16, kqTang6t: 4.16, kbTang6t: 3.89, lech6t: 0.27, muc2026: 5186.23, mucTang2026: 4.15, q3Tang: 4.2, q4Tang: 4.12, cuoiTang: 4.14, danhGia: "Đạt", chuTri: "Sở Nông nghiệp và Môi trường được giao đầu năm (quý III: 3,7" },
+      { ma: "B", ten: "Khai khoáng", nam2025: 131.15, kq6t: 47.29, kqTang6t: 2.46, kbTang6t: 9.79, lech6t: -7.34, muc2026: 140.59, mucTang2026: 7.2, q3Tang: 5.91, q4Tang: 12.36, cuoiTang: 9.78, danhGia: "Không đạt", chuTri: "Sở Công Thương" },
+      { ma: "C", ten: "Công nghiệp chế biến, chế tạo", nam2025: 1050.13, kq6t: 596.03, kqTang6t: 16.18, kbTang6t: 15.11, lech6t: 1.07, muc2026: 1195.14, mucTang2026: 13.81, q3Tang: 10.15, q4Tang: 12.83, cuoiTang: 11.55, danhGia: "Đạt", chuTri: "Sở Công Thương" },
+      { ma: "D", ten: "SX & PP điện, khí đốt, nước nóng...", nam2025: 1186.82, kq6t: 350.92, kqTang6t: 14, kbTang6t: 13.31, lech6t: 0.69, muc2026: 1322.42, mucTang2026: 11.43, q3Tang: 12.8, q4Tang: 8.4, cuoiTang: 10.53, danhGia: "Đạt", chuTri: "Sở Công Thương" },
+      { ma: "E", ten: "Cung cấp nước; hoạt động quản lý và xử lý rác thải, nước thải", nam2025: 108.81, kq6t: 54.9, kqTang6t: 9.26, kbTang6t: 10.68, lech6t: -1.42, muc2026: 118.3, mucTang2026: 8.72, q3Tang: 5.46, q4Tang: 10.52, cuoiTang: 8.26, danhGia: "Không đạt", chuTri: "" },
+      { ma: "F", ten: "Xây dựng", nam2025: 3261.8, kq6t: 1501.78, kqTang6t: 11.92, kbTang6t: 22.9, lech6t: -10.98, muc2026: 3720.14, mucTang2026: 14.05, q3Tang: 12.35, q4Tang: 17.76, cuoiTang: 15.54, danhGia: "Không đạt", chuTri: "Sở Xây dựng đã phân bổ chỉ tiêu đến các xã, phường" },
+      { ma: "G", ten: "Bán buôn và bán lẻ; sửa chữa ô tô, mô tô, xe máy và xe có động cơ khác", nam2025: 2486.46, kq6t: 1323.81, kqTang6t: 12.68, kbTang6t: 11.61, lech6t: 1.07, muc2026: 2832.08, mucTang2026: 13.9, q3Tang: 14.31, q4Tang: 15.74, cuoiTang: 15, danhGia: "Đạt", chuTri: "Sở Công Thương" },
+      { ma: "H", ten: "Vận tải kho bãi", nam2025: 844.31, kq6t: 447.96, kqTang6t: 11.46, kbTang6t: 16.07, lech6t: -4.61, muc2026: 958.42, mucTang2026: 13.51, q3Tang: 12.86, q4Tang: 17.91, cuoiTang: 15.38, danhGia: "Không đạt", chuTri: "Sở Xây dựng, Sở Công thương Sở Xây dựng đã có phương án phân" },
+      { ma: "I", ten: "Dịch vụ lưu trú và ăn uống", nam2025: 1374.34, kq6t: 902.2, kqTang6t: 8.67, kbTang6t: 17.45, lech6t: -8.78, muc2026: 1636.56, mucTang2026: 19.08, q3Tang: 15.31, q4Tang: 55.56, cuoiTang: 34.97, danhGia: "Không đạt", chuTri: "Sở Văn hóa, Thể thao và Du lịch đã phân bổ chỉ tiêu đến xã, " },
+      { ma: "J", ten: "Thông tin và truyền thông", nam2025: 1134.9, kq6t: 631.26, kqTang6t: 7.94, kbTang6t: 7.96, lech6t: -0.02, muc2026: 1262.69, mucTang2026: 11.26, q3Tang: 13, q4Tang: 17.11, cuoiTang: 14.79, danhGia: "Không đạt", chuTri: "Sở Văn hoá, Thể thao và Du lịch đã có phương án phân bổ chỉ " },
+      { ma: "K", ten: "Hoạt động tài chính, ngân hàng và bảo hiểm", nam2025: 1178.72, kq6t: 520.3, kqTang6t: 6.64, kbTang6t: 9.62, lech6t: -2.97, muc2026: 1266.77, mucTang2026: 7.47, q3Tang: 7.35, q4Tang: 8.63, cuoiTang: 8.05, danhGia: "Không đạt", chuTri: "" },
+      { ma: "L", ten: "Hoạt động kinh doanh bất động sản", nam2025: 2236.94, kq6t: 1070.15, kqTang6t: 5.29, kbTang6t: 5.82, lech6t: -0.53, muc2026: 2493.96, mucTang2026: 11.49, q3Tang: 15.6, q4Tang: 17.61, cuoiTang: 16.65, danhGia: "Không đạt", chuTri: "Trung tâm phát triển quỹ đất tỉnh chưa phân bổ chỉ tiêu" },
+      { ma: "M", ten: "Hoạt động chuyên môn, khoa học và công nghệ", nam2025: 575.23, kq6t: 263.49, kqTang6t: 7.97, kbTang6t: 9.67, lech6t: -1.7, muc2026: 646.39, mucTang2026: 12.37, q3Tang: 14.61, q4Tang: 16.47, cuoiTang: 15.61, danhGia: "Không đạt", chuTri: "" },
+      { ma: "N", ten: "Hoạt động hành chính và dịch vụ hỗ trợ", nam2025: 86.91, kq6t: 50.98, kqTang6t: 15.06, kbTang6t: 21.01, lech6t: -5.94, muc2026: 107.73, mucTang2026: 23.96, q3Tang: 32.27, q4Tang: 34.2, cuoiTang: 33.21, danhGia: "Không đạt", chuTri: "Các sở, ngành, UBND các xã phường" },
+      { ma: "O", ten: "Hoạt động của Đảng cộng sản, tổ chức chính trị- xã hội, quản lý nhà nước, an ninh quốc phòng; bảo đảm xã hội bắt buộc", nam2025: 3554.06, kq6t: 1882.67, kqTang6t: 10.3, kbTang6t: 8.55, lech6t: 1.76, muc2026: 4003.79, mucTang2026: 12.65, q3Tang: 13.93, q4Tang: 15.7, cuoiTang: 14.83, danhGia: "Đạt", chuTri: "Các cơ quan Đảng, MTTQ, Công an tỉnh; Bộ CHQS tỉnh; BHXH; Cá" },
+      { ma: "P", ten: "Giáo dục và đào tạo", nam2025: 2846.03, kq6t: 1398.24, kqTang6t: 6.24, kbTang6t: 9.27, lech6t: -3.04, muc2026: 3147.23, mucTang2026: 12.34, q3Tang: 9.77, q4Tang: 18.87, cuoiTang: 14.32, danhGia: "Không đạt", chuTri: "Sở Giáo dục và Đào tạo" },
+      { ma: "Q", ten: "Y tế và hoạt động trợ giúp xã hội", nam2025: 1684.93, kq6t: 852.46, kqTang6t: 9.97, kbTang6t: 9.22, lech6t: 0.75, muc2026: 1860.45, mucTang2026: 10.12, q3Tang: 10.72, q4Tang: 10.87, cuoiTang: 10.8, danhGia: "Đạt", chuTri: "" },
+      { ma: "R", ten: "Nghệ thuật, vui chơi và giải trí", nam2025: 117, kq6t: 54.68, kqTang6t: 7.22, kbTang6t: 8.83, lech6t: -1.6, muc2026: 129.31, mucTang2026: 10.52, q3Tang: 12.64, q4Tang: 13.58, cuoiTang: 13.07, danhGia: "Không đạt", chuTri: "Sở Văn hoá, Thể thao và Du lịch đã có phương án phân bổ chỉ " },
+      { ma: "S", ten: "Hoạt động dịch vụ khác", nam2025: 290.38, kq6t: 162.9, kqTang6t: 17.12, kbTang6t: 25.13, lech6t: -8, muc2026: 354.32, mucTang2026: 22.02, q3Tang: 24.55, q4Tang: 28.37, cuoiTang: 26.52, danhGia: "Không đạt", chuTri: "" },
+      { ma: "T", ten: "Hoạt động làm thuê các công việc trong các hộ gia đình, sản xuất sản phẩm vật chất và dịch vụ tự tiêu dùng của hộ gia đình", nam2025: 38.25, kq6t: 19.9, kqTang6t: 7.39, kbTang6t: 7.84, lech6t: -0.45, muc2026: 42.41, mucTang2026: 8.24, q3Tang: 11.73, q4Tang: 16.02, cuoiTang: 14.13, danhGia: "Không đạt", chuTri: "" },
+    ],
+    // Chỉ tiêu 6 tháng cuối năm giao cho 45 xã/phường (tỷ đồng)
+    // nhaO = giá trị nhà tăng trưởng · san = m2 sàn · vanTai = vận tải kho bãi · luuTruAnUong = lưu trú + ăn uống
+    diaBan: [
+      { ten: "Phường Điện Biên Phủ", nhaO: 137.3, san: 18220, vanTai: 470.7, luuTruAnUong: 329.41 },
+      { ten: "Phường Mường Thanh", nhaO: 77.8, san: 10329, vanTai: 201.7, luuTruAnUong: 56.1 },
+      { ten: "Xã Thanh Nưa", nhaO: 93.7, san: 16957, vanTai: 2.8, luuTruAnUong: 22.9 },
+      { ten: "Xã Tuần Giáo", nhaO: 71.5, san: 12934, vanTai: 8.3, luuTruAnUong: 36.9 },
+      { ten: "Xã Thanh An", nhaO: 66.9, san: 12096, vanTai: 18.2, luuTruAnUong: 6.5 },
+      { ten: "Phường Mường Lay", nhaO: 49.3, san: 8921, vanTai: 8.4, luuTruAnUong: 33.4 },
+      { ten: "Xã Mường Nhé", nhaO: 54.6, san: 9885, vanTai: 6, luuTruAnUong: 24.5 },
+      { ten: "Xã Tủa Chùa", nhaO: 48.9, san: 8850, vanTai: 6, luuTruAnUong: 20.3 },
+      { ten: "Xã Mường Ảng", nhaO: 49.6, san: 8978, vanTai: 6, luuTruAnUong: 16.4 },
+      { ten: "Xã Mường Phăng", nhaO: 45.2, san: 8177, vanTai: 2.8, luuTruAnUong: 22.8 },
+      { ten: "Xã Na Sang", nhaO: 49.8, san: 9014, vanTai: 5, luuTruAnUong: 15.8 },
+      { ten: "Xã Thanh Yên", nhaO: 50.6, san: 9149, vanTai: 2.8, luuTruAnUong: 8.7 },
+      { ten: "Xã Búng Lao", nhaO: 53.8, san: 9724, vanTai: 2.8, luuTruAnUong: 5.35 },
+      { ten: "Xã Na Son", nhaO: 42, san: 7592, vanTai: 6, luuTruAnUong: 12.2 },
+      { ten: "Xã Nà Hỳ", nhaO: 42.1, san: 7614, vanTai: 6, luuTruAnUong: 10.38 },
+      { ten: "Xã Mường Luân", nhaO: 45.5, san: 8230, vanTai: 2.8, luuTruAnUong: 8.1 },
+      { ten: "Xã Nà Tấu", nhaO: 40.9, san: 7391, vanTai: 2.8, luuTruAnUong: 6.9 },
+      { ten: "Xã Mường Chà", nhaO: 34.4, san: 6225, vanTai: 2.8, luuTruAnUong: 12.53 },
+      { ten: "Xã Sáng Nhè", nhaO: 44.2, san: 7995, vanTai: 2.8, luuTruAnUong: 2.51 },
+      { ten: "Xã Quài Tở", nhaO: 38.5, san: 6972, vanTai: 2.8, luuTruAnUong: 7.8 },
+      { ten: "Xã Chiềng Sinh", nhaO: 40.4, san: 7306, vanTai: 2.8, luuTruAnUong: 3.51 },
+      { ten: "Xã Sính Phình", nhaO: 38.1, san: 6894, vanTai: 2.8, luuTruAnUong: 4.15 },
+      { ten: "Xã Mường Lạn", nhaO: 35.9, san: 6493, vanTai: 2.8, luuTruAnUong: 2.61 },
+      { ten: "Xã Xa Dung", nhaO: 35.4, san: 6406, vanTai: 2.8, luuTruAnUong: 2.51 },
+      { ten: "Xã Núa Ngam", nhaO: 33.9, san: 6131, vanTai: 2.8, luuTruAnUong: 3.85 },
+      { ten: "Xã Pú Nhung", nhaO: 33.4, san: 6041, vanTai: 2.8, luuTruAnUong: 2.51 },
+      { ten: "Xã Mường Mùn", nhaO: 35.8, san: 6481, vanTai: 2.8, luuTruAnUong: 0 },
+      { ten: "Xã Sín Chải", nhaO: 31.1, san: 5619, vanTai: 2.8, luuTruAnUong: 2.51 },
+      { ten: "Xã Sam Mứn", nhaO: 25.8, san: 4674, vanTai: 2.8, luuTruAnUong: 5.6 },
+      { ten: "Xã Si Pa Phìn", nhaO: 26.6, san: 4811, vanTai: 2.8, luuTruAnUong: 2.62 },
+      { ten: "Xã Mường Pồn", nhaO: 26.7, san: 4825, vanTai: 2.8, luuTruAnUong: 2.51 },
+      { ten: "Xã Mường Nhà", nhaO: 26.3, san: 4757, vanTai: 2.8, luuTruAnUong: 2.62 },
+      { ten: "Xã Mường Toong", nhaO: 26.2, san: 4731, vanTai: 2.8, luuTruAnUong: 2.01 },
+      { ten: "Xã Phình Giàng", nhaO: 25.2, san: 4555, vanTai: 2.8, luuTruAnUong: 2.51 },
+      { ten: "Xã Pu Nhi", nhaO: 24.5, san: 4427, vanTai: 2.8, luuTruAnUong: 2.51 },
+      { ten: "Xã Sín Thầu", nhaO: 17.4, san: 3139, vanTai: 2.8, luuTruAnUong: 9.6 },
+      { ten: "Xã Mường Tùng", nhaO: 22.3, san: 4041, vanTai: 2.8, luuTruAnUong: 4.35 },
+      { ten: "Xã Quảng Lâm", nhaO: 24.1, san: 4361, vanTai: 2.8, luuTruAnUong: 2.51 },
+      { ten: "Xã Tủa Thàng", nhaO: 23.1, san: 4183, vanTai: 2.8, luuTruAnUong: 3.23 },
+      { ten: "Xã Nà Bủng", nhaO: 22.5, san: 4063, vanTai: 2.8, luuTruAnUong: 2.09 },
+      { ten: "Xã Pa Ham", nhaO: 20.4, san: 3684, vanTai: 2.8, luuTruAnUong: 2.01 },
+      { ten: "Xã Nậm Kè", nhaO: 20.2, san: 3655, vanTai: 2.8, luuTruAnUong: 2.01 },
+      { ten: "Xã Tìa Dình", nhaO: 16.6, san: 3011, vanTai: 2.8, luuTruAnUong: 1.81 },
+      { ten: "Xã Nậm Nèn", nhaO: 18.2, san: 3300, vanTai: 2.8, luuTruAnUong: 0 },
+      { ten: "Xã Chà Tở", nhaO: 13.3, san: 2404, vanTai: 2.8, luuTruAnUong: 1.31 },
+    ],
+    tongPhanBo: { nhaO: 1800, san: 315245, nhaOQ3: 684, nhaOQ4: 1116, vanTai: 1045.08, vanTaiQ3: 507.36, vanTaiQ4: 537.72, luuTru: 443.74, anUong: 290.62 }
+  },
+
+  // ================= NGÂN SÁCH & ĐẦU TƯ 2026 (SỐ LIỆU THẬT) =================
+  ns2026: {
+    // PL-5: Thu NSNN 6T/2026 theo sắc thuế (triệu đồng) — Báo cáo 304/BC-ĐU ngày 02/7/2026
+    thuNSNN: {
+      duToan: 2159780, th6t2025: 865014, th6t2026: 1047700, cuoiNam: 1107390,
+      tyLeDuToan: 48.5, soCungKy: 21.1,
+      khoan: [
+        { ten: "Tiền sử dụng đất", duToan: 909780, th6t: 232057, cuoiNam: 677723, tyLe: 25.5, cungKy: 12.5 },
+        { ten: "Thuế CTN & dịch vụ ngoài quốc doanh", duToan: 488000, th6t: 351054, cuoiNam: 136946, tyLe: 71.9, cungKy: 48.7 },
+        { ten: "DNNN Trung ương", duToan: 225000, th6t: 103742, cuoiNam: 121258, tyLe: 46.1, cungKy: 7.4 },
+        { ten: "Lệ phí trước bạ", duToan: 120000, th6t: 83326, cuoiNam: 36674, tyLe: 69.4, cungKy: 34.2 },
+        { ten: "Thuế bảo vệ môi trường", duToan: 115000, th6t: 49340, cuoiNam: 65660, tyLe: 42.9, cungKy: -18.4 },
+        { ten: "Thuế thu nhập cá nhân", duToan: 59760, th6t: 67322, cuoiNam: 0, tyLe: 112.7, cungKy: 48.7 },
+        { ten: "Thu tiền thuê đất, mặt nước", duToan: 48000, th6t: 34201, cuoiNam: 13799, tyLe: 71.3, cungKy: 97.1 },
+        { ten: "Cấp quyền khai thác khoáng sản", duToan: 42000, th6t: 31075, cuoiNam: 10925, tyLe: 74, cungKy: -14.5 },
+        { ten: "Thu phí – lệ phí", duToan: 35000, th6t: 18591, cuoiNam: 16409, tyLe: 53.1, cungKy: -20.2 },
+        { ten: "Xổ số kiến thiết", duToan: 35000, th6t: 21608, cuoiNam: 8700, tyLe: 61.7, cungKy: 11.9 }
+      ]
+    },
+    // PL-4: Nguồn thu từ các dự án có sử dụng đất (tỷ đồng)
+    thuSDD: {
+      duToan: 909.78, duKienDuAn: 734.15, thieuHut: 175.63,
+      duAn: [
+        { ten: "Khu đô thị mới Him Lam phía Đông đường 60m (Khu A) – đấu giá", dienTich: 63737, gia: 4.0, giaTri: 254.95 },
+        { ten: "Đấu giá khu trung tâm hành chính mới", dienTich: 97794, gia: 2.1, giaTri: 205.13 },
+        { ten: "Khu dân cư đô thị Mường Thanh A", dienTich: 19070, gia: 7.5, giaTri: 143.03 },
+        { ten: "Khu dân cư TDP 17, 18 phường Him Lam", dienTich: 17954, gia: 4.0, giaTri: 71.81 },
+        { ten: "Khu dân cư đô thị Him Lam 7", dienTich: 14744, gia: 3.0, giaTri: 44.23 },
+        { ten: "Khu dân cư – DVTM Thanh Hưng, Thanh Chăn (GĐ1)", dienTich: 25000, gia: 0.6, giaTri: 15.0 }
+      ]
+    },
+    // PL-2: Đầu tư công 2026 (triệu đồng)
+    dauTuCong: {
+      keHoach: 5213019, mucTieuQ2: 1889617, giaiNgan30_6: 2428530, tyLe: 46.6,
+      nhom: [
+        { ten: "Dự án đầu tư công", keHoach: 2387842, mucTieu: 1178542, giaiNgan: 976546 },
+        { ten: "Trường PTDTNT liên cấp", keHoach: 2292150, mucTieu: 711075, giaiNgan: 1266310 },
+        { ten: "Khắc phục thiên tai & bảo trì đường bộ", keHoach: 395980, mucTieu: 0, giaiNgan: 185670 },
+        { ten: "CTMTQG về Văn hóa", keHoach: 137047, mucTieu: 0, giaiNgan: 0 }
+      ],
+      trongDiem: [
+        { ten: "Cấp điện nông thôn – \"Bừng sáng Điện Biên\"", keHoach: 1014770, giaiNgan: 332957, danhGia: "cham" },
+        { ten: "GPMB, tái định cư Cảng hàng không Điện Biên", keHoach: 348597, giaiNgan: 348597, danhGia: "dat" },
+        { ten: "Quản lý đa thiên tai lưu vực sông Nậm Rốm", keHoach: 266388, giaiNgan: 65265, danhGia: "cham" },
+        { ten: "Trường PTDTNT TH-THCS Thanh Nưa", keHoach: 168300, giaiNgan: 118403, danhGia: "vuot" },
+        { ten: "Đường kết nối vùng kinh tế động lực QL279 – QL12", keHoach: 158387, giaiNgan: 56834, danhGia: "cham" },
+        { ten: "Cao tốc Sơn La – Điện Biên (đoạn qua tỉnh)", keHoach: 105000, giaiNgan: 0, danhGia: "cham" },
+        { ten: "Quản lý tổng hợp nguồn nước Tuần Giáo (ODA)", keHoach: 102766, giaiNgan: 0, danhGia: "cham" },
+        { ten: "Phát triển nông thôn thích ứng thiên tai (ODA)", keHoach: 102766, giaiNgan: 0, danhGia: "cham" },
+        { ten: "Bảo tàng tỉnh Điện Biên", keHoach: 47898, giaiNgan: 0, danhGia: "cham" }
+      ]
+    },
+    // PL-3: Dự án ngoài ngân sách (tỷ đồng)
+    ngoaiNganSach: {
+      linhVuc: [
+        { ten: "Đô thị – TM – DV – DL", dangTrienKhai: 6353.7, trongDiem: 27494.1, soDuAn: 17 },
+        { ten: "Năng lượng", dangTrienKhai: 2105.31, trongDiem: 9324.03, soDuAn: 11 },
+        { ten: "Nông nghiệp", dangTrienKhai: 0, trongDiem: 2133, soDuAn: 8 }
+      ],
+      lonNhat: [
+        { ten: "KĐT, du lịch nghỉ dưỡng & thể thao phía Tây Bắc", von: 23660.8, linhVuc: "Đô thị", trangThai: "Chuẩn bị khởi công" },
+        { ten: "Nhà máy điện mặt trời Điện Biên 1 (300 MW)", von: 5371.27, linhVuc: "Năng lượng", trangThai: "Hoàn thiện thủ tục" },
+        { ten: "Nhà máy điện gió Envision Nậm Pồ", von: 4375, linhVuc: "Năng lượng", trangThai: "GPMB, thủ tục" },
+        { ten: "Tổ hợp cáp treo & du lịch văn hóa lịch sử ĐBP", von: 2076, linhVuc: "Du lịch", trangThai: "Chuẩn bị khởi công" },
+        { ten: "Khu dân cư – DVTM Thanh Hưng, Thanh Chăn", von: 1977.46, linhVuc: "Đô thị", trangThai: "Đang triển khai" },
+        { ten: "KĐT, TM, DL, DV và sân golf Huổi Phạ", von: 1757.36, linhVuc: "Đô thị", trangThai: "Hoàn thiện thủ tục" },
+        { ten: "KĐT mới Nam Thanh Trường", von: 1638, linhVuc: "Đô thị", trangThai: "Chọn nhà đầu tư" },
+        { ten: "ĐMT hồ Pá Khoang tích hợp pin lưu trữ (73 MW)", von: 1473.95, linhVuc: "Năng lượng", trangThai: "Hoàn thiện thủ tục" },
+        { ten: "ĐMT trên mặt hồ thủy điện Trung Thu (72 MW)", von: 1454.05, linhVuc: "Năng lượng", trangThai: "Hoàn thiện thủ tục" },
+        { ten: "KĐT mới Bắc Hồng Cúm (Khu A)", von: 998.59, linhVuc: "Đô thị", trangThai: "GPMB" }
+      ],
+      dienNangLuong: { dangThiCong: 61, sapKhoiCong: 471.8 }
+    }
+  },
+
   // ---- 4 lĩnh vực động lực GRDP (theo tài liệu phân tích GRDP Điện Biên) ----
   linhVuc: {
     // 1) DỊCH VỤ – DU LỊCH – THƯƠNG MẠI · động lực số 1 (đóng góp 65,4% mức tăng 2025)

@@ -32,14 +32,75 @@
       <div class="card welcome-card col-12" style="margin-bottom:0">
         <div class="card-body">
           <div class="welcome-body">
-            <div class="welcome-title">Cấu phần thứ tư của GRDP</div>
-            <div class="welcome-text">GRDP = giá trị tăng thêm 3 khu vực <strong>+ thuế sản phẩm trừ trợ cấp sản phẩm</strong>. Năm 2025 thuế sản phẩm tăng <strong>6,20%</strong>, đóng góp <strong>0,26 điểm %</strong> (3,5% mức tăng GRDP). Biến động theo tiêu dùng, xuất nhập khẩu và chính sách thuế.</div>
+            <div class="welcome-title">Thu ngân sách đạt tiến độ, nhưng nghẽn ở tiền sử dụng đất</div>
+            <div class="welcome-text">Thu nội địa 6 tháng đầu 2026 đạt <strong>1.047,7 tỷ đồng</strong> — <strong>48,5%</strong> dự toán năm, tăng <strong>21,1%</strong> so cùng kỳ. Nhưng <strong>thu tiền sử dụng đất mới đạt 25,5%</strong> dự toán (232,1/909,8 tỷ), dồn <strong>677,7 tỷ</strong> vào 6 tháng cuối năm — gấp <strong>2,9 lần</strong> số đã thu. Danh mục dự án có sử dụng đất mới bố trí được <strong>734,1 tỷ</strong>, còn <strong>thiếu 175,6 tỷ</strong> so dự toán.</div>
           </div>
           <div class="welcome-art">🧾</div>
         </div>
       </div>
 
       <div class="row" id="statRow"></div>
+
+      <div class="row">
+        <div class="card col-8">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Tiến độ thu NSNN 6 tháng đầu 2026 theo sắc thuế</div>
+              <div class="card-subtitle">% hoàn thành dự toán năm · nguồn: Phụ lục V, Báo cáo 304/BC-ĐU ngày 02/7/2026</div>
+            </div>
+            <span class="badge badge-success">Thu nội địa 48,5%</span>
+          </div>
+          <div class="card-body"><div id="chartThuNS2026" class="chart-box"></div></div>
+        </div>
+        <div class="card col-4">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Nguồn thu từ dự án có sử dụng đất</div>
+              <div class="card-subtitle">Giá trị tạm tính · tỷ đồng · Phụ lục IV</div>
+            </div>
+            <span class="badge badge-danger">Thiếu 175,6 tỷ</span>
+          </div>
+          <div class="card-body no-pad table-wrap" style="padding-top:14px">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Dự án</th>
+                  <th class="num">DT tính thu (m²)</th>
+                  <th class="num">Giá trị</th>
+                </tr>
+              </thead>
+              <tbody id="tblSDD"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card col-12">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Chi tiết thu ngân sách theo khoản thu, sắc thuế</div>
+              <div class="card-subtitle">Triệu đồng · so sánh thực hiện 6 tháng với dự toán năm và cùng kỳ 2025</div>
+            </div>
+            <button class="btn btn-outline btn-sm"><i class="ti ti-download"></i>Xuất báo cáo</button>
+          </div>
+          <div class="card-body no-pad table-wrap" style="padding-top:14px">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Khoản thu / sắc thuế</th>
+                  <th class="num">Dự toán 2026</th>
+                  <th class="num">TH 6 tháng</th>
+                  <th style="width:190px">% dự toán</th>
+                  <th class="num">So cùng kỳ</th>
+                  <th class="num">Còn phải thu</th>
+                </tr>
+              </thead>
+              <tbody id="tblThuNS"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 
       <div class="row">
         <div class="card col-6">
@@ -73,11 +134,46 @@
 <script>
 (function () {
   var D = window.IOC_DATA, IOC = window.IOC;
+  var TN = D.ns2026.thuNSNN, SD = D.ns2026.thuSDD;
+  var p1 = function (v) { return (v > 0 ? "+" : "") + v.toFixed(1).replace(".", ","); };
+
   document.getElementById("statRow").innerHTML =
-    IOC.statCard({ icon: "ti ti-percentage", tint: "tint-primary", badge: "2025", value: "6,20", unit: "%", label: "Tăng trưởng thuế sản phẩm", note: "So với năm 2024" }) +
-    IOC.statCard({ icon: "ti ti-circle-plus", tint: "tint-info", badge: "GRDP", value: "0,26", unit: "điểm %", label: "Đóng góp vào mức tăng", note: "Chiếm 3,5% mức tăng 2025" }) +
-    IOC.statCard({ icon: "ti ti-shopping-bag", tint: "tint-warning", badge: "GTGT", value: "58", unit: "%", label: "Thuế GTGT hàng – dịch vụ", note: "Nguồn lớn nhất" }) +
-    IOC.statCard({ icon: "ti ti-arrows-exchange", tint: "tint-success", badge: "biên mậu", value: "24", unit: "%", label: "Thuế xuất – nhập khẩu", note: "Gắn thương mại cửa khẩu" });
+    IOC.statCard({ icon: "ti ti-building-bank", tint: "tint-primary", badge: "48,5% dự toán", badgeClass: "badge-secondary",
+      value: "1.047,7", unit: "tỷ", label: "Thu nội địa 6 tháng 2026", note: "Dự toán năm 2.159,8 tỷ đồng" }) +
+    IOC.statCard({ icon: "ti ti-trending-up", tint: "tint-success", badge: "so cùng kỳ 2025",
+      value: "+21,1", unit: "%", label: "Tăng trưởng thu nội địa", note: "Cùng kỳ 2025: 865,0 tỷ đồng" }) +
+    IOC.statCard({ icon: "ti ti-map-pin", tint: "tint-danger", badge: "chậm nhất", dir: "down",
+      value: "25,5", unit: "%", label: "Tiền sử dụng đất / dự toán", note: "Còn phải thu 677,7 tỷ trong 6T cuối" }) +
+    IOC.statCard({ icon: "ti ti-receipt-tax", tint: "tint-warning", badge: "vượt dự toán cả năm", badgeClass: "badge-warning",
+      value: "112,7", unit: "%", label: "Thuế thu nhập cá nhân", note: "67,3/59,8 tỷ — cần điều chỉnh dự toán" });
+
+  /* Bảng thu NSNN theo sắc thuế */
+  document.getElementById("tblThuNS").innerHTML = TN.khoan.map(function (x) {
+    var conLai = x.duToan - x.th6t;
+    return "<tr>" +
+      '<td class="td-main">' + x.ten + "</td>" +
+      '<td class="num">' + IOC.fmt(x.duToan) + "</td>" +
+      '<td class="num" style="font-weight:600;color:var(--text-heading)">' + IOC.fmt(x.th6t) + "</td>" +
+      '<td><div class="progress-cell"><div class="progress"><div class="progress-bar ' + IOC.progressClass(Math.min(x.tyLe, 100)) + '" style="width:' + Math.min(x.tyLe, 100) + '%"></div></div><span class="pct">' + x.tyLe.toFixed(1).replace(".", ",") + '%</span></div></td>' +
+      '<td class="num"><span class="badge ' + (x.cungKy >= 0 ? "badge-success" : "badge-danger") + '">' + p1(x.cungKy) + "%</span></td>" +
+      '<td class="num" style="color:' + (conLai > x.th6t ? "var(--danger)" : "var(--text-body)") + '">' + (conLai > 0 ? IOC.fmt(conLai) : "—") + "</td>" +
+      "</tr>";
+  }).join("");
+
+  /* Bảng dự án có sử dụng đất */
+  document.getElementById("tblSDD").innerHTML = SD.duAn.map(function (x) {
+    return "<tr>" +
+      '<td class="td-main" style="font-size:.8rem">' + x.ten + "</td>" +
+      '<td class="num">' + IOC.fmt(x.dienTich) + "</td>" +
+      '<td class="num" style="font-weight:600;color:var(--text-heading)">' + x.giaTri.toFixed(1).replace(".", ",") + "</td>" +
+      "</tr>";
+  }).join("") +
+    '<tr><td class="td-main"><strong>Tổng dự kiến</strong></td><td class="num">—</td>' +
+    '<td class="num"><strong style="color:var(--warning)">' + SD.duKienDuAn.toFixed(1).replace(".", ",") + '</strong></td></tr>' +
+    '<tr><td class="td-main">Dự toán thu tiền SDĐ 2026</td><td class="num">—</td>' +
+    '<td class="num"><strong style="color:var(--text-heading)">' + SD.duToan.toFixed(1).replace(".", ",") + '</strong></td></tr>' +
+    '<tr><td class="td-main" style="color:var(--danger)">Chưa có dự án bố trí</td><td class="num">—</td>' +
+    '<td class="num"><strong style="color:var(--danger)">−' + SD.thieuHut.toFixed(1).replace(".", ",") + '</strong></td></tr>';
 
   var vaiTro = [
     { icon: "ti ti-stack-2", tint: "tint-primary", t: "Cấu phần thứ 4 của GRDP", s: "Cộng vào giá trị tăng thêm 3 khu vực" },

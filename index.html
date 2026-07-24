@@ -37,10 +37,79 @@
           <div class="card-body">
             <div class="welcome-body">
               <div class="welcome-title">Chào mừng đồng chí! 👋</div>
-              <div class="welcome-text">GRDP tỉnh Điện Biên năm 2025 tăng <strong>7,34%</strong>, quy mô đạt <strong>17.548 tỷ đồng</strong> (giá SS 2010). Dịch vụ tiếp tục là khu vực dẫn dắt, đóng góp <strong>65,4%</strong> mức tăng trưởng; xây dựng đã chuyển từ lực cản (2024) sang động lực. Xem phân tích chi tiết theo quý và cơ cấu ngành bên dưới.</div>
-              <a href="bao-cao.html" class="btn btn-primary">Xem báo cáo</a>
+              <div class="welcome-text">6 tháng đầu năm 2026, GRDP tỉnh tăng <strong>8,67%</strong> — thấp hơn kịch bản <strong>1,79 điểm %</strong>. Để cả năm đạt mục tiêu <strong>11,02%</strong>, 6 tháng cuối năm phải tăng <strong>13,07%</strong> (Quý III +11,67%, Quý IV +14,22%). Có <strong>14/20</strong> ngành cấp I chưa đạt kịch bản, áp lực lớn nhất ở <strong>Xây dựng</strong> (−10,98 điểm %) và <strong>Lưu trú – ăn uống</strong> (−8,78 điểm %).</div>
+              <a href="grdp-nganh.html" class="btn btn-primary">Xem theo ngành</a>
             </div>
             <div class="welcome-art">📊</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hàng stat cards -->
+      <div class="row" id="statRow"></div>
+
+      <!-- KỊCH BẢN TĂNG TRƯỞNG 2026 – số liệu thật -->
+      <div class="row">
+        <div class="card col-8">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Kịch bản tăng trưởng GRDP năm 2026</div>
+              <div class="card-subtitle">Quy mô theo quý · giá SS 2020 · tỷ đồng · nhãn = % tăng so cùng kỳ</div>
+            </div>
+            <span class="badge badge-warning"><i class="ti ti-alert-triangle"></i>Dồn về 6 tháng cuối</span>
+          </div>
+          <div class="card-body">
+            <div id="chartKb2026Quy" class="chart-box"></div>
+            <div class="card-subtitle" style="margin-top:6px">Nguồn: Phụ lục I – Kịch bản tăng trưởng quý III, IV/2026, Đảng uỷ UBND tỉnh (17/7/2026).</div>
+          </div>
+        </div>
+
+        <div class="card col-4">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Tiến độ mục tiêu năm</div>
+              <div class="card-subtitle">Luỹ kế 6 tháng / mục tiêu 2026</div>
+            </div>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ti ti-dots-vertical"></i></button>
+          </div>
+          <div class="card-body" style="display:flex;flex-direction:column;gap:12px" id="kbTienDo"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card col-6">
+          <div class="card-header">
+            <div>
+              <div class="card-title">4 khu vực kinh tế: thực hiện vs kịch bản</div>
+              <div class="card-subtitle">6 tháng đầu năm 2026 · % tăng so cùng kỳ</div>
+            </div>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ti ti-dots-vertical"></i></button>
+          </div>
+          <div class="card-body">
+            <div id="chartKhuVuc2026" class="chart-box"></div>
+          </div>
+        </div>
+
+        <div class="card col-6">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Ngành cần điều hành ngay</div>
+              <div class="card-subtitle">Hụt nhiều nhất so kịch bản 6 tháng · điểm %</div>
+            </div>
+            <a href="grdp-nganh.html" class="btn btn-outline btn-sm">Xem 20 ngành</a>
+          </div>
+          <div class="card-body no-pad table-wrap" style="padding-top:14px">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Ngành cấp I</th>
+                  <th class="num">TH 6T</th>
+                  <th class="num">So kịch bản</th>
+                  <th class="num">Q4 phải đạt</th>
+                </tr>
+              </thead>
+              <tbody id="tblNganhHut"></tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -99,11 +168,6 @@
             <div class="card-subtitle" style="margin-top:6px">Mô hình kế toán tĩnh — minh họa độ nhạy, không phải dự báo nhân quả.</div>
           </div>
         </div>
-      </div>
-
-      <!-- Hàng stat cards -->
-      <div class="row" id="statRow">
-        <!-- 3 card render bằng JS + 1 card radial tĩnh -->
       </div>
 
       <!-- Chart lớn + donut -->
@@ -234,20 +298,52 @@
 (function () {
   var D = window.IOC_DATA, IOC = window.IOC;
 
-  /* Stat cards */
+  var K = D.kb2026, T2 = K.tong;
+  var p2 = function (v) { return (v > 0 ? "+" : "") + v.toFixed(2).replace(".", ","); };
+
+  /* Stat cards – kịch bản tăng trưởng 2026 (số liệu thật) */
   document.getElementById("statRow").innerHTML =
-    IOC.statCard({ icon: "ti ti-chart-line", tint: "tint-primary", badge: "+7,34%", value: "17.548", unit: "tỷ đồng", label: "Quy mô GRDP 2025", note: "Giá so sánh 2010" }) +
-    IOC.statCard({ icon: "ti ti-chart-histogram", tint: "tint-success", badge: "cao nhất 3 năm", value: "8,51", unit: "%", label: "Tăng trưởng GRDP 2024", note: "Nhờ năm sự kiện 70 năm ĐBP" }) +
-    '<div class="card stat-card col-3"><div class="card-body" style="padding-bottom:12px">' +
-    '  <div class="stat-top" style="margin-bottom:0">' +
-    '    <div class="stat-icon tint-info"><i class="ti ti-tool"></i></div>' +
-    '    <span class="badge badge-success">Dẫn dắt</span>' +
-    "  </div>" +
-    '  <div id="chartGiaiNganRadial" class="chart-box" style="margin:-4px 0 -10px"></div>' +
-    '  <div class="stat-label" style="text-align:center">Tỷ trọng dịch vụ trong GRDP</div>' +
-    '  <span class="stat-note" style="align-self:center">Cơ cấu kinh tế năm 2025</span>' +
-    "</div></div>" +
-    IOC.statCard({ icon: "ti ti-alert-triangle", tint: "tint-danger", badge: "minh họa", value: "23", unit: "cảnh báo", label: "Cảnh báo đang mở", note: "Số liệu demo hệ thống" });
+    IOC.statCard({ icon: "ti ti-chart-line", tint: "tint-primary", badge: "so kịch bản " + p2(T2.lech6t) + " điểm %", dir: "down",
+      value: p2(T2.kqTang6t), unit: "%", label: "GRDP 6 tháng đầu 2026", note: IOC.fmt(T2.kq6t) + " tỷ · giá SS 2020" }) +
+    IOC.statCard({ icon: "ti ti-target-arrow", tint: "tint-success", badge: "Nghị quyết HĐND tỉnh", badgeClass: "badge-secondary",
+      value: p2(T2.mucTang2026), unit: "%", label: "Mục tiêu GRDP cả năm 2026", note: IOC.fmt(T2.muc2026) + " tỷ đồng" }) +
+    IOC.statCard({ icon: "ti ti-flame", tint: "tint-warning", badge: "Q3 " + p2(T2.q3Tang) + "% · Q4 " + p2(T2.q4Tang) + "%", badgeClass: "badge-warning",
+      value: p2(T2.cuoiTang), unit: "%", label: "6 tháng cuối phải đạt", note: "Cần thêm " + IOC.fmt(T2.cuoiNam) + " tỷ đồng" }) +
+    IOC.statCard({ icon: "ti ti-alert-triangle", tint: "tint-danger", badge: "6 ngành đạt", dir: "down",
+      value: "14", unit: "/20", label: "Ngành cấp I chưa đạt kịch bản", note: "Hụt sâu nhất: Xây dựng −10,98 điểm %" });
+
+  /* Tiến độ mục tiêu năm */
+  (function () {
+    var rows = [
+      { ten: "GRDP toàn tỉnh", da: T2.kq6t, muc: T2.muc2026 },
+      { ten: K.khuVuc[2].ten, da: K.khuVuc[2].kq6t, muc: K.khuVuc[2].muc2026 },
+      { ten: K.khuVuc[1].ten, da: K.khuVuc[1].kq6t, muc: K.khuVuc[1].muc2026 },
+      { ten: K.khuVuc[0].ten, da: K.khuVuc[0].kq6t, muc: K.khuVuc[0].muc2026 },
+      { ten: K.khuVuc[3].ten, da: K.khuVuc[3].kq6t, muc: K.khuVuc[3].muc2026 }
+    ];
+    document.getElementById("kbTienDo").innerHTML = rows.map(function (r) {
+      var pc = r.da / r.muc * 100;
+      return '<div>' +
+        '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px">' +
+        '  <span style="font-weight:600;font-size:.83rem">' + r.ten + '</span>' +
+        '  <span class="stat-note">' + IOC.fmt(Math.round(r.da)) + ' / ' + IOC.fmt(Math.round(r.muc)) + ' tỷ</span>' +
+        '</div>' +
+        '<div class="progress-cell"><div class="progress"><div class="progress-bar ' + IOC.progressClass(pc) + '" style="width:' + pc.toFixed(1) + '%"></div></div>' +
+        '<span class="pct">' + pc.toFixed(1).replace(".", ",") + '%</span></div>' +
+        '</div>';
+    }).join("");
+  })();
+
+  /* 6 ngành hụt sâu nhất so kịch bản */
+  document.getElementById("tblNganhHut").innerHTML = K.nganh.slice()
+    .sort(function (a, b) { return a.lech6t - b.lech6t; }).slice(0, 6).map(function (x) {
+      return "<tr>" +
+        '<td class="td-main">' + x.ma + ". " + x.ten + "</td>" +
+        '<td class="num" style="color:var(--text-heading)">' + p2(x.kqTang6t) + "%</td>" +
+        '<td class="num"><span class="badge badge-danger">' + p2(x.lech6t) + "</span></td>" +
+        '<td class="num" style="font-weight:600;color:var(--warning)">' + p2(x.q4Tang) + "%</td>" +
+        "</tr>";
+    }).join("");
 
   /* GRDP cả năm (số liệu thật) */
   (function () {

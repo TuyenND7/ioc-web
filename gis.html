@@ -74,6 +74,38 @@
           </div>
         </div>
       </div>
+
+      <!-- Phân bổ chỉ tiêu 6 tháng cuối năm 2026 cho 45 xã/phường (số liệu thật) -->
+      <div class="row">
+        <div class="card col-12">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Chỉ tiêu tăng trưởng 6 tháng cuối năm 2026 giao cho 45 xã, phường</div>
+              <div class="card-subtitle">Tỷ đồng · nguồn: Phụ biểu 2.2 (nhà ở), Phụ biểu 4 (vận tải), biểu phân bổ Sở VHTTDL (lưu trú – ăn uống)</div>
+            </div>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-outline btn-sm" id="btnTop10"><i class="ti ti-filter"></i>Chỉ 10 địa bàn lớn nhất</button>
+              <button class="btn btn-outline btn-sm"><i class="ti ti-download"></i>Xuất báo cáo</button>
+            </div>
+          </div>
+          <div class="card-body no-pad table-wrap" style="padding-top:14px">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th style="width:42px">#</th>
+                  <th>Xã / phường</th>
+                  <th class="num">Nhà ở (tỷ)</th>
+                  <th class="num">Sàn nhà (m²)</th>
+                  <th class="num">Vận tải kho bãi (tỷ)</th>
+                  <th class="num">Lưu trú – ăn uống (tỷ)</th>
+                  <th style="width:170px">Tỷ trọng toàn tỉnh</th>
+                </tr>
+              </thead>
+              <tbody id="tblPhanBo"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </main>
 
     <footer class="footer" id="footer"></footer>
@@ -101,6 +133,37 @@
       '<td class="num" style="font-weight:600;color:' + mauKH(x.kh) + '">' + x.kh + "%</td>" +
       "</tr>";
   }).join("");
+
+
+  /* Phân bổ chỉ tiêu 6T cuối năm 2026 cho 45 xã/phường (số liệu thật) */
+  (function () {
+    var db = D.kb2026.diaBan, tb = document.getElementById("tblPhanBo"), top = false;
+    var tongAll = db.reduce(function (a, x) { return a + x.nhaO + x.vanTai + x.luuTruAnUong; }, 0);
+    var maxT = db[0].nhaO + db[0].vanTai + db[0].luuTruAnUong;
+    function ve() {
+      var ds = top ? db.slice(0, 10) : db;
+      tb.innerHTML = ds.map(function (x, i) {
+        var t = x.nhaO + x.vanTai + x.luuTruAnUong;
+        var pc = t / tongAll * 100;
+        return "<tr>" +
+          '<td style="color:var(--text-muted)">' + (i + 1) + "</td>" +
+          '<td class="td-main">' + x.ten + "</td>" +
+          '<td class="num" style="font-weight:600;color:var(--text-heading)">' + x.nhaO.toFixed(1).replace(".", ",") + "</td>" +
+          '<td class="num">' + IOC.fmt(x.san) + "</td>" +
+          '<td class="num">' + x.vanTai.toFixed(1).replace(".", ",") + "</td>" +
+          '<td class="num">' + x.luuTruAnUong.toFixed(1).replace(".", ",") + "</td>" +
+          '<td><div class="progress-cell"><div class="progress"><div class="progress-bar" style="width:' + (t / maxT * 100).toFixed(1) + '%"></div></div>' +
+          '<span class="pct">' + pc.toFixed(1).replace(".", ",") + '%</span></div></td>' +
+          "</tr>";
+      }).join("");
+    }
+    document.getElementById("btnTop10").addEventListener("click", function () {
+      top = !top;
+      this.innerHTML = top ? '<i class="ti ti-filter-off"></i>Hiện đủ 45 địa bàn' : '<i class="ti ti-filter"></i>Chỉ 10 địa bàn lớn nhất';
+      ve();
+    });
+    ve();
+  })();
 
   /* bản đồ Leaflet */
   if (typeof L !== "undefined") {

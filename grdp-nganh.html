@@ -31,6 +31,53 @@
 
       <div class="row" id="statRow"></div>
 
+      <!-- BẢNG ĐIỀU HÀNH 20 NGÀNH CẤP I – SỐ LIỆU THẬT 2026 -->
+      <div class="row">
+        <div class="card col-12">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Kết quả 6 tháng đầu năm 2026 theo 20 ngành kinh tế cấp I</div>
+              <div class="card-subtitle">Giá SS 2020 · tỷ đồng · nguồn: Phụ lục I Kịch bản tăng trưởng QIII–IV/2026</div>
+            </div>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-outline btn-sm" id="btnLocHut"><i class="ti ti-filter"></i>Chỉ ngành chưa đạt</button>
+              <button class="btn btn-outline btn-sm"><i class="ti ti-download"></i>Xuất báo cáo</button>
+            </div>
+          </div>
+          <div class="card-body no-pad table-wrap" style="padding-top:14px">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th style="min-width:230px">Ngành kinh tế cấp I</th>
+                  <th class="num">Quy mô 6T</th>
+                  <th class="num">Kịch bản</th>
+                  <th class="num">Thực hiện</th>
+                  <th class="num">Chênh lệch</th>
+                  <th class="num">Mục tiêu năm</th>
+                  <th class="num">Q3</th>
+                  <th class="num">Q4</th>
+                  <th>Đánh giá</th>
+                </tr>
+              </thead>
+              <tbody id="tblNganh"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card col-12">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Chênh lệch so kịch bản 6 tháng — toàn bộ 20 ngành</div>
+              <div class="card-subtitle">Điểm % · xanh = vượt kịch bản · đỏ = hụt kịch bản</div>
+            </div>
+            <button class="card-menu-btn" aria-label="Tùy chọn"><i class="ti ti-dots-vertical"></i></button>
+          </div>
+          <div class="card-body"><div id="chartNganhLech" class="chart-box"></div></div>
+        </div>
+      </div>
+
       <div class="row">
         <div class="card col-8">
           <div class="card-header">
@@ -88,12 +135,53 @@
 <script src="assets/js/charts.js"></script>
 <script>
 (function () {
-  var D = window.IOC_DATA, IOC = window.IOC, g = D.grdp;
+  var D = window.IOC_DATA, IOC = window.IOC, g = D.grdp, K = D.kb2026;
+  var p2 = function (v) { return (v > 0 ? "+" : "") + v.toFixed(2).replace(".", ","); };
+
   document.getElementById("statRow").innerHTML =
-    IOC.statCard({ icon: "ti ti-chart-line", tint: "tint-primary", badge: "+7,34%", value: "17.548", unit: "tỷ đồng", label: "Quy mô GRDP 2025", note: "Giá so sánh 2010" }) +
-    IOC.statCard({ icon: "ti ti-tool", tint: "tint-info", badge: "dẫn dắt", value: "65,4", unit: "%", label: "Dịch vụ trong mức tăng", note: "4,80 điểm %" }) +
-    IOC.statCard({ icon: "ti ti-building", tint: "tint-warning", badge: "phục hồi", value: "24,8", unit: "%", label: "Công nghiệp – xây dựng", note: "1,82 điểm %" }) +
-    IOC.statCard({ icon: "ti ti-plant-2", tint: "tint-success", badge: "ổn định", value: "6,3", unit: "%", label: "Nông, lâm nghiệp & TS", note: "0,46 điểm %" });
+    IOC.statCard({ icon: "ti ti-chart-line", tint: "tint-primary", badge: "so kịch bản −1,79 điểm %", dir: "down",
+      value: "+8,67", unit: "%", label: "GRDP 6 tháng đầu 2026", note: IOC.fmt(K.tong.kq6t) + " tỷ · giá SS 2020" }) +
+    IOC.statCard({ icon: "ti ti-circle-check", tint: "tint-success", badge: "A · C · D · G · O · Q", badgeClass: "badge-secondary",
+      value: "6", unit: "/20", label: "Ngành đạt kịch bản 6T", note: "Chế biến chế tạo dẫn đầu: +16,18%" }) +
+    IOC.statCard({ icon: "ti ti-alert-triangle", tint: "tint-danger", badge: "Xây dựng −10,98", dir: "down",
+      value: "14", unit: "/20", label: "Ngành chưa đạt kịch bản", note: "Kế đến: lưu trú −8,78 · dịch vụ khác −8,00" }) +
+    IOC.statCard({ icon: "ti ti-flame", tint: "tint-warning", badge: "Q4 lưu trú +55,56%", badgeClass: "badge-warning",
+      value: "+13,07", unit: "%", label: "6 tháng cuối phải đạt", note: "Rủi ro dồn chỉ tiêu vào quý IV" });
+
+  /* Bảng 20 ngành cấp I */
+  (function () {
+    var loc = false, tb = document.getElementById("tblNganh");
+    function badge(x) {
+      return x.danhGia === "Đạt"
+        ? '<span class="badge badge-success"><i class="ti ti-check"></i>Đạt</span>'
+        : '<span class="badge badge-danger"><i class="ti ti-alert-triangle"></i>Chưa đạt</span>';
+    }
+    function ve() {
+      var ds = K.nganh.filter(function (x) { return !loc || x.danhGia !== "Đạt"; });
+      tb.innerHTML = ds.map(function (x) {
+        var xau = x.lech6t < 0;
+        return "<tr>" +
+          '<td class="td-main">' + x.ma + ". " + x.ten + "</td>" +
+          '<td class="num">' + IOC.fmt(x.kq6t) + "</td>" +
+          '<td class="num" style="color:var(--text-muted)">' + p2(x.kbTang6t) + "%</td>" +
+          '<td class="num" style="font-weight:600;color:var(--text-heading)">' + p2(x.kqTang6t) + "%</td>" +
+          '<td class="num"><span class="badge ' + (xau ? "badge-danger" : "badge-success") + '">' + p2(x.lech6t) + "</span></td>" +
+          '<td class="num">' + p2(x.mucTang2026) + "%</td>" +
+          '<td class="num" style="color:var(--text-muted)">' + p2(x.q3Tang) + "%</td>" +
+          '<td class="num" style="font-weight:600;color:' + (x.q4Tang > 25 ? "var(--danger)" : "var(--warning)") + '">' + p2(x.q4Tang) + "%</td>" +
+          "<td>" + badge(x) + "</td>" +
+          "</tr>";
+      }).join("");
+    }
+    document.getElementById("btnLocHut").addEventListener("click", function () {
+      loc = !loc;
+      this.innerHTML = loc
+        ? '<i class="ti ti-filter-off"></i>Hiện tất cả 20 ngành'
+        : '<i class="ti ti-filter"></i>Chỉ ngành chưa đạt';
+      ve();
+    });
+    ve();
+  })();
 
   var colors = ["#82868B", "#28C76F", "#7367F0"];
   document.getElementById("grdpNamList").innerHTML = g.nam.labels.map(function (nam, i) {
