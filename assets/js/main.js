@@ -513,6 +513,55 @@
     return document.documentElement.getAttribute("data-theme") === "dark";
   };
 
+  /* =============== 8b. Bảng -> thẻ trên mobile ===============
+     Gắn data-label (theo tiêu đề cột) + đánh dấu ô STT / ô tiêu đề cho từng
+     hàng, để CSS ≤576px hiển thị mỗi hàng thành 1 thẻ. Tự chạy lại khi tbody
+     được render lại (nút lọc, đổi trang...). */
+  function labelTable(table) {
+    var ths = table.querySelectorAll("thead th");
+    if (!ths.length) return;
+    var labels = [].map.call(ths, function (th) { return th.textContent.trim(); });
+    [].forEach.call(table.querySelectorAll("tbody tr"), function (tr) {
+      var cells = tr.children, titleIdx = -1, j, k;
+      for (j = 0; j < cells.length; j++) {
+        if (cells[j].classList.contains("td-main") || cells[j].querySelector(".td-main")) { titleIdx = j; break; }
+      }
+      if (titleIdx === -1) {
+        for (k = 0; k < cells.length; k++) {
+          var lu = (labels[k] || "").toUpperCase();
+          if (lu !== "#" && lu !== "STT") { titleIdx = k; break; }
+        }
+      }
+      [].forEach.call(cells, function (td, i) {
+        var lbl = labels[i] || "", up = lbl.toUpperCase();
+        td.setAttribute("data-label", lbl);
+        td.classList.toggle("col-idx", up === "#" || up === "STT");
+        td.classList.toggle("card-title-cell", i === titleIdx);
+      });
+    });
+  }
+
+  function setupResponsiveTables() {
+    [].forEach.call(document.querySelectorAll(".table"), function (table) {
+      labelTable(table);
+      var tb = table.querySelector("tbody");
+      if (tb && window.MutationObserver) {
+        var obs = new MutationObserver(function () {
+          obs.disconnect();
+          labelTable(table);
+          obs.observe(tb, { childList: true });
+        });
+        obs.observe(tb, { childList: true });
+      }
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupResponsiveTables);
+  } else {
+    setupResponsiveTables();
+  }
+
   /* =============== 9. PWA: service worker + nút cài đặt =============== */
   /* Chỉ chạy qua http/https (GitHub Pages). Bản bundle WebView load
      qua file:// → bỏ qua toàn bộ, không lỗi console. */
