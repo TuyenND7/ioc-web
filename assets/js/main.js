@@ -569,6 +569,11 @@
         td.classList.toggle("col-idx", isIdx);
         td.classList.toggle("card-title-cell", i === titleIdx);
         if (isIdx) idxNum = td.textContent.trim();
+        // ô chỉ là badge chữ (trạng thái/đánh giá) -> ẩn nhãn cột, chữ badge tự rõ nghĩa
+        // (giữ nhãn cho badge dạng số như "+0,27" vì số trần không đủ nghĩa)
+        var bdg = i === titleIdx ? null : td.querySelector(".badge");
+        var isStatus = !!bdg && /[^\d\s+\-.,%\/()]/.test(bdg.textContent.trim());
+        td.classList.toggle("status-only", isStatus);
       });
 
       var titleCell = cells[titleIdx];
