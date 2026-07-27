@@ -563,18 +563,21 @@
           if (lu !== "#" && lu !== "STT") { titleIdx = k; break; }
         }
       }
+      var hasStatus = false;
       [].forEach.call(cells, function (td, i) {
         var lbl = labels[i] || "", up = lbl.toUpperCase(), isIdx = up === "#" || up === "STT";
         td.setAttribute("data-label", lbl);
         td.classList.toggle("col-idx", isIdx);
         td.classList.toggle("card-title-cell", i === titleIdx);
         if (isIdx) idxNum = td.textContent.trim();
-        // ô chỉ là badge chữ (trạng thái/đánh giá) -> ẩn nhãn cột, chữ badge tự rõ nghĩa
+        // ô chỉ là badge chữ (trạng thái/đánh giá) -> đẩy lên góc phải header, bỏ nhãn cột.
         // (giữ nhãn cho badge dạng số như "+0,27" vì số trần không đủ nghĩa)
         var bdg = i === titleIdx ? null : td.querySelector(".badge");
         var isStatus = !!bdg && /[^\d\s+\-.,%\/()]/.test(bdg.textContent.trim());
         td.classList.toggle("status-only", isStatus);
+        if (isStatus) hasStatus = true;
       });
+      tr.classList.toggle("has-status", hasStatus);
 
       var titleCell = cells[titleIdx];
       if (titleCell && !titleCell.querySelector(".item-lead-ic")) {

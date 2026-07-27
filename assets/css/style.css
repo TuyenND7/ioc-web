@@ -1223,6 +1223,7 @@ body.sidebar-open .sidebar-backdrop { display: block; }
   .table thead { display: none; }
 
   .table tbody tr {
+    position: relative;
     display: block;
     border: 1px solid var(--border-color);
     border-left: 3px solid var(--item-accent, var(--border-color));
@@ -1250,9 +1251,19 @@ body.sidebar-open .sidebar-backdrop { display: block; }
   }
   .table td:last-child { border-bottom: 0; }
 
-  /* Ô chỉ là badge trạng thái: bỏ nhãn cột, badge canh trái như 1 tag gọn */
-  .table td.status-only { justify-content: flex-start; }
+  /* Ô badge trạng thái: đẩy lên góc phải của header (như ảnh mẫu), tách khỏi luồng */
+  .table td.status-only {
+    position: absolute;
+    top: 11px;
+    right: 13px;
+    width: auto;
+    padding: 0;
+    border: 0;
+    justify-content: flex-end;
+  }
   .table td.status-only::before { display: none; }
+  /* chừa chỗ cho badge ở header để tiêu đề không chạy dưới badge */
+  .table tbody tr.has-status .card-title-cell { padding-right: 96px; }
   .table td::before {
     content: attr(data-label);
     flex: 0 0 40%;
