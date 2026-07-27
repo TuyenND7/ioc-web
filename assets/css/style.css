@@ -1251,6 +1251,13 @@ body.sidebar-open .sidebar-backdrop { display: block; }
   }
   .table td:last-child { border-bottom: 0; }
 
+  /* Item con (dòng dữ liệu) thụt vào 2 bên -> thấy rõ thuộc thẻ nào, canh dưới tiêu đề */
+  .table td:not(.card-title-cell):not(.status-only):not(.col-idx) {
+    width: auto;
+    margin-left: 40px;
+    margin-right: 4px;
+  }
+
   /* Ô badge trạng thái: đẩy lên góc phải của header (như ảnh mẫu), tách khỏi luồng */
   .table td.status-only {
     position: absolute;
