@@ -1044,6 +1044,9 @@ body.search-open .search-overlay { display: block; }
 
 .progress-cell .pct { font-size: 0.82rem; font-weight: 600; color: var(--text-heading); min-width: 44px; text-align: right; font-variant-numeric: tabular-nums; }
 
+/* chip icon dẫn đầu item — chỉ hiện ở chế độ thẻ (mobile) */
+.item-lead-ic { display: none; }
+
 /* ---------- Lists ---------- */
 
 .item-list { list-style: none; }
@@ -1222,12 +1225,14 @@ body.sidebar-open .sidebar-backdrop { display: block; }
   .table tbody tr {
     display: block;
     border: 1px solid var(--border-color);
+    border-left: 3px solid var(--item-accent, var(--border-color));
     border-radius: 12px;
-    padding: 10px 14px;
+    padding: 12px 14px 4px;
     margin-bottom: 12px;
     background: var(--card-bg);
+    box-shadow: 0 2px 10px rgba(34, 41, 47, 0.05);
   }
-  :root[data-theme="dark"] .table tbody tr { background: rgba(255, 255, 255, 0.02); }
+  :root[data-theme="dark"] .table tbody tr { background: rgba(255, 255, 255, 0.02); box-shadow: none; }
   .table tbody tr:hover { background: var(--hover-bg); }
   .table tbody tr:last-child td { border-bottom: 0; }
 
@@ -1257,19 +1262,43 @@ body.sidebar-open .sidebar-backdrop { display: block; }
   /* Ô số thứ tự (#/STT): ẩn trên mobile */
   .table td.col-idx { display: none; }
 
-  /* Ô tiêu đề của thẻ: chiếm cả dòng, in đậm, không hiện nhãn */
+  /* Ô tiêu đề của thẻ: icon chip + tên, chiếm cả dòng, không hiện nhãn cột */
   .table td.card-title-cell {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 11px;
     text-align: left;
-    font-size: 0.92rem;
+    font-size: 0.94rem;
     font-weight: 700;
     color: var(--text-heading);
-    padding: 2px 0 9px;
-    margin-bottom: 4px;
+    padding: 0 0 10px;
+    margin-bottom: 6px;
     border-bottom: 1px solid var(--border-color);
+    line-height: 1.35;
   }
   .table td.card-title-cell::before { display: none; }
   .table td.card-title-cell .td-main { font-weight: 700; }
+
+  /* chip icon dẫn đầu */
+  .item-lead-ic {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+  .item-lead-ic.item-rank { font-size: 0.9rem; }
+  .item-lead-ic.acc-success { background: rgba(40, 199, 111, 0.16); color: var(--success); }
+  .item-lead-ic.acc-danger { background: rgba(234, 84, 85, 0.16); color: var(--danger); }
+  .item-lead-ic.acc-warning { background: rgba(255, 159, 67, 0.16); color: var(--warning); }
+  .item-lead-ic.acc-info { background: rgba(0, 207, 232, 0.16); color: var(--info); }
+  .item-lead-ic.acc-primary { background: rgba(115, 103, 240, 0.16); color: var(--primary); }
+  .item-lead-ic.acc-secondary { background: rgba(130, 134, 139, 0.18); color: var(--text-muted); }
 
   /* Thanh tiến độ trong ô: co về bên phải, chừa chỗ cho nhãn */
   .table td .progress-cell { flex: 1 1 auto; justify-content: flex-end; min-width: 0; }

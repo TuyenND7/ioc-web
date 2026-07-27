@@ -513,16 +513,47 @@
     return document.documentElement.getAttribute("data-theme") === "dark";
   };
 
-  /* =============== 8b. Bảng -> thẻ trên mobile ===============
-     Gắn data-label (theo tiêu đề cột) + đánh dấu ô STT / ô tiêu đề cho từng
-     hàng, để CSS ≤576px hiển thị mỗi hàng thành 1 thẻ. Tự chạy lại khi tbody
-     được render lại (nút lọc, đổi trang...). */
+  /* =============== 8b. Bảng -> thẻ (item) trên mobile ===============
+     Gắn data-label (theo tiêu đề cột), đánh dấu ô STT / ô tiêu đề, và thêm
+     "chip" icon dẫn đầu cho từng hàng để trông như item trong app. Chip lấy
+     màu + icon theo trạng thái (badge cuối hàng), hoặc số thứ hạng, hoặc icon
+     mặc định của trang. Tự chạy lại khi tbody được render lại (nút lọc...). */
+  var PAGE_IC = {
+    "index": "ti-layout-grid", "grdp-nganh": "ti-chart-bar", "nong-nghiep": "ti-plant-2",
+    "cong-nghiep": "ti-building-factory-2", "dau-tu-cong": "ti-building-community",
+    "gia-thi-truong": "ti-tag", "van-tai": "ti-truck-delivery", "dich-vu": "ti-briefcase",
+    "dich-vu-xh": "ti-heart-handshake", "thue": "ti-receipt-tax", "du-bao": "ti-chart-dots",
+    "mo-phong": "ti-adjustments", "ngan-sach": "ti-wallet", "tai-san-cong": "ti-building-bank",
+    "doanh-nghiep": "ti-building-store", "thanh-tra": "ti-gavel",
+    "cai-cach-hanh-chinh": "ti-file-check", "canh-bao": "ti-alert-triangle",
+    "nhiem-vu": "ti-checklist", "bao-cao": "ti-report", "gis": "ti-map-pin",
+    "quan-tri-nguoi-dung": "ti-users", "cau-hinh-kpi": "ti-settings"
+  };
+
+  /* Trạng thái hàng: lấy badge gần cuối hàng nhất -> {màu, icon} */
+  function rowStatus(tr) {
+    var cells = tr.children, i, b;
+    for (i = cells.length - 1; i >= 0; i--) {
+      b = cells[i].querySelector ? cells[i].querySelector(".badge") : null;
+      if (b) {
+        var c = b.className;
+        if (/badge-success/.test(c)) return { c: "success", i: "ti-circle-check" };
+        if (/badge-danger/.test(c)) return { c: "danger", i: "ti-alert-triangle" };
+        if (/badge-warning/.test(c)) return { c: "warning", i: "ti-clock-hour-4" };
+        if (/badge-info/.test(c)) return { c: "info", i: "ti-trending-up" };
+        return { c: "secondary", i: "ti-flag" };
+      }
+    }
+    return null;
+  }
+
   function labelTable(table) {
     var ths = table.querySelectorAll("thead th");
     if (!ths.length) return;
     var labels = [].map.call(ths, function (th) { return th.textContent.trim(); });
+    var pageIc = PAGE_IC[document.body.getAttribute("data-page")] || "ti-point";
     [].forEach.call(table.querySelectorAll("tbody tr"), function (tr) {
-      var cells = tr.children, titleIdx = -1, j, k;
+      var cells = tr.children, titleIdx = -1, idxNum = "", j, k;
       for (j = 0; j < cells.length; j++) {
         if (cells[j].classList.contains("td-main") || cells[j].querySelector(".td-main")) { titleIdx = j; break; }
       }
@@ -533,11 +564,31 @@
         }
       }
       [].forEach.call(cells, function (td, i) {
-        var lbl = labels[i] || "", up = lbl.toUpperCase();
+        var lbl = labels[i] || "", up = lbl.toUpperCase(), isIdx = up === "#" || up === "STT";
         td.setAttribute("data-label", lbl);
-        td.classList.toggle("col-idx", up === "#" || up === "STT");
+        td.classList.toggle("col-idx", isIdx);
         td.classList.toggle("card-title-cell", i === titleIdx);
+        if (isIdx) idxNum = td.textContent.trim();
       });
+
+      var titleCell = cells[titleIdx];
+      if (titleCell && !titleCell.querySelector(".item-lead-ic")) {
+        var st = rowStatus(tr), chip;
+        if (st) {
+          chip = document.createElement("i");
+          chip.className = "item-lead-ic acc-" + st.c + " ti " + st.i;
+          tr.style.setProperty("--item-accent", "var(--" + st.c + ")");
+        } else if (idxNum && /^\d+$/.test(idxNum)) {
+          chip = document.createElement("span");
+          chip.className = "item-lead-ic acc-primary item-rank";
+          chip.textContent = idxNum;
+          tr.style.setProperty("--item-accent", "var(--primary)");
+        } else {
+          chip = document.createElement("i");
+          chip.className = "item-lead-ic acc-secondary ti " + pageIc;
+        }
+        titleCell.insertBefore(chip, titleCell.firstChild);
+      }
     });
   }
 
